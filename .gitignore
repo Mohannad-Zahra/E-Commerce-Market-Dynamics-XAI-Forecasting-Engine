@@ -59,7 +59,6 @@ venv.bak/
 # Project-specific
 data/
 logs/
-scraper_deployment/
 *.db
 *.json
 !config/config.json
