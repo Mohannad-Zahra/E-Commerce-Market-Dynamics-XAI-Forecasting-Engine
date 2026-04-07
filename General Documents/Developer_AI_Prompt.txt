@@ -59,6 +59,22 @@ MANDATORY EXECUTION PROTOCOL (FOLLOW IN THIS EXACT ORDER):
    - Validation performed (tests/live run/log evidence)
    - Any remaining required user inputs
 
+7) MANDATORY SYSTEM TEST AFTER INITIAL TESTS
+   After unit/integration tests pass, you MUST run one real end-to-end runtime test:
+   - Launch `watchdog.py` (or `watchdog.exe` when requested).
+   - Temporarily adjust `scrape_intervals_utc` to a near-future or catch-up interval so a cycle triggers quickly.
+   - Keep changes temporary and restore original `config/config.json` after test completion.
+   - Verify in logs/terminal that:
+     1. watchdog started and launched scraper
+     2. at least one payload cycle executed
+     3. cloud upload succeeded (Google Drive confirmation line)
+   - Include concrete evidence in final report:
+     - cycle timestamp
+     - cycle id / uploaded filename
+     - record count
+     - upload success log line
+   - If upload does not succeed, diagnose and report blocker/root cause instead of claiming success.
+
 USE THIS PLACEHOLDER INPUT TEMPLATE:
 - Retailer: [NAME]
 - Retailer ID: [retailer_id]
