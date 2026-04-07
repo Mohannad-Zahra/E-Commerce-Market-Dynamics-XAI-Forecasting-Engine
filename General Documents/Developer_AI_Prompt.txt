@@ -46,6 +46,15 @@ MANDATORY EXECUTION PROTOCOL (FOLLOW IN THIS EXACT ORDER):
 
 5) CONFIG + DOCUMENTATION DUTIES
    - Update `Web Scrapper/config/config.json` only after requirements are confirmed.
+   - `Web Scrapper/config/oauth_credentials.json` policy:
+     - Keep this file present in the repo as an empty placeholder only.
+     - Never commit secrets/real OAuth client data to Git.
+     - If runtime setup is needed, instruct developer to create credentials via:
+       1. Google Cloud Console → APIs & Services → Credentials
+       2. Create OAuth Client ID (Desktop app)
+       3. Download client JSON
+       4. Place local credentials content into `Web Scrapper/config/oauth_credentials.json` on their machine only
+       5. Verify Drive auth flow generates local token for runtime use
    - Update all impacted docs immediately:
      - `General Documents/architecture.md`
      - `General Documents/proposal.md`
