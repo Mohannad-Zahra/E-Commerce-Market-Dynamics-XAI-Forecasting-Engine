@@ -25,7 +25,15 @@ if getattr(sys, "frozen", False):
 else:
     BASE_DIR = Path(__file__).parent
 
-CONFIG_PATH = BASE_DIR / "config" / "config.json"
+def _resolve_config_path() -> Path:
+    primary = BASE_DIR / "config" / "config.json"
+    if primary.exists():
+        return primary
+    # Fallback for PyInstaller layouts where exe is in ./dist but config is one level above.
+    fallback = BASE_DIR.parent / "config" / "config.json"
+    return fallback
+
+CONFIG_PATH = _resolve_config_path()
 
 _running = True
 _scheduler = None
@@ -87,8 +95,9 @@ def main():
                     continue
                 
                 retailer_id = retailer.get("retailer_id")
+                retailer_name = retailer.get("retailer_name", retailer_id)
                 payload_module_name = retailer.get("payload_module")
-                logger.info("Starting scrape payload for: %s", retailer_id)
+                logger.info("Starting scrape payload for: %s (%s)", retailer_name, retailer_id)
 
                 try:
                     payload_module = importlib.import_module(payload_module_name)
@@ -99,7 +108,12 @@ def main():
                     retailers_scraped += 1
                 except Exception as exc:
                     logger.error("Error executing payload for %s: %s", retailer_id, exc, exc_info=True)
-                    notifier.notify_scrape_failure(retailer_id, str(exc))
+                    notifier.notify_scrape_failure(
+                        retailer_id,
+                        str(exc),
+                        retailer_name=retailer_name,
+                        payload_module=payload_module_name,
+                    )
 
             all_records = db.get_all_records()
             if all_records:

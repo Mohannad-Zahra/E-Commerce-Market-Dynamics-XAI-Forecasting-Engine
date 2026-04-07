@@ -76,7 +76,12 @@ def test_scraper_main_loop(
     
     mock_transport.flush_buffer.assert_called_once()
     mock_db.insert_records.assert_called_once_with([{"fake": "record"}])
-    mock_notifier.notify_scrape_failure.assert_called_once_with("broken", "Cannot find module")
+    mock_notifier.notify_scrape_failure.assert_called_once_with(
+        "broken",
+        "Cannot find module",
+        retailer_name="broken",
+        payload_module="payload.broken",
+    )
     mock_transport.upload_cycle_data.assert_called_once_with(
         [{"fake": "record"}], mock_db.cycle_id, "2026-04-05T12-00-00Z"
     )

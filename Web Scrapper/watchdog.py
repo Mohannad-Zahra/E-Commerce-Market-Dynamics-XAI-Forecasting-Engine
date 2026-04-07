@@ -42,7 +42,15 @@ if getattr(sys, "frozen", False):
 else:
     BASE_DIR = Path(__file__).parent
 
-CONFIG_PATH = BASE_DIR / "config" / "config.json"
+def _resolve_config_path() -> Path:
+    primary = BASE_DIR / "config" / "config.json"
+    if primary.exists():
+        return primary
+    # Fallback for PyInstaller layouts where exe is in ./dist but config is one level above.
+    fallback = BASE_DIR.parent / "config" / "config.json"
+    return fallback
+
+CONFIG_PATH = _resolve_config_path()
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -161,6 +169,7 @@ class Watchdog:
         self._health_interval = wd_cfg.get("health_check_interval_seconds", 30)
         self._max_restarts = wd_cfg.get("max_restart_attempts", 5)
         self._restart_cooldown = wd_cfg.get("restart_cooldown_seconds", 10)
+        self._heartbeat_every_checks = wd_cfg.get("heartbeat_every_checks", 4)
 
         # Resolve scraper executable path
         scraper_name = wd_cfg.get("scraper_executable", "scraper.exe")
@@ -176,6 +185,22 @@ class Watchdog:
         self._restart_count = 0
         self._running = True
         self._total_crashes = 0
+        self._monitor_ticks = 0
+        self._started_at_utc = datetime.now(timezone.utc)
+
+    def _log_status(self, state: str, detail: str = "", level: str = "info"):
+        pid = self._process.pid if self._process else "n/a"
+        uptime = int((datetime.now(timezone.utc) - self._started_at_utc).total_seconds())
+        remaining_restarts = max(self._max_restarts - self._restart_count, 0)
+        message = (
+            f"[WATCHDOG_STATUS] state={state} pid={pid} "
+            f"uptime_s={uptime} crashes={self._total_crashes} "
+            f"restarts_used={self._restart_count}/{self._max_restarts} "
+            f"restarts_remaining={remaining_restarts}"
+        )
+        if detail:
+            message = f"{message} detail={detail}"
+        getattr(self._logger, level)(message)
 
     # ── Process Management ────────────────────────────────────────
 
@@ -191,8 +216,8 @@ class Watchdog:
             self._process = subprocess.Popen(
                 self._scraper_cmd,
                 cwd=str(BASE_DIR),
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
+                stdout=None,
+                stderr=None,
                 # Ensure child gets its own process group for clean termination
                 creationflags=(
                     subprocess.CREATE_NEW_PROCESS_GROUP
@@ -203,6 +228,7 @@ class Watchdog:
             self._logger.info(
                 "Scraper launched successfully (PID=%d)", self._process.pid
             )
+            self._log_status("LAUNCHED", "child process started")
             return True
 
         except FileNotFoundError:
@@ -268,16 +294,7 @@ class Watchdog:
             "exit_meaning": self._interpret_exit_code(exit_code),
         }
 
-        # Try to capture last few lines of output for diagnostics
-        try:
-            if self._process.stdout and self._process.stdout.readable():
-                remaining = self._process.stdout.read()
-                if remaining:
-                    last_lines = remaining.decode("utf-8", errors="replace")
-                    # Keep only the last 500 chars to avoid huge payloads
-                    info["last_output"] = last_lines[-500:]
-        except Exception:
-            pass
+        info["last_output"] = "Child output is streamed directly to terminal/logs."
 
         return info
 
@@ -311,6 +328,7 @@ class Watchdog:
         """
         self._logger.info("=" * 65)
         self._logger.info("WATCHDOG STARTED")
+        self._logger.info("  Config path:        %s", CONFIG_PATH)
         self._logger.info(
             "  Developer:          %s", self._config.get("developer_id")
         )
@@ -323,7 +341,12 @@ class Watchdog:
         self._logger.info(
             "  Max restarts:       %d", self._max_restarts
         )
+        self._logger.info(
+            "  Heartbeat cadence:  every %d health checks",
+            self._heartbeat_every_checks,
+        )
         self._logger.info("=" * 65)
+        self._log_status("STARTUP", "watchdog loop initialized")
 
         # Initial launch
         if not self._start_scraper():
@@ -349,6 +372,12 @@ class Watchdog:
 
             # ── Check if scraper is still alive ───────────────────
             if self._is_alive():
+                self._monitor_ticks += 1
+                if self._monitor_ticks % max(1, self._heartbeat_every_checks) == 0:
+                    self._log_status(
+                        "HEALTHY",
+                        f"monitor_tick={self._monitor_ticks} health_interval_s={self._health_interval}",
+                    )
                 continue  # All good, keep monitoring
 
             # ── Scraper has exited ────────────────────────────────
@@ -361,6 +390,7 @@ class Watchdog:
                     "Scraper exited cleanly (code 0). "
                     "Watchdog will NOT restart it."
                 )
+                self._log_status("CHILD_EXITED_CLEAN", "child returned exit_code=0")
                 send_email_alert(
                     self._config, "scraper_clean_exit",
                     "Scraper exited with code 0 (clean shutdown).",
@@ -372,6 +402,11 @@ class Watchdog:
             # ── Crash detected ────────────────────────────────────
             self._total_crashes += 1
             self._restart_count += 1
+            self._log_status(
+                "CHILD_CRASHED",
+                f"exit_code={exit_code} exit_meaning={exit_info.get('exit_meaning', 'unknown')}",
+                level="error",
+            )
             self._logger.error(
                 "SCRAPER CRASHED (crash #%d) — %s",
                 self._total_crashes,
@@ -391,6 +426,7 @@ class Watchdog:
 
             # ── Check restart budget ──────────────────────────────
             if self._restart_count > self._max_restarts:
+                self._log_status("RESTART_BUDGET_EXHAUSTED", level="critical")
                 self._logger.critical(
                     "RESTART BUDGET EXHAUSTED (%d/%d). "
                     "Watchdog is shutting down. Manual intervention required.",
@@ -417,6 +453,7 @@ class Watchdog:
                 self._restart_count,
                 self._max_restarts,
             )
+            self._log_status("RESTART_PENDING", f"cooldown_s={self._restart_cooldown}")
             time.sleep(self._restart_cooldown)
 
             if not self._start_scraper():
@@ -436,8 +473,10 @@ class Watchdog:
                 self._restart_count,
                 self._max_restarts,
             )
+            self._log_status("RESTART_SUCCESS", "child process restarted")
 
         # ── Cleanup ───────────────────────────────────────────────
+        self._log_status("SHUTDOWN", "stopping child and exiting watchdog loop")
         self._stop_scraper()
         self._logger.info("Watchdog shutdown complete.")
 

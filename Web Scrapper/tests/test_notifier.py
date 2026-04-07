@@ -62,7 +62,11 @@ class TestEmailNotifier(unittest.TestCase):
         notifier = EmailNotifier(make_config())
         
         notifier.notify_scrape_failure("2b", "error")
-        mock_send.assert_called_with("scrape_failed", "Scraping failed for '2b': error", extra={"retailer_id": "2b"})
+        mock_send.assert_called_with(
+            "scrape_failed",
+            "Scraping failed for '2b': error",
+            extra={"retailer_id": "2b", "retailer_name": "2b"},
+        )
         
         notifier.notify_upload_failure("2b", 1, 3, "fail")
         self.assertEqual(mock_send.call_count, 2)

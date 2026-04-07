@@ -259,7 +259,8 @@ class CloudTransport:
             # Notify on first failure
             if attempt == 1 and self._notifier:
                 self._notifier.notify_upload_failure(
-                    retailer_id, attempt, self._max_retries, last_error
+                    retailer_id, attempt, self._max_retries, last_error,
+                    cycle_id=cycle_id, blob_name=blob_name
                 )
 
             time_module.sleep(self._retry_interval)
@@ -273,7 +274,8 @@ class CloudTransport:
             last_error = f"Retry {attempt} failed"
             if self._notifier:
                 self._notifier.notify_upload_failure(
-                    retailer_id, attempt, self._max_retries, last_error
+                    retailer_id, attempt, self._max_retries, last_error,
+                    cycle_id=cycle_id, blob_name=blob_name
                 )
 
         # All retries exhausted → buffer locally
@@ -286,7 +288,13 @@ class CloudTransport:
         self._save_to_buffer(records, blob_name, retailer_id, cycle_id)
 
         if self._notifier:
-            self._notifier.notify_upload_exhausted(retailer_id, last_error)
+            self._notifier.notify_upload_exhausted(
+                retailer_id,
+                last_error,
+                cycle_id=cycle_id,
+                blob_name=blob_name,
+                record_count=len(records),
+            )
 
         return False
 

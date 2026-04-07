@@ -48,6 +48,9 @@ The infrastructure operates as a **distributed, clock-synchronized data ingestio
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
+Runtime note: both `watchdog.exe` and `scraper.exe` resolve `config/config.json`
+from the executable directory first, then fall back to the parent directory.
+
 ---
 
 ## 2. Component Breakdown
@@ -64,6 +67,7 @@ The infrastructure operates as a **distributed, clock-synchronized data ingestio
 | Crash detection | Interprets exit codes (OOM/SIGKILL, general error, clean exit) |
 | Restart budget | Max 5 restart attempts with 10s cooldown between each |
 | SMTP Email alerts | Dispatches HTML emails via `smtplib` on crash + fatal error |
+| Terminal observability | Emits structured `[WATCHDOG_STATUS]` heartbeat lines with PID, uptime, and restart budget |
 | Sleep prevention | `SetThreadExecutionState` via `ctypes.windll.kernel32` |
 | Signal handling | Graceful shutdown on Ctrl+C / SIGINT / SIGBREAK |
 | Dev mode | Runs `python scraper.py` when not frozen as .exe |
@@ -306,7 +310,9 @@ Web Scrapper/
 ├── payload/
 │   ├── __init__.py
 │   ├── base.py                    ✅ Abstract base class
-│   └── dummy_retailer.py          ✅ Team boilerplate template
+│   ├── dummy_retailer.py          ✅ Team boilerplate template
+│   ├── twob.py                    ✅ 2B Egypt Playwright payload
+│   └── ...                        (retailer-specific payloads)
 ├── database/
 │   ├── __init__.py
 │   └── local_db.py                ✅ SQLite per-cycle manager
