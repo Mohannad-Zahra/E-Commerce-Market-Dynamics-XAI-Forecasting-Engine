@@ -166,8 +166,15 @@ class EmailNotifier:
             extra=details,
         )
 
-    def notify_cycle_complete(self, total_records: int, retailers_scraped: int, duration_seconds: float):
-        self.send("cycle_complete", f"Scrape cycle complete: {total_records} records from {retailers_scraped} retailers in {duration_seconds:.1f}s.", extra={"total_records": total_records, "retailers_scraped": retailers_scraped, "duration_seconds": duration_seconds})
+    def notify_cycle_complete(self, total_records: int, retailers_scraped: int, duration_seconds: float, retailer_names: list[str] | None = None):
+        retailer_str = ", ".join(retailer_names) if retailer_names else "N/A"
+        msg = f"Scrape cycle complete: {total_records} records from {retailers_scraped} retailers ({retailer_str}) in {duration_seconds:.1f}s."
+        self.send("cycle_complete", msg, extra={
+            "total_records": total_records,
+            "retailers_scraped": retailers_scraped,
+            "duration_seconds": duration_seconds,
+            "retailers": retailer_names or []
+        })
 
     def notify_missed_interval(self, missed_time: str, actual_time: str):
         self.send("missed_interval", f"Missed scheduled interval {missed_time}. Executing catch-up scrape at {actual_time}.", extra={"scheduled_utc": missed_time, "actual_utc": actual_time})

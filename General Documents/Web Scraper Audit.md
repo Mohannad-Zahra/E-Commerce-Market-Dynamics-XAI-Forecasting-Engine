@@ -169,36 +169,34 @@
 
 ### 1. Developer Information
 - **Assigned Developer:** Mohammed Rasheek
-- **Current Status:** Functional (with pagination issues)
+- **Current Status:** ✅ Migrated to Framework (Pagination fixed & Bronze schema compliant)
 
 ### 2. Target Scope
-- **Target Retailer:** Sigma Computer
-- **Broad Category:** Laptops
-- **Specific Items Targeted:** Dell Laptops
-- **Volume:** ~50 items
+- **Target Retailer:** Sigma Computer (sigma-computer.com)
+- **Broad Category:** Electronics & PC Components
+- **Specific Items Targeted:** Full inventory for Laptops, Hardware, Storage, and Monitors.
+- **Volume:** Large (multi-page AJAX navigation).
 
 ### 3. Data Extraction Schema
-- [ ] Scrape Timestamp
-- [X] Product Title (Raw)
-- [X] Current Price
-- [ ] Discounts label
-- [X] Original Price (if discounted)
-- [X] Stock Availability Status
-- [X] Product URL
+- [x] Scrape Timestamp
+- [x] Product Title (Raw)
+- [x] Current Price
+- [x] Original Price (if discounted)
+- [x] Stock Availability Status
+- [x] Product URL
+- [x] Category
+- [x] Sub-category
 
 ### 4. Technical Stack & Health
-- **Libraries Used:** BeautifulSoup
-- **Anti-Bot Strategy:** Randomized `time.sleep()`
-- **Execution Time:** Under 10 minutes
-- **Cycle Time:** 12 hours (naive sleep)
-- **Known Issues:** Pagination failing
+- **Libraries Used:** Playwright (`async_playwright`), Asyncio.
+- **Anti-Bot Strategy:** Randomized User-Agents; 5.0–7.0s polite delays.
+- **Execution Time:** ~30–60 minutes per full cycle.
 
 ### 5. Migration Notes
-- **❌ Missing `scrape_timestamp`** — must be added (mandatory Bronze field)
-- **⚠️ Pagination must be fixed** before migration
-- Rate limit needs update to 5.0–7.0s
-- Scope question: "Dell Laptops only" — needs broadening per project spec
-- Naive 12-hour sleep will be replaced by UTC delta calculation
+- **✅ Fixed Pagination** (Playwright logic with AJAX click interaction and .loading-mask detection)
+- **✅ Added `scrape_timestamp`** (Bronze compliant)
+- **✅ Broadened Scope** (Laptops, Hardware, Storage, Monitors)
+- **✅ Rate limit updated** (strictly tied to 5.0–7.0s base class logic)
 
 ---
 

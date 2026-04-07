@@ -41,6 +41,9 @@ MANDATORY EXECUTION PROTOCOL (FOLLOW IN THIS EXACT ORDER):
      `raw_original_price`, `availability_text`, `product_url`, `category`, `sub_category`.
    - Do NOT add custom `time.sleep()` for legal pacing in payload logic.
    - Use Playwright for dynamic pages; implement robust pagination and lazy-load handling.
+   - For SPA/AJAX sites, implement intelligent scroll-to-view triggers and wait for loading masks or skeleton components to disappear before data extraction.
+   - Category Mapping: Always use a static `CAT_MAP` dictionary to translate technical UUIDs or URL slugs to the project's standard category schema.
+   - Logging: Emit page-level progress (e.g., 'Page X: detected Y items') to provide heartbeat visibility in the watchdog terminal.
    - Add/adjust tests in `Web Scrapper/tests/`.
    - Keep config and docs aligned with the code.
 
@@ -65,7 +68,7 @@ MANDATORY EXECUTION PROTOCOL (FOLLOW IN THIS EXACT ORDER):
    Always report:
    - What changed (by file)
    - Why it changed
-   - Validation performed (tests/live run/log evidence)
+   - Validation performed (tests/live run/log evidence showing record counts and retailer names in completion alerts)
    - Any remaining required user inputs
 
 7) MANDATORY SYSTEM TEST AFTER INITIAL TESTS

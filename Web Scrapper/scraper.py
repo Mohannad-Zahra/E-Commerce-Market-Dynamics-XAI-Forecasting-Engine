@@ -21,6 +21,11 @@ from engine.sleep_prevention import SleepPrevention
 from database.local_db import CycleDatabase
 
 if getattr(sys, "frozen", False):
+    import os
+    # When frozen, Playwright defaults to looking inside the temporary extraction folder.
+    # We force it to use the standard global location in %LOCALAPPDATA%\ms-playwright.
+    if "LOCALAPPDATA" in os.environ:
+        os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(os.environ["LOCALAPPDATA"], "ms-playwright")
     BASE_DIR = Path(sys.executable).parent
 else:
     BASE_DIR = Path(__file__).parent
@@ -87,6 +92,7 @@ def main():
 
         total_inserted = 0
         retailers_scraped = 0
+        scraped_retailer_names = []
         start_time = time_module.monotonic()
 
         with CycleDatabase(cycle_dir=db_dir, cycle_timestamp=target_utc) as db:
@@ -106,6 +112,7 @@ def main():
                     inserted, skipped = db.insert_records(records)
                     total_inserted += inserted
                     retailers_scraped += 1
+                    scraped_retailer_names.append(retailer_name)
                 except Exception as exc:
                     logger.error("Error executing payload for %s: %s", retailer_id, exc, exc_info=True)
                     notifier.notify_scrape_failure(
@@ -121,7 +128,7 @@ def main():
                 transport.upload_cycle_data(all_records, db.cycle_id, ts_str)
 
         duration = time_module.monotonic() - start_time
-        notifier.notify_cycle_complete(total_inserted, retailers_scraped, duration)
+        notifier.notify_cycle_complete(total_inserted, retailers_scraped, duration, scraped_retailer_names)
 
     with SleepPrevention():
         # Passing no `last_execution_utc` means it will trigger a catch-up on first launch.

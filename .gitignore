@@ -1,1 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
 
+# Environment
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Database & Data
+Web\ Scrapper/data/
+Web\ Scrapper/database/*.db
+Web\ Scrapper/database/*.db-shm
+Web\ Scrapper/database/*.db-wal
+Web\ Scrapper/scraper_deployment/data/
+Web\ Scrapper/scraper_deployment/database/*.db
+
+# Secrets (MANDATORY)
+token.json
+**/token.json
+# oauth_credentials.json is NOT ignored because we want to push the empty placeholder.
+
+# Logs
+logs/
+*.log
+Web\ Scrapper/logs/
+Web\ Scrapper/scraper_deployment/logs/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -42,7 +42,7 @@ The project requires price data scraped from **7+ retailers** by **5+ developers
 |---|---|---|---|
 | Abdelrhman Wael | 2B Egypt | ✅ Functional (3,090 items) | ❌ Manual / one-off |
 | Adel Morad | Dream2000 | ✅ Functional (882 items) | ❌ Manual execution |
-| Mohammed Rasheek | Sigma Computer | ⚠️ Pagination issues | ❌ Naive `sleep()` |
+| Mohammed Rasheek | Sigma Computer | ✅ Functional (SPA/AJAX optimized) | ✅ UTC Scheduled |
 | Mohammed Hessen | Noon / Jumia | ❌ Manual browser extension | ❌ No automation |
 | Mohannad Zahra | (Template) | 🔲 Not started | — |
 
@@ -179,6 +179,8 @@ Developer Laptop
 | `scraper.py` (full loop) | ✅ Complete | 2/2 ✅ |
 | `payload/base.py` | ✅ Complete | 4/4 ✅ |
 | `payload/dummy_retailer.py` | ✅ Complete | — |
+| `payload/sigma.py` | ✅ Complete (SPA/AJAX) | 1/1 ✅ |
+| `payload/twob.py` | ✅ Complete (Playwright) | 1/1 ✅ |
 | PyInstaller build scripts | ✅ Complete | — |
 
 **Total: 58/58 unit tests passing.**

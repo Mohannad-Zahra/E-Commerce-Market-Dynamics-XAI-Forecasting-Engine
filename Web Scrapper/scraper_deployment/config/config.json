@@ -15,17 +15,13 @@
             "base_url": "https://2b.com.eg",
             "payload_module": "payload.twob",
             "target_urls": [
-                "https://2b.com.eg/en/computers/laptops.html",
-                "https://2b.com.eg/en/mobile-and-tablet/mobiles.html",
-                "https://2b.com.eg/en/mobile-and-tablet/mobile-tablet.html",
-                "https://2b.com.eg/en/mobile-and-tablet/wearables.html",
-                "https://2b.com.eg/en/audio/headphones/true-wireless-headphones.html"
+                "https://2b.com.eg/en/computers/laptops.html"
             ]
         },
         {
             "retailer_id": "dream2000",
             "retailer_name": "Dream2000",
-            "enabled": true,
+            "enabled": false,
             "base_url": "https://dream2000.com.eg",
             "payload_module": "payload.dream2000",
             "categories": [
@@ -37,13 +33,16 @@
             ]
         },
         {
-            "retailer_id": "sigma_computer",
+            "retailer_id": "sigma-computer",
             "retailer_name": "Sigma Computer",
-            "enabled": false,
+            "enabled": true,
             "base_url": "https://www.sigma-computer.com",
             "payload_module": "payload.sigma",
-            "categories": [
-                "laptops"
+            "target_urls": [
+                "https://www.sigma-computer.com/en/category/9f5039de-5c80-46f3-9fe4-6e8f94189b8c",
+                "https://www.sigma-computer.com/en/category/9f5039af-f5d2-4396-9ba2-8ac40277c373",
+                "https://www.sigma-computer.com/en/category/9f5039ed-8dd4-4a9b-a8ce-caf20ed29436",
+                "https://www.sigma-computer.com/en/category/9f503a01-79d7-4a25-b3f3-63b0fd5b3094"
             ]
         },
         {
@@ -60,7 +59,7 @@
         {
             "retailer_id": "dummy_retailer",
             "retailer_name": "Dummy Retailer",
-            "enabled": true,
+            "enabled": false,
             "base_url": "https://dummy.com",
             "payload_module": "payload.dummy_retailer",
             "categories": [
@@ -85,9 +84,9 @@
         "team_emails": [
             "mohannadezzzahra@gmail.com",
             "abdelrhamanwael8@gmail.com",
-            "adel@example.com",
-            "m.hessen@example.com",
-            "m.rasheek@example.com"
+            "Moroazer15@gmail.com",
+            "mohamed101hussien@gmail.com",
+            "m.rashik2005@gmail.com"
         ],
         "_comment": "Direct Gmail sender setup. Requires an App Password."
     },

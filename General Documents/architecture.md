@@ -3,7 +3,7 @@
 ### Distributed Web Scraping Infrastructure
 
 **Version:** 2.0 (Post-Executive Review)  
-**Date:** April 5, 2026  
+**Date:** April 7, 2026  
 **Author:** Mohannad Zahra  
 **Status:** In Implementation — Infrastructure Completion (58/58 Tests Passing)
 
@@ -177,7 +177,7 @@ Attempt GCP upload (groupped by retailer_id)
 | `cycle_complete` | scraper | Successful cycle completion |
 
 **Implementation:**
-Uses Python's native `smtplib` and `email.mime.text`. Alert emails include structured details (retailer info, cycle metadata, retry context) and watchdog alerts include a roster of all configured retailer IDs/names.
+Uses Python's native `smtplib` and `email.mime.text`. Alert emails include structured details (retailer info, cycle metadata, retry context). The `cycle_complete` heartbeat now dynamically lists the names of all retailers successfully processed in that specific cycle.
 
 ### 2.4 Local Database (`database/local_db.py`) — **IMPLEMENTED ✅ (11 tests)**
 
@@ -348,7 +348,13 @@ Web Scrapper/
             "retailer_id": "2b_egypt",
             "enabled": true,
             "payload_module": "payload.twob",
-            "categories": ["mobiles", "laptops", "pc_components"]
+            "target_urls": ["..."]
+        },
+        {
+            "retailer_id": "sigma-computer",
+            "enabled": true,
+            "payload_module": "payload.sigma",
+            "target_urls": ["..."]
         }
     ],
     "rate_limit": { "min_seconds": 5.0, "max_seconds": 7.0 },
