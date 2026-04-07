@@ -43,6 +43,7 @@ MANDATORY EXECUTION PROTOCOL (FOLLOW IN THIS EXACT ORDER):
    - Use Playwright for dynamic pages; implement robust pagination and lazy-load handling.
    - For SPA/AJAX sites, implement intelligent scroll-to-view triggers and wait for loading masks or skeleton components to disappear before data extraction.
    - Category Mapping: Always use a static `CAT_MAP` dictionary to translate technical UUIDs or URL slugs to the project's standard category schema.
+   - Standalone Path Resolution: Always ensure `scraper.py` resolves `PLAYWRIGHT_BROWSERS_PATH` using an absolute path to `%LOCALAPPDATA%\ms-playwright` when `sys.frozen` is True. Do NOT use relative paths or "0" as it is inconsistent in bundled builds.
    - Logging: Emit page-level progress (e.g., 'Page X: detected Y items') to provide heartbeat visibility in the watchdog terminal.
    - Add/adjust tests in `Web Scrapper/tests/`.
    - Keep config and docs aligned with the code.
@@ -63,6 +64,7 @@ MANDATORY EXECUTION PROTOCOL (FOLLOW IN THIS EXACT ORDER):
      - `General Documents/proposal.md`
      - `README.md` (if behavior/ops changed)
      - `General Documents/Web Scraper Audit.md` (if team/process status changes)
+   - GitHub Push Protocol: Before any push, backup your local `token.json` and `oauth_credentials.json`, sanitize the repo versions to empty placeholders, push, and then restore.
 
 6) FINAL DELIVERY FORMAT
    Always report:
@@ -86,6 +88,7 @@ MANDATORY EXECUTION PROTOCOL (FOLLOW IN THIS EXACT ORDER):
      - record count
      - upload success log line
    - If upload does not succeed, diagnose and report blocker/root cause instead of claiming success.
+   - MANDATORY DEPLOYMENT SYNC: After all tests pass and are verified, you MUST rebuild the binary using `build_scraper.bat` and update the deployment file (`Web Scrapper/scraper_deployment/scraper.exe`).
 
 USE THIS PLACEHOLDER INPUT TEMPLATE:
 - Retailer: [NAME]

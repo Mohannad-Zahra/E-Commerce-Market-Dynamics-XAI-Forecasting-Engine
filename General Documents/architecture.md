@@ -2,7 +2,7 @@
 ## E-Commerce Market Dynamics & XAI Forecasting Engine
 ### Distributed Web Scraping Infrastructure
 
-**Version:** 2.0 (Post-Executive Review)  
+**Version:** 2.1 (Browser Fix & Security Update)  
 **Date:** April 7, 2026  
 **Author:** Mohannad Zahra  
 **Status:** In Implementation — Infrastructure Completion (58/58 Tests Passing)
@@ -275,7 +275,7 @@ PHASE 2: CLOUD (GCP)
 | Language | Python 3.11+ | ✅ |
 | Packaging | PyInstaller (`--onefile`) | ✅ Implemented |
 | HTTP Client | `requests` / `httpx` | ✅ Implemented |
-| Browser Automation | Playwright (async) | ✅ Implemented |
+| Browser Automation | Playwright (async) | ✅ Implemented (Absolute Path Patch) |
 | HTML Parser | BeautifulSoup4 | ✅ Implemented |
 | GCP Client | `google-cloud-storage` | ✅ Implemented |
 | Scheduling | `datetime` + `time.sleep()` | ✅ Implemented |
@@ -283,6 +283,7 @@ PHASE 2: CLOUD (GCP)
 | OS Sleep Prevention | `ctypes.windll.kernel32` | ✅ Implemented |
 | Local DB | SQLite3 (stdlib) | ✅ Implemented |
 | Notifications | `smtplib` (stdlib) → Gmail Auth | ✅ Implemented |
+| Frozen Env Patch | Absolute %LOCALAPPDATA% Path | ✅ Implemented |
 
 ### Cloud Layer
 
@@ -383,6 +384,7 @@ Web Scrapper/
 | Domain | Measure |
 |---|---|
 | GCP Credentials | Never committed to Git. Scoped write-only service accounts. |
+| GitHub Security | `oauth_credentials.json` sanitized to placeholder before push. `token.json` blocked via `.gitignore`. |
 | Rate Limiting | **Hardcoded** 5.0–7.0s. Cannot be overridden via config. |
 | Data in Transit | HTTPS (TLS 1.2+) for all GCP uploads. |
 | Data at Rest | GCS: Google-managed encryption. Local: SQLite files on developer disk. |
