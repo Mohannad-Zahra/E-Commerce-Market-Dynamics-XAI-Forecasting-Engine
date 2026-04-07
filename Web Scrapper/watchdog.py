@@ -138,8 +138,20 @@ def send_email_alert(
     """
     from engine.notifier import EmailNotifier
     try:
+        retailers = config.get("retailers", [])
+        retailer_roster = [
+            {
+                "retailer_id": r.get("retailer_id", "unknown"),
+                "retailer_name": r.get("retailer_name", r.get("retailer_id", "unknown")),
+            }
+            for r in retailers
+        ]
+        payload_extra = dict(extra or {})
+        payload_extra["retailers"] = retailer_roster
+        payload_extra["retailer_count"] = len(retailer_roster)
+
         notifier = EmailNotifier(config)
-        notifier.send(event, message, source="watchdog", extra=extra)
+        notifier.send(event, message, source="watchdog", extra=payload_extra)
     except Exception as exc:
         logger.error("Failed to send email alert: %s", exc)
 

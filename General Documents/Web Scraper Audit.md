@@ -4,6 +4,15 @@
 
 ---
 
+## Recent Operational Updates (April 2026)
+
+- Watchdog now provides structured runtime status lines in terminal/log output.
+- Watchdog now streams child scraper logs directly for easier live debugging.
+- Notification emails now include richer detail fields for failures/retries.
+- Watchdog-triggered emails now include full configured retailer roster (IDs + names).
+
+---
+
 ## Architecture Note (Post-Executive Review)
 
 > **All scrapers in this audit are being migrated to the new Watchdog + Scraper framework.**

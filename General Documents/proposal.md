@@ -183,6 +183,13 @@ Developer Laptop
 
 **Total: 58/58 unit tests passing.**
 
+### 7.1 Operational Refinements (April 2026 Follow-Up)
+
+- Watchdog now emits structured terminal status lines (`[WATCHDOG_STATUS]`) for easier live monitoring.
+- Scraper child logs stream directly through watchdog for clearer runtime visibility.
+- SMTP alerts now include richer metadata (retailer context, cycle/retry details).
+- Watchdog-sourced alerts include all configured retailer IDs and names to improve team triage.
+
 ---
 
 ## 8. Next Steps

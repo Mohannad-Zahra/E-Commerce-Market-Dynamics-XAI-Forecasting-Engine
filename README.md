@@ -14,11 +14,13 @@ The system is built on a resilient, distributed infrastructure:
 - **`watchdog.exe`**: A supervisor process that monitors the scraper, handles auto-restarts, prevents system sleep, and dispatches SMTP alerts.
 - **`scraper.exe`**: The execution engine that handles UTC-synchronized scheduling, retailer payloads (Playwright/BS4), and local SQLite backups.
 - **`engine/scheduler.py`**: Ensures all nodes fire at exactly `00:00` and `12:00` UTC with self-correcting drift logic.
+- **Runtime Monitoring**: Watchdog emits structured `[WATCHDOG_STATUS]` lines and streams scraper logs directly for real-time terminal diagnostics.
 
 ### 2. Data Strategy
 - **Local Persistence**: Every cycle creates a unique SQLite backup (`.db`) to prevent data loss.
 - **Cloud Transport**: Automated upload to **Google Drive** with 3x retry logic and local store-and-forward buffering.
 - **Bronze Schema**: Standardized 8-field extraction including `scrape_timestamp`, `retailer_id`, `price`, and `category`.
+- **Alert Context**: SMTP alerts include richer operational details (retailer context, cycle/retry metadata, and watchdog retailer roster).
 
 ### 3. Compliance & Security
 - **Legal Compliance**: Hardcoded 5.0–7.0s randomized rate-limiting in accordance with **Egyptian Anti-Cybercrime Law 175/2018**.

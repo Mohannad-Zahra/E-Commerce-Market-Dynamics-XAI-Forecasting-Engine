@@ -57,7 +57,7 @@ from the executable directory first, then fall back to the parent directory.
 
 ### 2.1 watchdog.exe — Process Supervisor
 
-**File:** `watchdog.py` (330 lines) — **IMPLEMENTED ✅**
+**File:** `watchdog.py` — **IMPLEMENTED ✅**
 
 **Responsibility:** Launch, monitor, and restart `scraper.exe`. Zero knowledge of scraping logic.
 
@@ -68,6 +68,7 @@ from the executable directory first, then fall back to the parent directory.
 | Restart budget | Max 5 restart attempts with 10s cooldown between each |
 | SMTP Email alerts | Dispatches HTML emails via `smtplib` on crash + fatal error |
 | Terminal observability | Emits structured `[WATCHDOG_STATUS]` heartbeat lines with PID, uptime, and restart budget |
+| Child log visibility | Scraper logs stream directly to terminal and log output |
 | Sleep prevention | `SetThreadExecutionState` via `ctypes.windll.kernel32` |
 | Signal handling | Graceful shutdown on Ctrl+C / SIGINT / SIGBREAK |
 | Dev mode | Runs `python scraper.py` when not frozen as .exe |
@@ -176,7 +177,7 @@ Attempt GCP upload (groupped by retailer_id)
 | `cycle_complete` | scraper | Successful cycle completion |
 
 **Implementation:**
-Uses Python's native `smtplib` and `email.mime.text`. The system targets all emails configured in the `team_emails` config array, logging in via an App Password bypassing the need for a Google Cloud Function proxy.
+Uses Python's native `smtplib` and `email.mime.text`. Alert emails include structured details (retailer info, cycle metadata, retry context) and watchdog alerts include a roster of all configured retailer IDs/names.
 
 ### 2.4 Local Database (`database/local_db.py`) — **IMPLEMENTED ✅ (11 tests)**
 
@@ -360,7 +361,11 @@ Web Scrapper/
         "team_emails": ["..."]
     },
     "cloud_retry": { "max_retries": 3, "retry_interval_seconds": 60 },
-    "watchdog": { "health_check_interval_seconds": 30, "max_restart_attempts": 5 },
+    "watchdog": {
+        "health_check_interval_seconds": 30,
+        "max_restart_attempts": 5,
+        "heartbeat_every_checks": 4
+    },
     "database": { "cycle_db_dir": "./data/cycles", "buffer_dir": "./data/buffer" }
 }
 ```
