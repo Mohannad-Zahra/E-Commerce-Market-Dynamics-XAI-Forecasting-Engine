@@ -88,7 +88,7 @@ MANDATORY EXECUTION PROTOCOL (FOLLOW IN THIS EXACT ORDER):
      - record count
      - upload success log line
    - If upload does not succeed, diagnose and report blocker/root cause instead of claiming success.
-   - MANDATORY DEPLOYMENT SYNC: After all tests pass and are verified, you MUST rebuild the binary using `build_scraper.bat` and update the deployment file (`Web Scrapper/scraper_deployment/scraper.exe`).
+   - MANDATORY DEPLOYMENT SYNC: After all tests pass and are verified, you MUST rebuild the binaries using `build_scraper.bat` and `build_watchdog.bat`, and update the deployment files (`Web Scrapper/scraper_deployment/scraper.exe` and `Web Scrapper/scraper_deployment/watchdog.exe`).
 
 USE THIS PLACEHOLDER INPUT TEMPLATE:
 - Retailer: [NAME]
