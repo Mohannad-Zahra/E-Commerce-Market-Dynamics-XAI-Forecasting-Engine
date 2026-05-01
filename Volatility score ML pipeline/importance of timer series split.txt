@@ -1,0 +1,22 @@
+The Time-Series Split (Forward Chaining) is the most critical part of your architecture. Without it, your model would be fundamentally broken. Here is why:
+
+1. Eliminating "Crystal Ball" Bias (Look-ahead)
+In a standard K-Fold split, the data is shuffled randomly. This means the model might train on price data from December to predict what happened in January.
+
+The Problem: In the real world, you don't know December's prices when you are in January.
+The Result: If you don't use Time-Series Split, the model will appear to have 99% accuracy because it is "cheating" by seeing the future, but it will fail completely the moment you deploy it.
+2. Protecting Temporal Lags
+You are using features like price_lag_7d and price_lag_14d.
+
+These features are mathematically derived from previous days.
+If you shuffle the data (K-Fold), the "future" prices of a product might leak into the "past" lags of the same product. This is called Data Leakage, and it makes the training results meaningless.
+3. Handling Macro-Economic Drift (Inflation)
+In the Egyptian market, the relationship between the USD rate and electronics prices changes over time (e.g., prices might react faster to currency spikes in 2026 than they did in 2025).
+
+Time-Series Split allows you to see if the model is still accurate as you move forward in time.
+It proves that your model is robust enough to handle new shocks it has never seen before.
+4. Real-World Validation
+When your FastAPI backend goes live, it will use today's data to predict tomorrow's volatility.
+
+Forward Chaining is the only validation method that actually mimics how your model will be used in production. It treats the "Validation Month" as if it were the "Upcoming Month."
+10:16 PM
