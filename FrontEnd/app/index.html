@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="src/img/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>app</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+  <style>
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/geist-font/1.0.0/fonts/geist-sans/style.min.css');
+
+    :root {
+      --chat--color-primary: #0062ff;
+      --chat--color-primary-shade-50: #0052d9;
+      --chat--color-primary-shade-100: #0042b3;
+      --chat--color-secondary: #ffffff;
+      --chat--color-secondary-shade-50: #f4f7f9;
+
+      --chat--font-family: 'Geist Sans', sans-serif;
+      --chat--window--border-radius: 28px;
+
+      /* Tidio Style Gradient Header */
+      --chat--header--background: linear-gradient(135deg, #2b67f6 0%, #3b82f6 100%);
+      --chat--header--color: #ffffff;
+
+      --chat--message--bot--background: #f4f7f9;
+      --chat--message--bot--color: #1a202c;
+      --chat--message--user--background: #0062ff;
+      --chat--message--user--color: #ffffff;
+
+      --chat--toggle--background: linear-gradient(135deg, #2b67f6 0%, #3b82f6 100%);
+      --chat--toggle--hover--background: #0052d9;
+      --chat--toggle--icon--color: #ffffff;
+
+      --chat--window--background: #ffffff;
+      --chat--message--font-size: 14px;
+    }
+
+    /* Tidio Curved Header and Avatar Styling */
+    .n8n-chat-widget-window header {
+      height: 120px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      justify-content: center !important;
+      padding-left: 85px !important;
+      clip-path: ellipse(150% 100% at 50% 0%);
+      position: relative;
+    }
+
+    .n8n-chat-widget-window header::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background-image: url('src/img/support_avatar.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .n8n-chat-widget-window header h2 {
+      font-weight: 800 !important;
+      font-size: 1.1rem !important;
+      margin-bottom: 2px !important;
+    }
+
+    .n8n-chat-widget-window header p {
+      font-size: 0.85rem !important;
+      opacity: 0.9 !important;
+    }
+
+    /* Floating Send Button Style */
+    .n8n-chat-widget-input-wrapper button {
+      background: #0062ff !important;
+      border-radius: 50% !important;
+      width: 45px !important;
+      height: 45px !important;
+      margin-left: 10px !important;
+      box-shadow: 0 4px 15px rgba(0, 98, 255, 0.3) !important;
+    }
+
+    /* Force Chatbot to the Absolute Top Layer */
+    .n8n-chat-widget, 
+    .n8n-chat-widget-window,
+    .n8n-chat-widget-toggle {
+      z-index: 2147483647 !important;
+    }
+
+    /* Floating Animation and Cyber Shadow */
+    .n8n-chat-widget-toggle {
+      box-shadow: 0 10px 40px rgba(0, 98, 255, 0.4) !important;
+      animation: cyberFloat 3s ease-in-out infinite !important;
+      border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    @keyframes cyberFloat {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(2deg);
+      }
+
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+    }
+  </style>
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://abdelrhaman.abdelrhaman.cfd/webhook/b5600934-fe67-4a10-a00b-9eca3ffaf01d/chat',
+      title: 'Jessica Smith',
+      subtitle: 'We are online!',
+      mainColor: '#0062ff',
+      initialMessages: [
+        'Hi there 👋 If you need any assistance, I’m always here.'
+      ],
+      i18n: {
+        en: {
+          welcomeMessages: [
+            'Hi there 👋 If you need any assistance, I’m always here.'
+          ],
+          chatInputPlaceholder: 'Enter your message...',
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

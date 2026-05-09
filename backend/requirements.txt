@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+lightgbm
+joblib
+onnxruntime
+numpy
+pandas
+scikit-learn
+requests
+beautifulsoup4
