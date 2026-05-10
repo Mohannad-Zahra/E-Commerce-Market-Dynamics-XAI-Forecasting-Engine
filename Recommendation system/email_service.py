@@ -5,13 +5,14 @@ Step 5 of the Phase 4 pipeline: Autonomous Email Notification.
 
 Queries the subscribers table for users opted into Laptop alerts,
 formats a clean HTML email from today's daily_recommendations, and
-dispatches it via the SendGrid API.
+dispatches it via the Resend API.
 
-No external libraries required – pure requests.
+Requires:
+    pip install resend
 
 Configuration
 -------------
-Set SENDGRID_API_KEY and EMAIL_FROM as environment variables, or
+Set RESEND_API_KEY and EMAIL_FROM as environment variables, or
 update the constants below before running.
 """
 
@@ -19,19 +20,21 @@ import os
 from datetime import datetime, timezone
 from typing import Any, Dict, List
 
-import requests
+import resend
 
 # ---------------------------------------------------------------------------
 # Config – override via environment variables in production
 # ---------------------------------------------------------------------------
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", "SG.YOUR_SENDGRID_API_KEY_HERE")
-EMAIL_FROM       = os.getenv("EMAIL_FROM",       "alerts@yourapp.com")
-EMAIL_FROM_NAME  = os.getenv("EMAIL_FROM_NAME",  "Laptop Deal Alerts")
-SENDGRID_URL     = "https://api.sendgrid.com/v3/mail/send"
+RESEND_API_KEY  = os.getenv("RESEND_API_KEY", "re_R7Dqobmv_LZzNYXVzpMJDGZ3FUeZ5qJ7y")
+EMAIL_FROM      = os.getenv("EMAIL_FROM",      "onboarding@resend.dev")
+EMAIL_FROM_NAME = os.getenv("EMAIL_FROM_NAME", "Laptop Deal Alerts")
+
+# Initialise the Resend client with the API key
+resend.api_key = RESEND_API_KEY
 
 
 # ---------------------------------------------------------------------------
-# HTML template builder
+# HTML template builder  (unchanged)
 # ---------------------------------------------------------------------------
 
 def _build_html(recommendations: List[Dict[str, Any]], recipient_name: str = "") -> str:
@@ -39,7 +42,6 @@ def _build_html(recommendations: List[Dict[str, Any]], recipient_name: str = "")
     greeting = f"Hi {recipient_name}," if recipient_name else "Hi there,"
     today     = datetime.now(timezone.utc).strftime("%B %d, %Y")
 
-    # Build one card per recommendation
     cards_html = ""
     for rec in recommendations:
         model       = rec.get("model", "N/A")
@@ -49,7 +51,6 @@ def _build_html(recommendations: List[Dict[str, Any]], recipient_name: str = "")
         confidence  = rec.get("confidence", "N/A")
         explanation = rec.get("llm_explanation", "No explanation available.")
 
-        # Format price nicely if it's a number
         if isinstance(price, (int, float)):
             price = f"{price:,.0f} EGP"
 
@@ -105,39 +106,33 @@ def _build_html(recommendations: List[Dict[str, Any]], recipient_name: str = "")
 
 
 # ---------------------------------------------------------------------------
-# SendGrid dispatcher
+# Resend dispatcher
 # ---------------------------------------------------------------------------
 
-def _send_via_sendgrid(to_email: str, to_name: str, subject: str, html_body: str) -> bool:
+def _send_via_resend(to_email: str, to_name: str, subject: str, html_body: str) -> bool:
     """
-    POST one email to the SendGrid v3 /mail/send endpoint.
-    Returns True on HTTP 202 (Accepted), False otherwise.
+    Send one email via the Resend SDK.
+    Returns True on success, False on any error.
     """
-    payload = {
-        "personalizations": [
-            {"to": [{"email": to_email, "name": to_name}]}
-        ],
-        "from": {"email": EMAIL_FROM, "name": EMAIL_FROM_NAME},
-        "subject": subject,
-        "content": [{"type": "text/html", "value": html_body}],
-    }
-    headers = {
-        "Authorization": f"Bearer {SENDGRID_API_KEY}",
-        "Content-Type":  "application/json",
-    }
     try:
-        resp = requests.post(SENDGRID_URL, json=payload, headers=headers, timeout=10)
-        if resp.status_code == 202:
+        r = resend.Emails.send({
+            "from":    f"{EMAIL_FROM_NAME} <{EMAIL_FROM}>",
+            "to":      to_email,
+            "subject": subject,
+            "html":    html_body,
+        })
+        # Resend returns a dict with an 'id' key on success
+        if r and r.get("id"):
             return True
-        print(f"  [EMAIL] SendGrid returned {resp.status_code}: {resp.text[:200]}")
+        print(f"  [EMAIL] Resend returned unexpected response: {r}")
         return False
-    except requests.exceptions.RequestException as e:
-        print(f"  [EMAIL] Request failed: {e}")
+    except Exception as e:
+        print(f"  [EMAIL] Resend error: {e}")
         return False
 
 
 # ---------------------------------------------------------------------------
-# Public entry point
+# Public entry point  (signature unchanged — main_pipeline.py needs no edits)
 # ---------------------------------------------------------------------------
 
 def dispatch_laptop_alerts(
@@ -175,7 +170,7 @@ def dispatch_laptop_alerts(
             continue
 
         html = _build_html(recommendations, recipient_name=name)
-        ok   = _send_via_sendgrid(email, name, subject, html)
+        ok   = _send_via_resend(email, name, subject, html)
 
         if ok:
             print(f"  [EMAIL] ✓ Sent to {email}")

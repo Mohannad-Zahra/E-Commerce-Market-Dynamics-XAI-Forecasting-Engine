@@ -28,6 +28,10 @@ import time
 from datetime import datetime, timezone
 from typing import Any, Dict, List
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from database import (
     add_subscriber,
     get_laptop_subscribers,
