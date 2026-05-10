@@ -1,7 +1,7 @@
 """
 seed_data.py — Historical Data Seeder
 ======================================
-Imports historical data from src_integrated/database/ECom_Forecast_XAI_data.csv
+Imports historical data from data/ECom_Forecast_XAI_data.csv
 into the unified Wise Purchaser database.
 
 Usage:
@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 from Point_1.db.engine import SessionLocal, engine, Base
 from Point_1.db.models import ProcessedProduct, MLForecastShap, Batch
 
-CSV_PATH = "src_integrated/database/ECom_Forecast_XAI_data.csv"
+CSV_PATH = "data/ECom_Forecast_XAI_data.csv"
 BATCH_SIZE = 5000
 
 def seed():

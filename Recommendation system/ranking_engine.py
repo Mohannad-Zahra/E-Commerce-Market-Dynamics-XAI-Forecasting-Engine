@@ -26,7 +26,7 @@ warnings.filterwarnings("ignore")
 # Paths – resolve relative to this file so the script can be run from anywhere
 # ---------------------------------------------------------------------------
 _DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(_DIR, "data")
+DATA_DIR = os.path.join(_DIR, "..", "..", "data")
 
 PROCESSED_CSV = os.path.join(DATA_DIR, "Dataset_Pipeline_Processed.csv")
 XAI_CSV = os.path.join(DATA_DIR, "ECom_Forecast_XAI_data.csv")

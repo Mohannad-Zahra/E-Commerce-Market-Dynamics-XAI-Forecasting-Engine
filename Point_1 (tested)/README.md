@@ -7,7 +7,7 @@ This folder contains the implementation of the first phase of the unified archit
 Follow these steps in order to set up and run the Data Ingestion & ETL layer.
 
 ### 1. (Optional) Import Historical Data
-If you have existing data in `src_integrated/database/ECom_Forecast_XAI_data.csv`, you can import it into the new unified database by running:
+If you have existing data in `data/ECom_Forecast_XAI_data.csv`, you can import it into the new unified database by running:
 ```powershell
 python Point_1/seed_data.py
 ```
@@ -33,7 +33,7 @@ python -m pytest Point_1/tests/ -v
 ## 🏗️ Directory Structure
 - `api/`: FastAPI routers for scraper ingestion and ETL triggers.
 - `db/`: Database engine, SQLAlchemy models, and Pydantic schemas.
-- `etl/`: Core feature extraction engine.
+- `ETL/`: Core feature extraction engine.
 - `tests/`: 50 automated tests covering all logic.
 - `seed_data.py`: Script to import legacy CSV data.
 - `main.py`: Main entry point for the FastAPI application.

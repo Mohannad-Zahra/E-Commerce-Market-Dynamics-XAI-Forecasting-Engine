@@ -4,12 +4,12 @@ ml_models.py
 Lazy-loading wrappers for the three production ML models:
 
   Model 1 – Price Forecast (LightGBM Booster via joblib)
-      File   : ETl/model/artefacts/model.joblib
+      File   : ETL/model/artefacts/model.joblib
       Input  : 26 named float features
       Output : log_return  →  predicted_price_egp = current_price * exp(log_return)
 
   Model 2 – Price Forecast (LightGBM ONNX export)
-      File   : ETl/model/artefacts/model.onnx
+      File   : ETL/model/artefacts/model.onnx
       Input  : float32[1, 26]  (same feature order as joblib)
       Output : float32[1, 1]   log_return
 
@@ -36,8 +36,8 @@ logger = logging.getLogger(__name__)
 # ── Paths (relative to this file) ────────────────────────────────────────────
 _BASE = Path(__file__).resolve().parent.parent
 
-JOBLIB_PATH      = _BASE / "ETl" / "model" / "artefacts" / "model.joblib"
-LGBM_ONNX_PATH   = _BASE / "ETl" / "model" / "artefacts" / "model.onnx"
+JOBLIB_PATH      = _BASE / "ETL" / "model" / "artefacts" / "model.joblib"
+LGBM_ONNX_PATH   = _BASE / "ETL" / "model" / "artefacts" / "model.onnx"
 VOLAT_ONNX_PATH  = _BASE / "Volatility score ML pipeline" / "volatility_model.onnx"
 
 # ── Feature metadata (from new XAI pipeline) ────────────────────────────
