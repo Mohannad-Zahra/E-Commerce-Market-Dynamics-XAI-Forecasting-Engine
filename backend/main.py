@@ -55,42 +55,44 @@ def _retailer(product_id: str) -> str:
 def _category(row: dict) -> str:
     title = (row.get("raw_title") or "").lower()
     
-    # 1. MOBILES (Expanded for Tecno, Huawei, itel, etc.)
+    # 1. LAPTOPS
+    if any(k in title for k in [
+        "laptop", "notebook", "aspire", "vivobook", "ideapad", "macbook", "zenbook", "pavilion", 
+        "legion", "loq", "nitro", "rog", "strix", "victus", "predator", "alienware", "omen", 
+        "tuf", "katana", "sword", "vector", "stealth", "thin", "cyborg", "bravo", "thinkpad", 
+        "latitude", "vostro", "xps", "probook", "elitebook", "surface", "proart", "raider", 
+        "prestige", "modern 14", "modern 15", "expertbook", "a16", "yoga", "flex", "swift", 
+        "matebook", "galaxy book", "gram", "spin", "hx ", "hs ", "fhd", "qhd", "15.6", 
+        "14-inch", "16-inch", "13-inch", "17-inch", "oled", "ips display"
+    ]):
+        return "laptops"
+
+    # 2. MOBILES
     if any(k in title for k in [
         "iphone", "samsung galaxy", "redmi", "xiaomi", "oppo", "vivo", "realme", "infinix", 
         "honor", "hmd", "motorola", "moto ", "nokia", "google pixel", "tecno", "huawei", 
-        "zte", "itel", "pova", "spark", "camon", "phantom", "zero 30", "zero ultra", "y90", "y70"
+        "zte", "itel", "pova", "spark", "camon", "phantom", "zero 30", "zero ultra", "y90", "y70", " mobile "
     ]):
         return "mobiles"
     
-    # 2. TABLETS (Specific catch for Idea Tab and MatePad)
+    # 3. TABLETS
     if any(k in title for k in ["ipad", "tablet", "tab ", "tab s", "tab a", "idea tab", "matepad", "t-tab", "pad 6", "pad x"]):
         return "tablets"
 
-    # 3. LAPTOPS (Priority series + Mobile CPU signatures)
-    if any(k in title for k in [
-        "laptop", "notebook", "aspire", "vivobook", "ideapad", "macbook", "zenbook", "pavilion", 
-        "legion", "loq", "nitro", "rog ", "strix", "victus", "predator", "alienware", "omen", 
-        "tuf ", "katana", "sword", "vector", "stealth", "thin ", "cyborg", "bravo", "thinkpad", 
-        "latitude", "vostro", "xps", "probook", "elitebook", "surface", "proart", "raider", 
-        "prestige", "modern 14", "modern 15", "expertbook", "a16", "hx ", "hs ", "fhd", "qhd", "15.6", "14-inch"
-    ]):
-        return "laptops"
-        
-    # 4. MONITORS
-    if any(k in title for k in ["monitor", "display", "screen", "24-inch", "27-inch", "32-inch", "curved monitor"]):
-        return "monitors"
-        
-    # 5. PC COMPONENTS (RAM, SSD, GPU, CPU, PSU)
-    is_gpu = any(k in title for k in ["gpu", "graphics card", "rtx", "gtx", "rx 6", "rx 7", "rx 5", "radeon"])
-    is_cpu = any(k in title for k in ["processor", "cpu", "ryzen", "intel core", "core i3", "core i5", "core i7", "core i9", "12100", "12400", "13400", "13900", "14900", "7600x", "7800x3d"])
-    is_mem = any(k in title for k in ["ddr4", "ddr5", "ram", "memory", "udimm", "sodimm", "3200mhz", "3600mhz", "4800mhz", "5200mhz", "6000mhz", "cl16", "cl18", "cl22", "cl30"])
-    is_storage = any(k in title for k in ["ssd", "nvme", "m.2", "hdd", "hard disk", "sata", "barracuda", "solid state drive", "980 pro", "990 pro", "lexar", "kingston fury", "crucial p3"])
+    # 4. PC COMPONENTS
+    is_gpu = any(k in title for k in ["gpu", "graphics card", "rtx", "gtx", "rx 6", "rx 7", "rx 5", "radeon", "geforce", "nvidia", "amd "])
+    is_cpu = any(k in title for k in ["processor", "cpu", "ryzen", "intel core", "core i3", "core i5", "core i7", "core i9", "12100", "12400", "13400", "13900", "14900", "7600x", "7800x3d", "ultra 5", "ultra 7", "ultra 9"])
+    is_mem = any(k in title for k in ["ddr4", "ddr5", "udimm", "sodimm", "3200mhz", "3600mhz", "4800mhz", "5200mhz", "6000mhz", "cl16", "cl18", "cl22", "cl30"])
+    is_storage = any(k in title for k in ["nvme", "m.2", "sata", "barracuda", "980 pro", "990 pro", "lexar", "kingston fury", "crucial p3", "internal ssd", "internal hdd"])
     is_mobo = any(k in title for k in ["motherboard", "mainboard", "h610", "b660", "b760", "z690", "z790", "am4", "am5", "lga1700"])
-    is_power_case = any(k in title for k in ["psu", "power supply", "cpu cooler", "case fan", "chassis", "liquid cooler", "tower case"])
+    is_power_case = any(k in title for k in ["psu", "power supply", "cpu cooler", "case fan", "chassis", "liquid cooler", "tower case", "full tower", "mid tower", "cpu cooling"])
     
     if is_gpu or is_cpu or is_mem or is_storage or is_mobo or is_power_case:
         return "pc-components"
+
+    # 5. MONITORS
+    if any(k in title for k in ["monitor", "curved monitor", "gaming monitor", "24-inch monitor", "27-inch monitor", "32-inch monitor"]):
+        return "monitors"
         
     # 6. ACCESSORIES
     if any(k in title for k in [
@@ -262,47 +264,34 @@ def _to_product(row: dict, numeric_id: int) -> dict:
 
 _LATEST_PRODUCTS_SQL = text("""
     SELECT
-        agg.product_id,
-        agg.raw_title,
-        agg.latest_ts,
-        agg.price_egp,
-        agg.base_price_egp,
-        agg.official_egp_usd,
-        agg.cpi_inflation,
-        agg.is_major_sale_period,
-        agg.compute_potential,
-        agg.delta_p_1d,
-        agg.delta_p_7d,
-        agg.delta_p_14d,
-        agg.vol_30d,
-        agg.competitor_scarcity_count,
-        agg.volatility_score,
-        agg.category,
-        pt.thumbnail AS product_thumbnail,
-        pt.images AS product_images
-    FROM (
-        SELECT
-            product_id,
-            raw_title,
-            MAX(scrape_timestamp) AS latest_ts,
-            price_t_plus_14 AS price_egp,
-            price_t_plus_14 AS base_price_egp,
-            official_egp_usd,
-            cpi_inflation,
-            is_major_sale_period,
-            compute_potential,
-            delta_p_1d,
-            delta_p_7d,
-            delta_p_14d,
-            vol_30d,
-            competitor_scarcity_count,
-            stability_score AS volatility_score,
-            category
-        FROM master_training_features
+        p.id AS product_id,
+        p.raw_title,
+        ph.scrape_timestamp AS latest_ts,
+        COALESCE(NULLIF(ph.raw_current_price, 0), f.price_t_plus_14) AS price_egp,
+        COALESCE(NULLIF(ph.raw_original_price, 0), f.price_t_plus_14) AS base_price_egp,
+        m.official_egp_usd,
+        m.cpi_inflation,
+        m.is_major_sale_period,
+        p.compute_potential,
+        ph.delta_p_1d,
+        ph.delta_p_7d,
+        ph.delta_p_14d,
+        ph.vol_30d,
+        ph.competitor_scarcity_count,
+        f.stability_score AS volatility_score,
+        p.category,
+        p.thumbnail AS product_thumbnail,
+        p.images AS product_images
+    FROM products p
+    JOIN (
+        SELECT product_id, MAX(scrape_timestamp) as max_ts
+        FROM price_history
         GROUP BY product_id
-    ) AS agg
-    LEFT JOIN products pt ON pt.product_url = agg.product_id
-    ORDER BY agg.price_egp DESC
+    ) latest ON p.id = latest.product_id
+    JOIN price_history ph ON ph.product_id = p.id AND ph.scrape_timestamp = latest.max_ts
+    LEFT JOIN ml_forecast_shap f ON f.price_history_id = ph.id
+    LEFT JOIN macro_economics m ON m.date_id = ph.date_id
+    ORDER BY price_egp DESC
 """)
 
 
@@ -332,9 +321,16 @@ def get_cached_data(db: Session):
                 _CACHED_CATEGORIES = sorted(cats)
                 
                 # Pre-calculate stats
-                r1 = db.execute(text("SELECT COUNT(*) as total FROM master_training_features")).mappings().first()
-                r3 = db.execute(text("SELECT MIN(scrape_timestamp) as first, MAX(scrape_timestamp) as last FROM master_training_features")).mappings().first()
-                r4 = db.execute(text("SELECT MIN(price_t_plus_14) as lo, MAX(price_t_plus_14) as hi, AVG(price_t_plus_14) as avg FROM master_training_features")).mappings().first()
+                r1 = db.execute(text("SELECT COUNT(*) as total FROM price_history")).mappings().first()
+                r3 = db.execute(text("SELECT MIN(scrape_timestamp) as first, MAX(scrape_timestamp) as last FROM price_history")).mappings().first()
+                r4 = db.execute(text("""
+                    SELECT 
+                        MIN(COALESCE(NULLIF(ph.raw_current_price, 0), f.price_t_plus_14)) as lo, 
+                        MAX(COALESCE(NULLIF(ph.raw_current_price, 0), f.price_t_plus_14)) as hi, 
+                        AVG(COALESCE(NULLIF(ph.raw_current_price, 0), f.price_t_plus_14)) as avg 
+                    FROM price_history ph
+                    LEFT JOIN ml_forecast_shap f ON f.price_history_id = ph.id
+                """)).mappings().first()
                 
                 _CACHED_STATS = {
                     "total_rows":     r1["total"],
@@ -404,13 +400,15 @@ def get_price_history(product_id: int, db: Session = Depends(get_db)):
 
     url = products[idx]["product_url"]
     history_sql = text("""
-        SELECT scrape_timestamp, 
-               price_t_plus_14 AS price_egp, 
-               stability_score AS volatility_score,
-               official_egp_usd
-        FROM master_training_features
-        WHERE product_id = :url
-        ORDER BY scrape_timestamp ASC
+        SELECT ph.scrape_timestamp, 
+               ph.raw_current_price AS price_egp, 
+               f.stability_score AS volatility_score,
+               m.official_egp_usd
+        FROM price_history ph
+        LEFT JOIN ml_forecast_shap f ON f.price_history_id = ph.id
+        LEFT JOIN macro_economics m ON m.date_id = ph.date_id
+        WHERE ph.product_id = :url
+        ORDER BY ph.scrape_timestamp ASC
     """)
     hist = db.execute(history_sql, {"url": url}).mappings().all()
     return {

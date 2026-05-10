@@ -9,8 +9,8 @@ from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-# Absolute path to the real database
-_DB_PATH = Path(__file__).resolve().parent.parent / "data" / "electronics_history.db"
+# Absolute path to the refactored database
+_DB_PATH = Path(__file__).resolve().parent.parent / "src_integrated" / "database" / "wise_purchaser.sqlite"
 
 DATABASE_URL = f"sqlite:///{_DB_PATH}"
 

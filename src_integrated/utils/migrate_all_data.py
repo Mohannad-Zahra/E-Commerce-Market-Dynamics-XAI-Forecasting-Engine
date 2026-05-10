@@ -21,8 +21,10 @@ def extract_retailer(url):
     return domain.replace('www.', '').split('.')[0]
 
 def migrate_data():
-    csv_path = r'C:\Users\mohan\OneDrive\Desktop\Wise Purchaser\forecast+shap\ECom_Forecast_XAI_data.csv'
-    release_dates_path = r'C:\Users\mohan\OneDrive\Desktop\Wise Purchaser\release_dates_dictionary_v4.json'
+    # Update paths to match workspace structure
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    csv_path = os.path.join(base_dir, 'data', 'ECom_Forecast_XAI_data.csv')
+    release_dates_path = os.path.join(base_dir, 'release_dates_dictionary_v4.json')
     
     if not os.path.exists(csv_path):
         print(f"File not found: {csv_path}")

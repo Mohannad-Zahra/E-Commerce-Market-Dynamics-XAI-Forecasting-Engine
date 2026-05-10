@@ -33,7 +33,7 @@ const HeroSlider = () => {
                     <Swiper
                         loop={true}
                         autoplay={{
-                            delay: 2500,
+                            delay: 3500,
                             disableOnInteraction: false,
                         }}
                         pagination={true}
@@ -42,44 +42,44 @@ const HeroSlider = () => {
                     >
                         <SwiperSlide>
                             <div className="absolute top-1/2 -translate-y-1/2 left-[5%] z-10">
-                                <h4 className="uppercase text-[clamp(12px,2vw,18px)] italic font-normal mb-[0.4vw]">Introducing the new</h4>
+                                <h4 className="uppercase text-[clamp(12px,2vw,18px)] italic font-normal mb-[0.4vw]">Next-Gen Gaming</h4>
                                 <h3 className="text-[clamp(24px,5vw,60px)] capitalize mb-[clamp(15px,3vw,30px)] text-main font-black leading-[1.1]">
-                                    Microsoft Xbox <br /> 360 Controller{" "}
+                                    Pro Gaming <br /> Laptop Series
                                 </h3>
-                                <p className="text-[clamp(14px,2vw,24px)] mt-[clamp(10px,1.5vw,20px)] mb-[clamp(15px,2vw,30px)]">Windows Xp/10/7/8 Ps3, Tv Box</p>
+                                <p className="text-[clamp(14px,2vw,24px)] mt-[clamp(10px,1.5vw,20px)] mb-[clamp(15px,2vw,30px)]">Intel Core Ultra 9 | RTX 50 Series | 240Hz</p>
                                 <Link to="/" className="bg-transparent text-heading p-0 font-semibold text-[clamp(14px,2vw,20px)] hover:text-main flex items-center gap-[10px] transition-colors duration-300">
-                                    Shop Now
+                                    Explore Deals
                                 </Link>
                             </div>
-                            <img className="w-full" src={bannerHero1} alt="slider hero 1" />
+                            <img className="w-full rounded-2xl overflow-hidden shadow-2xl" src={bannerHero1} alt="gaming laptop banner" />
                         </SwiperSlide>
 
                         <SwiperSlide>
                             <div className="absolute top-1/2 -translate-y-1/2 left-[5%] z-10">
-                                <h4 className="uppercase text-[clamp(12px,2vw,18px)] italic font-normal mb-[0.4vw]">Introducing the new</h4>
+                                <h4 className="uppercase text-[clamp(12px,2vw,18px)] italic font-normal mb-[0.4vw]">Stay Connected</h4>
                                 <h3 className="text-[clamp(24px,5vw,60px)] capitalize mb-[clamp(15px,3vw,30px)] text-main font-black leading-[1.1]">
-                                    Microsoft Xbox <br /> 360 Controller{" "}
+                                    Latest Flagship <br /> Smartphones
                                 </h3>
-                                <p className="text-[clamp(14px,2vw,24px)] mt-[clamp(10px,1.5vw,20px)] mb-[clamp(15px,2vw,30px)]">Windows Xp/10/7/8 Ps3, Tv Box</p>
+                                <p className="text-[clamp(14px,2vw,24px)] mt-[clamp(10px,1.5vw,20px)] mb-[clamp(15px,2vw,30px)]">A18 Bionic | Titanium Design | Pro Camera</p>
                                 <Link to="/" className="bg-transparent text-heading p-0 font-semibold text-[clamp(14px,2vw,20px)] hover:text-main flex items-center gap-[10px] transition-colors duration-300">
-                                    Shop Now
+                                    Shop Mobiles
                                 </Link>
                             </div>
-                            <img className="w-full" src={bannerHero2} alt="slider hero 1" />
+                            <img className="w-full rounded-2xl overflow-hidden shadow-2xl" src={bannerHero2} alt="smartphone banner" />
                         </SwiperSlide>
 
                         <SwiperSlide>
                             <div className="absolute top-1/2 -translate-y-1/2 left-[5%] z-10">
-                                <h4 className="uppercase text-[clamp(12px,2vw,18px)] italic font-normal mb-[0.4vw]">Introducing the new</h4>
+                                <h4 className="uppercase text-[clamp(12px,2vw,18px)] italic font-normal mb-[0.4vw]">Build Your Dream PC</h4>
                                 <h3 className="text-[clamp(24px,5vw,60px)] capitalize mb-[clamp(15px,3vw,30px)] text-main font-black leading-[1.1]">
-                                    Microsoft Xbox <br /> 360 Controller{" "}
+                                    Performance PC <br /> Components
                                 </h3>
-                                <p className="text-[clamp(14px,2vw,24px)] mt-[clamp(10px,1.5vw,20px)] mb-[clamp(15px,2vw,30px)]">Windows Xp/10/7/8 Ps3, Tv Box</p>
+                                <p className="text-[clamp(14px,2vw,24px)] mt-[clamp(10px,1.5vw,20px)] mb-[clamp(15px,2vw,30px)]">Z790 Motherboards | DDR5 RAM | Gen5 SSD</p>
                                 <Link to="/" className="bg-transparent text-heading p-0 font-semibold text-[clamp(14px,2vw,20px)] hover:text-main flex items-center gap-[10px] transition-colors duration-300">
-                                    Shop Now
+                                    Browse Parts
                                 </Link>
                             </div>
-                            <img className="w-full" src={bannerHero3} alt="slider hero 1" />
+                            <img className="w-full rounded-2xl overflow-hidden shadow-2xl" src={bannerHero3} alt="pc components banner" />
                         </SwiperSlide>
                     </Swiper>
                 </div>

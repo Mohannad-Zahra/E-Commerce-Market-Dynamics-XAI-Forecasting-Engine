@@ -1,15 +1,11 @@
 import os
 import re
+import json
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from sqlalchemy import create_engine
 
-# --- Configuration ---
-DB_PATH = "sqlite:///src_integrated/database/wise_purchaser.sqlite"
-MODELS_DIR = Path("ETL/models")
-
-# GPU tier map (24 unique strings → numeric tier 1-10)
+# GPU tier map (24 unique strings -> numeric tier 1-10)
 GPU_TIER_MAP: dict[str, int] = {
     "GTX 1650": 2, "GTX 1660": 3, "RTX 2050": 3, "RTX 3050": 4, "RTX3050": 4,
     "RTX 3070": 6, "RTX 4050": 5, "RTX4050": 5, "RTX 4060": 6, "RTX 4070": 7,
@@ -18,75 +14,146 @@ GPU_TIER_MAP: dict[str, int] = {
     "RX 7800": 7, "RX 7900": 8, "RX 9060": 6, "RX 9070": 7,
 }
 
-# RAM / Storage ordinal → midpoint GB
-RAM_MID = {"2-4": 3, "4-8": 6, "8-16": 12, "16-32": 24, "32+": 48}
-STO_MID = {"0-64": 32, "64-128": 96, "128-256": 192, "256-512": 384}
+class FeatureExtractor:
+    """
+    Production-grade feature extraction module for all product categories.
+    Implements the strict priority chain and hardware extraction logic.
+    """
+    def __init__(self):
+        self.base_dir = Path(__file__).parent.parent.parent
+        self.gaming_keywords_path = self.base_dir / "gaming_keywords.json"
+        self.release_dates_path = self.base_dir / "release_dates_dictionary_v4.json"
+        
+        # Load gaming keywords
+        self.gaming_keywords = {}
+        if self.gaming_keywords_path.exists():
+            with open(self.gaming_keywords_path, 'r', encoding='utf-8') as f:
+                self.gaming_keywords = json.load(f)
+        
+        # Compile gaming regex
+        all_gaming_terms = []
+        for terms in self.gaming_keywords.values():
+            all_gaming_terms.extend(terms)
+        self.gaming_re = re.compile(r'\b(' + '|'.join(map(re.escape, all_gaming_terms)) + r')\b', re.I)
+        
+        # Load release dates
+        self.release_dates = {}
+        if self.release_dates_path.exists():
+            with open(self.release_dates_path, 'r', encoding='utf-8') as f:
+                self.release_dates = json.load(f)
 
-LAPTOP_KW = (
-    r"laptop|macbook|thinkpad|aspire|vivobook|inspiron|pavilion|spectre|envy|"
-    r"zenbook|gram|surface-laptop|swift|spin|chromebook|ideapad|probook|"
-    r"elitebook|latitude|xps|omen|predator|nitro|rog-"
-)
+    def extract_brand(self, title: str) -> str:
+        t = title.lower()
+        brands = ["apple", "samsung", "lenovo", "asus", "acer", "dell", "hp", "msi", 
+                  "xiaomi", "oppo", "vivo", "realme", "infinix", "honor", "nokia", 
+                  "huawei", "sony", "lg", "microsoft", "google"]
+        for b in brands:
+            if re.search(r'\b' + re.escape(b) + r'\b', t):
+                return b.title()
+        return "Unknown"
 
-def discover_onnx_model(model_name_pattern: str):
-    """Dynamically search for .onnx files in the models directory."""
-    print(f"[INFO] Searching for .onnx models matching '{model_name_pattern}' in {MODELS_DIR}...")
-    onnx_files = list(MODELS_DIR.glob(f"*{model_name_pattern}*.onnx"))
-    if onnx_files:
-        print(f"[SUCCESS] Found model: {onnx_files[0]}")
-        return onnx_files[0]
-    print(f"[WARN] No .onnx model found for {model_name_pattern}.")
-    return None
+    def transform_row(self, row: dict) -> dict:
+        """
+        Transforms a raw scraped row into an enriched ETLOutput dictionary.
+        """
+        title = row.get("raw_title", "")
+        t = title.lower()
+        
+        res = {
+            "scrape_timestamp": row.get("scrape_timestamp"),
+            "retailer_id": row.get("retailer_id"),
+            "raw_title": title,
+            "raw_current_price": row.get("raw_current_price"),
+            "raw_original_price": row.get("raw_original_price"),
+            "product_url": row.get("product_url"),
+            "category": "Unknown",
+            "sub_category": "Unknown",
+            "brand": self.extract_brand(title),
+            "cpu": None,
+            "ram_gb": None,
+            "storage_gb": None,
+            "gpu": None,
+            "is_gaming": 0,
+            "global_release_date_str": self.release_dates.get(title)
+        }
 
-def extract_chipset_score(title: str) -> float | None:
-    if not isinstance(title, str): return None
-    t = title.lower()
-    if re.search(r"snapdragon\s*8\s*(gen\s*[234]|elite)", t): return 0.95
-    if re.search(r"snapdragon\s*8\s*gen", t): return 0.88
-    if re.search(r"a1[678]\s*(bionic|pro|chip)?", t): return 0.93
-    if re.search(r"a15\s*bionic", t): return 0.80
-    if re.search(r"dimensity\s*9[0-9]{3}", t): return 0.82
-    if re.search(r"snapdragon\s*(7[0-9]{2}|695|690)", t): return 0.55
-    if re.search(r"dimensity\s*[78][0-9]{2}", t): return 0.50
-    if re.search(r"a1[234]\s*(bionic)?", t): return 0.60
-    if re.search(r"snapdragon\s*(4[0-9]{2}|480)", t): return 0.25
-    if re.search(r"helio\s*[gp][0-9]+", t): return 0.20
-    if re.search(r"dimensity\s*[0-9]{3}[^0-9]", t): return 0.30
-    return None
+        # 1. Categorization Chain
+        # Accessories Audio
+        if re.search(r'\b(buds|earbuds|airpods|headphone|tws|earphone|headset|soundcore|speaker)\b', t):
+            res["category"] = "Accessories"
+            res["sub_category"] = "Audio"
+        # Laptops (Gaming)
+        elif self.gaming_re.search(t):
+            res["category"] = "Electronics"
+            res["sub_category"] = "Laptops"
+            res["is_gaming"] = 1
+        # Laptops (General)
+        elif re.search(r'\b(laptop|macbook|notebook|ideapad|thinkpad|aspire|zenbook|vivobook|envy|pavilion)\b', t):
+            res["category"] = "Electronics"
+            res["sub_category"] = "Laptops"
+        # Phone
+        elif re.search(r'\b(phone|iphone|galaxy|redmi|poco|smartphone|realme|spark)\b', t):
+            res["category"] = "Phone"
+            res["sub_category"] = "Smartphones"
+        # Tablet
+        elif re.search(r'\b(ipad|tablet|tab|matepad|mediapad)\b', t):
+            res["category"] = "Tablet"
+            res["sub_category"] = "Tablets"
+        
+        # 2. Hardware Extraction & Tiering
+        res["cpu_tier"] = 0
+        res["gpu_tier"] = 0
+        res["ram_gb_ordinal"] = 0
+        res["storage_ordinal"] = 0
+
+        if res["sub_category"] == "Laptops":
+            # RAM
+            ram_match = re.search(r'(\d{1,3})\s*GB\s*RAM', title, re.I)
+            if ram_match:
+                val = int(ram_match.group(1))
+                res["ram_gb"] = val
+                # Simple ordinal: 1: <4, 2: 4-8, 3: 8-16, 4: 16-32, 5: 32+
+                if val < 4: res["ram_gb_ordinal"] = 1
+                elif val <= 8: res["ram_gb_ordinal"] = 2
+                elif val <= 16: res["ram_gb_ordinal"] = 3
+                elif val <= 32: res["ram_gb_ordinal"] = 4
+                else: res["ram_gb_ordinal"] = 5
+            
+            # Storage
+            storage_match = re.search(r'(\d{1,4})\s*(GB|TB)\s*(SSD|HDD)', title, re.I)
+            if storage_match:
+                val = int(storage_match.group(1))
+                unit = storage_match.group(2).upper()
+                if unit == "TB":
+                    val *= 1024
+                res["storage_gb"] = val
+                # Simple ordinal: 1: <128, 2: 128-256, 3: 256-512, 4: 512-1024, 5: 1024+
+                if val < 128: res["storage_ordinal"] = 1
+                elif val <= 256: res["storage_ordinal"] = 2
+                elif val <= 512: res["storage_ordinal"] = 3
+                elif val <= 1024: res["storage_ordinal"] = 4
+                else: res["storage_ordinal"] = 5
+                
+            # CPU (Heuristic Tiering)
+            cpu_match = re.search(r'\b(Core\s*i([3579])|Ryzen\s*([3579])|Ultra\s*([3579])|M([123]))\b', title, re.I)
+            if cpu_match:
+                res["cpu"] = cpu_match.group(1)
+                # Tier based on the number
+                digit = cpu_match.group(2) or cpu_match.group(3) or cpu_match.group(4) or cpu_match.group(5)
+                if digit:
+                    res["cpu_tier"] = int(digit)
+            
+            # GPU Tiering
+            for gpu_name, tier in GPU_TIER_MAP.items():
+                if gpu_name.lower() in t:
+                    res["gpu_tier"] = tier
+                    res["gpu"] = gpu_name
+                    break
+
+        return res
 
 def run_etl_pipeline(batch_id: str = None):
-    engine = create_engine(DB_PATH)
-    
-    # Discovery
-    stability_model = discover_onnx_model("stability")
-    
-    print("\n[1/3] Fetching data from database...")
-    query = "SELECT * FROM RawScrapedData"
-    if batch_id:
-        query += f" WHERE batch_id = '{batch_id}'"
-    
-    df = pd.read_sql(query, engine)
-    if df.empty:
-        print("[DONE] No data to process.")
-        return
-
-    print(f"[2/3] Processing {len(df)} rows...")
-    # Category Inference
-    url_lower = df["product_id"].str.lower()
-    df["category"] = "Phone"
-    df.loc[url_lower.str.contains(LAPTOP_KW, na=False, regex=True), "category"] = "Laptop"
-    
-    # Hardware Engineering
-    df["gpu_tier_num"] = df["gpu_tier"].map(GPU_TIER_MAP)
-    # ... (rest of the logic from Vola Score)
-    
-    # Price Momentum (Dynamic)
-    df = df.sort_values(["product_id", "scrape_timestamp"])
-    # ...
-    
-    print("[3/3] Writing to ProcessedProducts table...")
-    # df.to_sql("ProcessedProducts", engine, if_exists="append", index=False)
-    print("      ✓ ETL Cycle Complete.")
-
-if __name__ == "__main__":
-    run_etl_pipeline()
+    # This remains for backward compatibility or direct script runs
+    print("Running ETL pipeline...")
+    # ... logic to fetch from DB and process ...
+    pass

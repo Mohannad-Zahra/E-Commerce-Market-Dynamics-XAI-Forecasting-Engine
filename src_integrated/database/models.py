@@ -22,6 +22,8 @@ class Product(Base):
     global_release_date_str = Column(String, nullable=True)
     missing_release_date = Column(Boolean)
     compute_potential = Column(Float, nullable=True)
+    thumbnail = Column(String, nullable=True)
+    images = Column(String, nullable=True)
 
     price_history = relationship("PriceHistory", back_populates="product")
 
