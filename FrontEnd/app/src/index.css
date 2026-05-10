@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-main: #0090f0;
+  --color-p: #7b7b7b;
+  --color-bg: #F3F3F3;
+  --color-heading: #253237;
+  --color-border-custom: #d6d6d6d5;
+  --font-inter: "Inter", sans-serif;
+  --font-dmsans: "DM Sans", sans-serif;
+  
+  /* Unified Design Tokens */
+  --radius-standard: 16px;
+  --header-height: 140px;
+  --header-height-md: 160px;
+}
+
+@layer base {
+  body {
+    @apply bg-white font-inter text-p pt-[var(--header-height)] md:pt-[var(--header-height-md)];
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-heading font-dmsans;
+  }
+}
+
+@layer utilities {
+  .btn {
+    @apply px-[18px] py-[10px] capitalize rounded-[var(--radius-standard)] cursor-pointer bg-main text-white flex gap-[10px] items-center transition-all duration-300 w-max hover:translate-y-[-2px] hover:shadow-lg;
+  }
+
+  .skeltion {
+    @apply bg-[#e2e5e7];
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    background-size: 40px 100%;
+    background-repeat: no-repeat;
+    background-position: left -40px top 0;
+    animation: shine 1s ease infinite;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: var(--color-main) !important;
+  }
+
+  .toast-wrapper {
+    @apply flex items-center gap-[15px] min-w-[320px] p-2;
+  }
+
+  .toast-img {
+    @apply w-12 h-12 rounded-xl object-cover shadow-md;
+  }
+
+  .toast-content {
+    @apply flex flex-col gap-1 text-[14px];
+  }
+
+  .premium-alert {
+    @apply backdrop-blur-xl bg-black/80 text-white border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)];
+  }
+}
+
+@keyframes shine {
+  0% { background-position: left -40px top 0; }
+  100% { background-position: right -60px top 0; }
+}
+
+/* ── StatsBar ─────────────────────────────────────────────────────── */
+.stats-bar {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f172a 100%);
+  border-top: 1px solid #1e3a5f;
+  border-bottom: 1px solid #1e3a5f;
+  padding: 40px 0;
+  margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(0,144,240,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 50%, rgba(56,189,248,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.stats-inner {
+  width: 90%;
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.stats-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  margin-bottom: 20px;
+}
+
+.stats-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34,197,94,0.6);
+  animation: pulse-dot 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.stat-card:hover {
+  background: rgba(0,144,240,0.10);
+  border-color: rgba(0,144,240,0.35);
+  transform: translateY(-2px);
+}
+
+.stat-value {
+  font-family: "DM Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #f1f5f9;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+}
+
+.stat-sub {
+  font-size: 10px;
+  color: #64748b;
+  margin-top: 1px;
+}
+

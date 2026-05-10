@@ -1,0 +1,11 @@
+{
+    "acer": ["nitro", "predator", "helios", "triton"],
+    "asus": ["rog", "strix", "zephyrus", "tuf", "scar", "flow"],
+    "dell": ["alienware", "g15", "g16"],
+    "hp": ["omen", "victus", "pavilion gaming"],
+    "lenovo": ["legion", "loq", "ideapad gaming"],
+    "msi": ["katana", "cyborg", "stealth", "raider", "titan", "pulse", "crosshair", "sword", "bravo", "vector", "alpha", "delta"],
+    "gigabyte": ["aorus", "aero"],
+    "razer": ["blade"],
+    "general": ["gaming"]
+}

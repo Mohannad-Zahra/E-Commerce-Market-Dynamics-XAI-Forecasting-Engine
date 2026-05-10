@@ -1,0 +1,5313 @@
+{
+  "active_nodes": [
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "class",
+      "name": "NodeInfo",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 8,
+      "line_end": 19
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "method",
+      "name": "NodeInfo.to_dict",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 18,
+      "line_end": 19
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "function",
+      "name": "get_annotation_name",
+      "args": [
+        {
+          "name": "node",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 21,
+      "line_end": 35
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "class",
+      "name": "ASTVisitor",
+      "args": [
+        "ast.NodeVisitor"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 37,
+      "line_end": 91
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "method",
+      "name": "ASTVisitor.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "file_path",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 38,
+      "line_end": 41
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "method",
+      "name": "ASTVisitor.visit_ClassDef",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "node",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 43,
+      "line_end": 59
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "method",
+      "name": "ASTVisitor.visit_FunctionDef",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "node",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 61,
+      "line_end": 62
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "method",
+      "name": "ASTVisitor.visit_AsyncFunctionDef",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "node",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 64,
+      "line_end": 65
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "method",
+      "name": "ASTVisitor._visit_function",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "node",
+          "type": null
+        },
+        {
+          "name": "is_async",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 67,
+      "line_end": 91
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "function",
+      "name": "analyze_directory",
+      "args": [
+        {
+          "name": "root_dir",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 93,
+      "line_end": 147
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ast_analyzer.py",
+      "type": "function",
+      "name": "main",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 149,
+      "line_end": 172
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\resolve_versions.py",
+      "type": "function",
+      "name": "resolve_duplicates",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 4,
+      "line_end": 79
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\database.py",
+      "type": "class",
+      "name": "Base",
+      "args": [
+        "DeclarativeBase"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 24,
+      "line_end": 25
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\database.py",
+      "type": "function",
+      "name": "get_db",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 28,
+      "line_end": 33
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\fetch_product_thumbnails.py",
+      "type": "function",
+      "name": "_abs_url",
+      "args": [
+        {
+          "name": "base",
+          "type": "str"
+        },
+        {
+          "name": "href",
+          "type": "BinOp"
+        }
+      ],
+      "returns": "BinOp",
+      "docstring": null,
+      "line_start": 36,
+      "line_end": 43
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\fetch_product_thumbnails.py",
+      "type": "function",
+      "name": "extract_image_url",
+      "args": [
+        {
+          "name": "html",
+          "type": "str"
+        },
+        {
+          "name": "page_url",
+          "type": "str"
+        }
+      ],
+      "returns": "BinOp",
+      "docstring": null,
+      "line_start": 46,
+      "line_end": 75
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\fetch_product_thumbnails.py",
+      "type": "function",
+      "name": "fetch_page",
+      "args": [
+        {
+          "name": "session",
+          "type": "requests.Session"
+        },
+        {
+          "name": "url",
+          "type": "str"
+        },
+        {
+          "name": "timeout",
+          "type": "float"
+        },
+        {
+          "name": "retries",
+          "type": "int"
+        }
+      ],
+      "returns": "BinOp",
+      "docstring": null,
+      "line_start": 78,
+      "line_end": 98
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "_retailer",
+      "args": [
+        {
+          "name": "product_id",
+          "type": "str"
+        }
+      ],
+      "returns": "str",
+      "docstring": null,
+      "line_start": 45,
+      "line_end": 50
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "_category",
+      "args": [
+        {
+          "name": "row",
+          "type": "dict"
+        }
+      ],
+      "returns": "str",
+      "docstring": null,
+      "line_start": 55,
+      "line_end": 107
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "_brand",
+      "args": [
+        {
+          "name": "row",
+          "type": "dict"
+        }
+      ],
+      "returns": "str",
+      "docstring": null,
+      "line_start": 110,
+      "line_end": 117
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "_thumbnail",
+      "args": [
+        {
+          "name": "row",
+          "type": "dict"
+        }
+      ],
+      "returns": "str",
+      "docstring": "Return an instant inline SVG data URI \u2014 no external network request.",
+      "line_start": 135,
+      "line_end": 160
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "_thumbnail_from_row",
+      "args": [
+        {
+          "name": "row",
+          "type": "dict"
+        }
+      ],
+      "returns": "tuple[Tuple]",
+      "docstring": "Prefer scraped product page image URL (joined from products.thumbnail);\nfall back to inline category/brand SVG.",
+      "line_start": 163,
+      "line_end": 218
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "_to_product",
+      "args": [
+        {
+          "name": "row",
+          "type": "dict"
+        },
+        {
+          "name": "numeric_id",
+          "type": "int"
+        }
+      ],
+      "returns": "dict",
+      "docstring": null,
+      "line_start": 221,
+      "line_end": 258
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "get_cached_data",
+      "args": [
+        {
+          "name": "db",
+          "type": "Session"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 318,
+      "line_end": 350
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "list_products",
+      "args": [
+        {
+          "name": "skip",
+          "type": "int"
+        },
+        {
+          "name": "limit",
+          "type": "int"
+        },
+        {
+          "name": "db",
+          "type": "Session"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 353,
+      "line_end": 360
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "search_products",
+      "args": [
+        {
+          "name": "q",
+          "type": "str"
+        },
+        {
+          "name": "db",
+          "type": "Session"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 364,
+      "line_end": 368
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "list_categories",
+      "args": [
+        {
+          "name": "db",
+          "type": "Session"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 372,
+      "line_end": 374
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "products_by_category",
+      "args": [
+        {
+          "name": "category",
+          "type": "str"
+        },
+        {
+          "name": "limit",
+          "type": "int"
+        },
+        {
+          "name": "db",
+          "type": "Session"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 378,
+      "line_end": 385
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "get_product",
+      "args": [
+        {
+          "name": "product_id",
+          "type": "int"
+        },
+        {
+          "name": "db",
+          "type": "Session"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 389,
+      "line_end": 394
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "get_price_history",
+      "args": [
+        {
+          "name": "product_id",
+          "type": "int"
+        },
+        {
+          "name": "db",
+          "type": "Session"
+        }
+      ],
+      "returns": null,
+      "docstring": "Returns daily price history for use in charts.",
+      "line_start": 398,
+      "line_end": 420
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "get_stats",
+      "args": [
+        {
+          "name": "db",
+          "type": "Session"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 424,
+      "line_end": 426
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "get_feature_metadata",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 434,
+      "line_end": 441
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "forecast_price_onnx",
+      "args": [
+        {
+          "name": "body",
+          "type": "schemas.PriceForecastRequest"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 449,
+      "line_end": 455
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "forecast_stability",
+      "args": [
+        {
+          "name": "body",
+          "type": "schemas.StabilityRequest"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 463,
+      "line_end": 469
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "chat_proxy",
+      "args": [
+        {
+          "name": "body",
+          "type": "dict"
+        }
+      ],
+      "returns": null,
+      "docstring": "Proxies chat messages to the n8n webhook to avoid CORS issues.\nExpects {\"message\": \"...\", \"sessionId\": \"...\"}",
+      "line_start": 475,
+      "line_end": 508
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\main.py",
+      "type": "function",
+      "name": "health",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 514,
+      "line_end": 515
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\ml_models.py",
+      "type": "class",
+      "name": "_LazyLoader",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 52,
+      "line_end": 92
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\ml_models.py",
+      "type": "method",
+      "name": "_LazyLoader.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 53,
+      "line_end": 60
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\ml_models.py",
+      "type": "method",
+      "name": "_LazyLoader.price_onnx_session",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 64,
+      "line_end": 76
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\ml_models.py",
+      "type": "method",
+      "name": "_LazyLoader.stability_onnx_session",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 80,
+      "line_end": 92
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\ml_models.py",
+      "type": "function",
+      "name": "predict_price_onnx",
+      "args": [
+        {
+          "name": "features",
+          "type": "list[float]"
+        }
+      ],
+      "returns": "dict",
+      "docstring": "Model 1: 14d Price Forecast.",
+      "line_start": 100,
+      "line_end": 132
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\ml_models.py",
+      "type": "function",
+      "name": "predict_stability_onnx",
+      "args": [
+        {
+          "name": "features",
+          "type": "list[float]"
+        }
+      ],
+      "returns": "dict",
+      "docstring": "Model 2: Stability Scorer.",
+      "line_start": 134,
+      "line_end": 155
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\models.py",
+      "type": "class",
+      "name": "TrainingFeature",
+      "args": [
+        "Base"
+      ],
+      "returns": null,
+      "docstring": "Maps to the `master_training_features` table \u2014 678k rows of real scraped data.",
+      "line_start": 12,
+      "line_end": 40
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\models.py",
+      "type": "class",
+      "name": "Product",
+      "args": [
+        "Base"
+      ],
+      "returns": null,
+      "docstring": "Maps to the `products` table \u2014 unique product metadata and thumbnails.",
+      "line_start": 43,
+      "line_end": 54
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\schemas.py",
+      "type": "class",
+      "name": "ProductOut",
+      "args": [
+        "BaseModel"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 12,
+      "line_end": 30
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\schemas.py",
+      "type": "class",
+      "name": "Config",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 29,
+      "line_end": 30
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\schemas.py",
+      "type": "class",
+      "name": "ProductsResponse",
+      "args": [
+        "BaseModel"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 33,
+      "line_end": 37
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\schemas.py",
+      "type": "class",
+      "name": "PriceForecastRequest",
+      "args": [
+        "BaseModel"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 61,
+      "line_end": 68
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\schemas.py",
+      "type": "class",
+      "name": "PriceForecastResponse",
+      "args": [
+        "BaseModel"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 71,
+      "line_end": 73
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\schemas.py",
+      "type": "class",
+      "name": "StabilityRequest",
+      "args": [
+        "BaseModel"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 78,
+      "line_end": 85
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\schemas.py",
+      "type": "class",
+      "name": "StabilityResponse",
+      "args": [
+        "BaseModel"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 88,
+      "line_end": 90
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\backend\\seed.py",
+      "type": "function",
+      "name": "seed_db",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 8,
+      "line_end": 89
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\twob_test.py",
+      "type": "function",
+      "name": "run",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 5,
+      "line_end": 11
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "function",
+      "name": "_resolve_config_path",
+      "args": [],
+      "returns": "Path",
+      "docstring": null,
+      "line_start": 45,
+      "line_end": 51
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "function",
+      "name": "_signal_handler",
+      "args": [
+        {
+          "name": "signum",
+          "type": null
+        },
+        {
+          "name": "frame",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 522,
+      "line_end": 526
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "function",
+      "name": "load_config",
+      "args": [
+        {
+          "name": "config_path",
+          "type": "Path"
+        }
+      ],
+      "returns": "dict",
+      "docstring": "Load and validate the config.json file.",
+      "line_start": 60,
+      "line_end": 79
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\scraper.py",
+      "type": "function",
+      "name": "_setup_logging",
+      "args": [
+        {
+          "name": "config",
+          "type": "dict"
+        }
+      ],
+      "returns": "logging.Logger",
+      "docstring": null,
+      "line_start": 59,
+      "line_end": 66
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\scraper.py",
+      "type": "function",
+      "name": "on_cycle",
+      "args": [
+        {
+          "name": "is_catchup",
+          "type": null
+        },
+        {
+          "name": "target_utc",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 88,
+      "line_end": 131
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\test_email.py",
+      "type": "function",
+      "name": "run_test",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 4,
+      "line_end": 17
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "function",
+      "name": "setup_logging",
+      "args": [
+        {
+          "name": "config",
+          "type": "dict"
+        }
+      ],
+      "returns": "logging.Logger",
+      "docstring": "Configure structured logging with both console and rotating file output.",
+      "line_start": 86,
+      "line_end": 121
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "function",
+      "name": "send_email_alert",
+      "args": [
+        {
+          "name": "config",
+          "type": "dict"
+        },
+        {
+          "name": "event",
+          "type": "str"
+        },
+        {
+          "name": "message",
+          "type": "str"
+        },
+        {
+          "name": "logger",
+          "type": "logging.Logger"
+        },
+        {
+          "name": "extra",
+          "type": "BinOp"
+        }
+      ],
+      "returns": null,
+      "docstring": "Send an email alert using the engine.notifier module.\nThis is fire-and-forget to avoid cascading failures.",
+      "line_start": 128,
+      "line_end": 156
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "class",
+      "name": "Watchdog",
+      "args": [],
+      "returns": null,
+      "docstring": "Process supervisor that launches, monitors, and restarts scraper.exe.\n\nLifecycle:\n    1. Start scraper as a subprocess\n    2. Poll process health every `health_check_interval_seconds`\n    3. If process exits:\n       a. Exit code 0 \u2192 graceful shutdown, do not restart\n       b. Exit code != 0 \u2192 crash, restart + notify webhook\n    4. If restart budget exhausted \u2192 send fatal alert + exit",
+      "line_start": 163,
+      "line_end": 498
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "method",
+      "name": "Watchdog.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "config",
+          "type": "dict"
+        },
+        {
+          "name": "logger",
+          "type": "logging.Logger"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 176,
+      "line_end": 201
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "method",
+      "name": "Watchdog._log_status",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "detail",
+          "type": "str"
+        },
+        {
+          "name": "level",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 203,
+      "line_end": 215
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "method",
+      "name": "Watchdog._start_scraper",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Launch the scraper as a child process.\nReturns True if launch succeeded, False otherwise.",
+      "line_start": 219,
+      "line_end": 257
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "method",
+      "name": "Watchdog._stop_scraper",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Gracefully terminate the scraper process.",
+      "line_start": 259,
+      "line_end": 289
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "method",
+      "name": "Watchdog._is_alive",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Check if the scraper process is still running.",
+      "line_start": 291,
+      "line_end": 295
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "method",
+      "name": "Watchdog._get_exit_info",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "dict",
+      "docstring": "Get diagnostic info about a crashed scraper.",
+      "line_start": 297,
+      "line_end": 311
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "method",
+      "name": "Watchdog._interpret_exit_code",
+      "args": [
+        {
+          "name": "code",
+          "type": "BinOp"
+        }
+      ],
+      "returns": "str",
+      "docstring": "Provide a human-readable interpretation of common exit codes.",
+      "line_start": 314,
+      "line_end": 329
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "method",
+      "name": "Watchdog.run",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Main watchdog loop:\n  1. Launch scraper\n  2. Monitor health\n  3. Restart on crash (up to budget)\n  4. Alert on failures",
+      "line_start": 333,
+      "line_end": 493
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\watchdog.py",
+      "type": "method",
+      "name": "Watchdog.shutdown",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Signal the watchdog to stop gracefully.",
+      "line_start": 495,
+      "line_end": 498
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "class",
+      "name": "CycleDatabase",
+      "args": [],
+      "returns": null,
+      "docstring": "Manages a single SQLite database file for one scrape cycle.\n\nLifecycle:\n    1. CycleDatabase is created \u2192 new .db file on disk\n    2. Records are inserted via insert_records()\n    3. All records are read via get_all_records() for cloud upload\n    4. The .db file is KEPT on disk as a permanent backup\n\nUsage:\n    with CycleDatabase(cycle_dir=\"./data/cycles\") as db:\n        db.insert_records(records)\n        all_data = db.get_all_records()",
+      "line_start": 72,
+      "line_end": 344
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "cycle_dir",
+          "type": "BinOp"
+        },
+        {
+          "name": "cycle_timestamp",
+          "type": "BinOp"
+        }
+      ],
+      "returns": null,
+      "docstring": "Args:\n    cycle_dir: Directory where cycle .db files are stored.\n    cycle_timestamp: UTC timestamp for this cycle.\n                     Defaults to now().",
+      "line_start": 88,
+      "line_end": 110
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.db_path",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "Path",
+      "docstring": "Absolute path to the SQLite file.",
+      "line_start": 113,
+      "line_end": 115
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.cycle_id",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "str",
+      "docstring": "Unique identifier for this cycle.",
+      "line_start": 118,
+      "line_end": 120
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.record_count",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "int",
+      "docstring": "Number of records inserted so far.",
+      "line_start": 123,
+      "line_end": 125
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.__enter__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 129,
+      "line_end": 131
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.__exit__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "exc_type",
+          "type": null
+        },
+        {
+          "name": "exc_val",
+          "type": null
+        },
+        {
+          "name": "exc_tb",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 133,
+      "line_end": 135
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.open",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Open the SQLite connection and create the schema.",
+      "line_start": 137,
+      "line_end": 146
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.close",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Close the SQLite connection.",
+      "line_start": 148,
+      "line_end": 157
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.validate_record",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "record",
+          "type": "dict"
+        }
+      ],
+      "returns": "tuple[Tuple]",
+      "docstring": "Validate a single record against the Bronze schema.\n\nReturns:\n    Tuple of (is_valid, error_message).",
+      "line_start": 161,
+      "line_end": 175
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.insert_records",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "records",
+          "type": "list[dict]"
+        }
+      ],
+      "returns": "tuple[Tuple]",
+      "docstring": "Insert multiple Bronze records into the cycle database.\n\nRecords that fail validation are skipped and logged.\n\nArgs:\n    records: List of dicts, each containing Bronze schema fields.\n\nReturns:\n    Tuple of (inserted_count, skipped_count).",
+      "line_start": 177,
+      "line_end": 250
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.get_all_records",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "list[dict]",
+      "docstring": "Read all records from the cycle database.\nUsed for cloud upload after the cycle completes.\n\nReturns:\n    List of dicts (one per record), including extra_data merged in.",
+      "line_start": 252,
+      "line_end": 296
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.get_record_count",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "int",
+      "docstring": "Get the count of records in the database (from SQL).",
+      "line_start": 298,
+      "line_end": 303
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\E-Commerce Market Dynamics & XAI Forecasting Engine\\Web Scrapper\\database\\local_db.py",
+      "type": "method",
+      "name": "CycleDatabase.get_records_by_retailer",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "retailer_id",
+          "type": "str"
+        }
+      ],
+      "returns": "list[dict]",
+      "docstring": "Get all records for a specific retailer.",
+      "line_start": 305,
+      "line_end": 344
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\notifier.py",
+      "type": "class",
+      "name": "EmailNotifier",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 21,
+      "line_end": 180
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\notifier.py",
+      "type": "method",
+      "name": "EmailNotifier.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "config",
+          "type": "dict"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 22,
+      "line_end": 33
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\notifier.py",
+      "type": "method",
+      "name": "EmailNotifier._details_html",
+      "args": [
+        {
+          "name": "details",
+          "type": "dict[Tuple]"
+        }
+      ],
+      "returns": "str",
+      "docstring": null,
+      "line_start": 36,
+      "line_end": 49
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\notifier.py",
+      "type": "method",
+      "name": "EmailNotifier.send",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "event",
+          "type": "str"
+        },
+        {
+          "name": "message",
+          "type": "str"
+        },
+        {
+          "name": "source",
+          "type": "str"
+        },
+        {
+          "name": "extra",
+          "type": "BinOp"
+        }
+      ],
+      "returns": "bool",
+      "docstring": null,
+      "line_start": 51,
+      "line_end": 102
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\notifier.py",
+      "type": "method",
+      "name": "EmailNotifier.notify_scrape_failure",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "retailer_id",
+          "type": "str"
+        },
+        {
+          "name": "error_msg",
+          "type": "str"
+        },
+        {
+          "name": "retailer_name",
+          "type": "BinOp"
+        },
+        {
+          "name": "payload_module",
+          "type": "BinOp"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 104,
+      "line_end": 117
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\notifier.py",
+      "type": "method",
+      "name": "EmailNotifier.notify_upload_failure",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "retailer_id",
+          "type": "str"
+        },
+        {
+          "name": "attempt",
+          "type": "int"
+        },
+        {
+          "name": "max_attempts",
+          "type": "int"
+        },
+        {
+          "name": "error_msg",
+          "type": "str"
+        },
+        {
+          "name": "retailer_name",
+          "type": "BinOp"
+        },
+        {
+          "name": "cycle_id",
+          "type": "BinOp"
+        },
+        {
+          "name": "blob_name",
+          "type": "BinOp"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 119,
+      "line_end": 144
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\notifier.py",
+      "type": "method",
+      "name": "EmailNotifier.notify_upload_exhausted",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "retailer_id",
+          "type": "str"
+        },
+        {
+          "name": "error_msg",
+          "type": "str"
+        },
+        {
+          "name": "retailer_name",
+          "type": "BinOp"
+        },
+        {
+          "name": "cycle_id",
+          "type": "BinOp"
+        },
+        {
+          "name": "blob_name",
+          "type": "BinOp"
+        },
+        {
+          "name": "record_count",
+          "type": "BinOp"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 146,
+      "line_end": 167
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\notifier.py",
+      "type": "method",
+      "name": "EmailNotifier.notify_cycle_complete",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "total_records",
+          "type": "int"
+        },
+        {
+          "name": "retailers_scraped",
+          "type": "int"
+        },
+        {
+          "name": "duration_seconds",
+          "type": "float"
+        },
+        {
+          "name": "retailer_names",
+          "type": "BinOp"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 169,
+      "line_end": 177
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\notifier.py",
+      "type": "method",
+      "name": "EmailNotifier.notify_missed_interval",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "missed_time",
+          "type": "str"
+        },
+        {
+          "name": "actual_time",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 179,
+      "line_end": 180
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\scheduler.py",
+      "type": "class",
+      "name": "UTCScheduler",
+      "args": [],
+      "returns": null,
+      "docstring": "UTC-anchored interval scheduler with catch-up logic.\n\nThe scheduler operates on fixed UTC times (e.g., [\"00:00\", \"12:00\"]).\nOn each iteration:\n  1. It computes the next target UTC datetime.\n  2. It sleeps until that moment.\n  3. On wake, it checks if the actual time has drifted past the target\n     (system was asleep) \u2014 if so, it flags a catch-up execution.\n  4. It calls the provided `on_cycle` callback.\n  5. After the callback returns, it recalculates from scratch (no drift).\n\nUsage:\n    scheduler = UTCScheduler(intervals=[\"00:00\", \"12:00\"])\n    scheduler.run(on_cycle=my_scrape_function)",
+      "line_start": 27,
+      "line_end": 319
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\scheduler.py",
+      "type": "method",
+      "name": "UTCScheduler.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "intervals",
+          "type": "list[str]"
+        }
+      ],
+      "returns": null,
+      "docstring": "Args:\n    intervals: List of UTC time strings in \"HH:MM\" format.\n               Example: [\"00:00\", \"12:00\"]",
+      "line_start": 49,
+      "line_end": 64
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\scheduler.py",
+      "type": "method",
+      "name": "UTCScheduler._parse_intervals",
+      "args": [
+        {
+          "name": "raw",
+          "type": "list[str]"
+        }
+      ],
+      "returns": "list[dt_time]",
+      "docstring": "Parse \"HH:MM\" strings into dt_time objects, sorted ascending.",
+      "line_start": 69,
+      "line_end": 81
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\scheduler.py",
+      "type": "method",
+      "name": "UTCScheduler.calculate_next_target",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "now",
+          "type": "BinOp"
+        }
+      ],
+      "returns": "datetime",
+      "docstring": "Calculate the next target UTC datetime from the configured intervals.\n\nAlgorithm:\n  1. For each interval, construct today's target at that HH:MM UTC.\n  2. If the target is in the past (already passed today), try tomorrow.\n  3. Return the nearest future target.\n\nArgs:\n    now: Current UTC datetime. If None, uses datetime.now(timezone.utc).\n\nReturns:\n    The next target as a timezone-aware UTC datetime.",
+      "line_start": 85,
+      "line_end": 117
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\scheduler.py",
+      "type": "method",
+      "name": "UTCScheduler.calculate_delta_seconds",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "now",
+          "type": "BinOp"
+        }
+      ],
+      "returns": "tuple[Tuple]",
+      "docstring": "Calculate seconds until the next interval.\n\nReturns:\n    Tuple of (delta_seconds, target_datetime).",
+      "line_start": 119,
+      "line_end": 134
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\scheduler.py",
+      "type": "method",
+      "name": "UTCScheduler.find_most_recent_past_interval",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "now",
+          "type": "BinOp"
+        }
+      ],
+      "returns": "datetime",
+      "docstring": "Find the most recent interval that has already passed.\nUsed for catch-up detection: if this interval wasn't serviced,\nwe need to execute it now.\n\nReturns:\n    The most recent past interval as a UTC datetime.",
+      "line_start": 136,
+      "line_end": 161
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\scheduler.py",
+      "type": "method",
+      "name": "UTCScheduler.check_catchup_needed",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "last_execution_utc",
+          "type": "BinOp"
+        },
+        {
+          "name": "now",
+          "type": "BinOp"
+        }
+      ],
+      "returns": "tuple[Tuple]",
+      "docstring": "Determine whether a catch-up scrape is needed.\n\nA catch-up is needed when:\n  - The laptop woke up after a scheduled interval\n  - The last execution was BEFORE the most recent past interval\n\nArgs:\n    last_execution_utc: When the last cycle actually ran (UTC).\n                        None on first launch.\n    now: Current UTC time (injected for testing).\n\nReturns:\n    Tuple of (is_catchup_needed, missed_interval_datetime).",
+      "line_start": 165,
+      "line_end": 208
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\scheduler.py",
+      "type": "method",
+      "name": "UTCScheduler.run",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "on_cycle",
+          "type": "Callable[Tuple]"
+        },
+        {
+          "name": "last_execution_utc",
+          "type": "BinOp"
+        }
+      ],
+      "returns": null,
+      "docstring": "Main scheduling loop. Blocks indefinitely.\n\nArgs:\n    on_cycle:  Callback invoked at each interval.\n               Signature: on_cycle(is_catchup: bool, target_utc: datetime)\n    last_execution_utc: When the last cycle ran (for catch-up on first launch).",
+      "line_start": 212,
+      "line_end": 314
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\scheduler.py",
+      "type": "method",
+      "name": "UTCScheduler.stop",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Signal the scheduler to exit its run loop.",
+      "line_start": 316,
+      "line_end": 319
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\sleep_prevention.py",
+      "type": "class",
+      "name": "SleepPrevention",
+      "args": [],
+      "returns": null,
+      "docstring": "Context manager that prevents Windows from sleeping or hibernating.\n\nOn enter:  Sets ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_AWAYMODE_REQUIRED\nOn exit:   Clears back to ES_CONTINUOUS (allows sleep again)\n\nUsage:\n    with SleepPrevention():\n        # System stays awake for the lifetime of this block\n        run_scraper_loop()",
+      "line_start": 31,
+      "line_end": 117
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\sleep_prevention.py",
+      "type": "method",
+      "name": "SleepPrevention.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "prevent_display_off",
+          "type": "bool"
+        }
+      ],
+      "returns": null,
+      "docstring": "Args:\n    prevent_display_off: If True, also prevents the monitor from\n                         turning off. Not usually needed for headless\n                         scraping, but useful during debugging.",
+      "line_start": 44,
+      "line_end": 54
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\sleep_prevention.py",
+      "type": "method",
+      "name": "SleepPrevention.__enter__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 56,
+      "line_end": 96
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\sleep_prevention.py",
+      "type": "method",
+      "name": "SleepPrevention.__exit__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "exc_type",
+          "type": null
+        },
+        {
+          "name": "exc_val",
+          "type": null
+        },
+        {
+          "name": "exc_tb",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 98,
+      "line_end": 117
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\transport.py",
+      "type": "class",
+      "name": "CloudTransport",
+      "args": [],
+      "returns": null,
+      "docstring": "Manages data upload to GCP with retry logic and local buffering.\n\nUpload flow:\n    1. Try GCP upload\n    2. On failure \u2192 retry up to max_retries at retry_interval\n    3. If exhausted \u2192 save to buffer dir + webhook alert\n    4. On next cycle \u2192 attempt to flush buffer first\n\nUsage:\n    transport = CloudTransport(config, notifier)\n    success = transport.upload_cycle_data(records, cycle_id, \"2b_egypt\")",
+      "line_start": 32,
+      "line_end": 383
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\transport.py",
+      "type": "method",
+      "name": "CloudTransport.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "config",
+          "type": "dict"
+        },
+        {
+          "name": "notifier",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Args:\n    config:   Full config dict from config.json.\n    notifier: Optional EmailNotifier instance for failure alerts.",
+      "line_start": 47,
+      "line_end": 70
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\transport.py",
+      "type": "method",
+      "name": "CloudTransport._init_drive_client",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Attempt to initialize the Google Drive API client using OAuth 2.0 Desktop Flow.\nFalls back to local-only mode if credentials are unavailable.",
+      "line_start": 72,
+      "line_end": 123
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\transport.py",
+      "type": "method",
+      "name": "CloudTransport.upload_cycle_data",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "records",
+          "type": "list[dict]"
+        },
+        {
+          "name": "cycle_id",
+          "type": "str"
+        },
+        {
+          "name": "timestamp_utc",
+          "type": "BinOp"
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Upload a set of Bronze records to GCP Cloud Storage.\n\nImplements the mandatory retry logic:\n  - 3 retries at 1-minute intervals\n  - On exhaustion: buffer locally + webhook alert\n\nArgs:\n    records:       List of Bronze record dicts.\n    cycle_id:      Unique cycle identifier (for file naming).\n    timestamp_utc: ISO 8601 timestamp for the cycle.\n\nReturns:\n    True if upload succeeded (including after retries), False if buffered.",
+      "line_start": 127,
+      "line_end": 172
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\transport.py",
+      "type": "method",
+      "name": "CloudTransport.flush_buffer",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "tuple[Tuple]",
+      "docstring": "Attempt to upload any buffered (previously failed) data.\nShould be called at the start of each cycle.\n\nReturns:\n    Tuple of (flushed_count, remaining_count).",
+      "line_start": 174,
+      "line_end": 220
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\transport.py",
+      "type": "method",
+      "name": "CloudTransport.get_buffer_count",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "int",
+      "docstring": "Count the number of buffered (un-uploaded) files.",
+      "line_start": 222,
+      "line_end": 224
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\transport.py",
+      "type": "method",
+      "name": "CloudTransport._upload_with_retry",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "records",
+          "type": "list[dict]"
+        },
+        {
+          "name": "blob_name",
+          "type": "str"
+        },
+        {
+          "name": "retailer_id",
+          "type": "str"
+        },
+        {
+          "name": "cycle_id",
+          "type": "str"
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Upload with the mandatory retry logic:\n  - Try once (initial attempt)\n  - On failure: retry exactly 3 times at 1-minute intervals\n  - On exhaustion: buffer locally + webhook alert",
+      "line_start": 228,
+      "line_end": 299
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\transport.py",
+      "type": "method",
+      "name": "CloudTransport._do_upload",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "records",
+          "type": "list[dict]"
+        },
+        {
+          "name": "blob_name",
+          "type": "str"
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Execute the actual upload to Google Drive.\nReturns True on success, False on failure.",
+      "line_start": 301,
+      "line_end": 343
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\engine\\transport.py",
+      "type": "method",
+      "name": "CloudTransport._save_to_buffer",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "records",
+          "type": "list[dict]"
+        },
+        {
+          "name": "blob_name",
+          "type": "str"
+        },
+        {
+          "name": "retailer_id",
+          "type": "str"
+        },
+        {
+          "name": "cycle_id",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": "Save failed upload data to the local buffer for future retry.",
+      "line_start": 345,
+      "line_end": 383
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\base.py",
+      "type": "class",
+      "name": "ScraperPayload",
+      "args": [
+        "abc.ABC"
+      ],
+      "returns": null,
+      "docstring": "Abstract interface that all retailer scrapers must implement.",
+      "line_start": 19,
+      "line_end": 75
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\base.py",
+      "type": "method",
+      "name": "ScraperPayload.run",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "list[dict]",
+      "docstring": "Execute the scraping operations.\n\nReturns:\n    list[dict]: A list of records complying with the Bronze schema.",
+      "line_start": 25,
+      "line_end": 32
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\base.py",
+      "type": "method",
+      "name": "ScraperPayload.polite_delay",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "HARDCODED compliance delay.\nEnforces a 5.0 to 7.0 second randomly distributed delay between requests.",
+      "line_start": 34,
+      "line_end": 41
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\base.py",
+      "type": "method",
+      "name": "ScraperPayload.fetch_page",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "url",
+          "type": "str"
+        }
+      ],
+      "returns": "requests.Response",
+      "docstring": "Fetch a URL with User-Agent rotation and mandatory polite delay.",
+      "line_start": 43,
+      "line_end": 61
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\base.py",
+      "type": "method",
+      "name": "ScraperPayload.validate_record",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "record",
+          "type": "dict"
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Validate that a record matches the mandatory Bronze layer schema.",
+      "line_start": 63,
+      "line_end": 75
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\twob.py",
+      "type": "class",
+      "name": "Scraper",
+      "args": [
+        "ScraperPayload"
+      ],
+      "returns": null,
+      "docstring": "Scraper implementation for 2b.com.eg using async_playwright.",
+      "line_start": 20,
+      "line_end": 232
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\twob.py",
+      "type": "method",
+      "name": "Scraper.run",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "list[dict]",
+      "docstring": null,
+      "line_start": 47,
+      "line_end": 67
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\twob.py",
+      "type": "method",
+      "name": "Scraper._parse_category",
+      "args": [
+        {
+          "name": "url",
+          "type": "str"
+        }
+      ],
+      "returns": "tuple[Tuple]",
+      "docstring": "Extract category and sub_category from a 2B target URL.\n\nExamples:\n    .../en/computers/laptops.html          \u2192 (\"computers\", \"laptops\")\n    .../en/mobile-and-tablet/mobiles.html   \u2192 (\"mobile-and-tablet\", \"mobiles\")\n    .../en/audio/headphones/true-wireless-headphones.html\n                                           \u2192 (\"audio\", \"headphones/true-wireless-headphones\")",
+      "line_start": 26,
+      "line_end": 45
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\twob.py",
+      "type": "method",
+      "name": "Scraper.polite_delay_async",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Async equivalent of the hardware 5.0-7.0s compliance delay.",
+      "line_start": 69,
+      "line_end": 75
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\twob.py",
+      "type": "method",
+      "name": "Scraper.async_run",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "target_urls",
+          "type": "list[str]"
+        }
+      ],
+      "returns": "list[dict]",
+      "docstring": null,
+      "line_start": 77,
+      "line_end": 97
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\payload\\twob.py",
+      "type": "method",
+      "name": "Scraper.scrape_category",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "context",
+          "type": null
+        },
+        {
+          "name": "start_url",
+          "type": "str"
+        }
+      ],
+      "returns": "list[dict]",
+      "docstring": null,
+      "line_start": 99,
+      "line_end": 232
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "function",
+      "name": "make_record",
+      "args": [],
+      "returns": "dict",
+      "docstring": "Create a valid Bronze record with optional overrides.",
+      "line_start": 22,
+      "line_end": 35
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "class",
+      "name": "TestCycleDatabaseCreation",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test database file creation and schema.",
+      "line_start": 38,
+      "line_end": 75
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestCycleDatabaseCreation.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 41,
+      "line_end": 42
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestCycleDatabaseCreation.tearDown",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 44,
+      "line_end": 45
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestCycleDatabaseCreation.test_creates_db_file",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "A new .db file should be created on disk.",
+      "line_start": 47,
+      "line_end": 52
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestCycleDatabaseCreation.test_filename_format",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Filename should contain timestamp and cycle_id.",
+      "line_start": 54,
+      "line_end": 60
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestCycleDatabaseCreation.test_unique_cycle_ids",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Each database should get a unique cycle_id.",
+      "line_start": 62,
+      "line_end": 69
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestCycleDatabaseCreation.test_creates_directory",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Should create the cycle directory if it doesn't exist.",
+      "line_start": 71,
+      "line_end": 75
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "class",
+      "name": "TestRecordInsert",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test record insertion and validation.",
+      "line_start": 78,
+      "line_end": 154
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordInsert.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 81,
+      "line_end": 82
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordInsert.tearDown",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 84,
+      "line_end": 85
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordInsert.test_insert_valid_records",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Valid records should insert successfully.",
+      "line_start": 87,
+      "line_end": 94
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordInsert.test_skip_invalid_records",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Records with missing required fields should be skipped.",
+      "line_start": 96,
+      "line_end": 108
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordInsert.test_nullable_fields",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Nullable fields (raw_original_price, availability_text) can be None.",
+      "line_start": 110,
+      "line_end": 116
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordInsert.test_extra_fields_stored_as_json",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Extra fields beyond Bronze schema should be in extra_data.",
+      "line_start": 118,
+      "line_end": 126
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordInsert.test_category_subcategory_roundtrip",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "category and sub_category should survive insert \u2192 retrieve.",
+      "line_start": 128,
+      "line_end": 136
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordInsert.test_missing_category_rejected",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Records without mandatory 'category' should be skipped.",
+      "line_start": 138,
+      "line_end": 145
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordInsert.test_subcategory_nullable",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "sub_category=None should insert and retrieve as None.",
+      "line_start": 147,
+      "line_end": 154
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "class",
+      "name": "TestRecordRetrieval",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test reading records back from the database.",
+      "line_start": 157,
+      "line_end": 210
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordRetrieval.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 160,
+      "line_end": 161
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordRetrieval.tearDown",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 163,
+      "line_end": 164
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordRetrieval.test_get_all_records",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "get_all_records should return all inserted records.",
+      "line_start": 166,
+      "line_end": 176
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordRetrieval.test_get_by_retailer",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Filter records by retailer_id.",
+      "line_start": 178,
+      "line_end": 192
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordRetrieval.test_get_record_count",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "SQL-based count should match insertion count.",
+      "line_start": 194,
+      "line_end": 198
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestRecordRetrieval.test_roundtrip_preserves_data",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Data should survive insert \u2192 retrieve roundtrip.",
+      "line_start": 200,
+      "line_end": 210
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "class",
+      "name": "TestDatabasePersistence",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test that the .db file persists after close (local backup).",
+      "line_start": 213,
+      "line_end": 231
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestDatabasePersistence.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 216,
+      "line_end": 217
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestDatabasePersistence.tearDown",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 219,
+      "line_end": 220
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_local_db.py",
+      "type": "method",
+      "name": "TestDatabasePersistence.test_file_persists_after_close",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "DB file should exist on disk after context manager exits.",
+      "line_start": 222,
+      "line_end": 231
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "function",
+      "name": "make_config",
+      "args": [
+        {
+          "name": "buffer_dir",
+          "type": "str"
+        }
+      ],
+      "returns": "dict",
+      "docstring": "Create a test config dict with a temp buffer directory.",
+      "line_start": 22,
+      "line_end": 38
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_notifier.py",
+      "type": "class",
+      "name": "TestEmailNotifier",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 17,
+      "line_end": 72
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_notifier.py",
+      "type": "method",
+      "name": "TestEmailNotifier.test_dry_run_when_no_password",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 18,
+      "line_end": 24
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_notifier.py",
+      "type": "method",
+      "name": "TestEmailNotifier.test_dry_run_when_no_team_emails",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 26,
+      "line_end": 32
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_notifier.py",
+      "type": "method",
+      "name": "TestEmailNotifier.test_successful_dispatch",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "mock_smtp_class",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 35,
+      "line_end": 46
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_notifier.py",
+      "type": "method",
+      "name": "TestEmailNotifier.test_smtp_error_returns_false",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "mock_smtp_class",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 49,
+      "line_end": 58
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_notifier.py",
+      "type": "method",
+      "name": "TestEmailNotifier.test_convenience_methods",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "mock_send",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 61,
+      "line_end": 72
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_payload_base.py",
+      "type": "class",
+      "name": "MockPayload",
+      "args": [
+        "ScraperPayload"
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 9,
+      "line_end": 11
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_payload_base.py",
+      "type": "method",
+      "name": "MockPayload.run",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 10,
+      "line_end": 11
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_payload_base.py",
+      "type": "function",
+      "name": "test_abstract_enforcement",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 13,
+      "line_end": 16
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_payload_base.py",
+      "type": "function",
+      "name": "test_polite_delay",
+      "args": [
+        {
+          "name": "mock_uniform",
+          "type": null
+        },
+        {
+          "name": "mock_sleep",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 20,
+      "line_end": 24
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_payload_base.py",
+      "type": "function",
+      "name": "test_fetch_page_rotates_agents_and_delays",
+      "args": [
+        {
+          "name": "mock_sleep",
+          "type": null
+        },
+        {
+          "name": "mock_get",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 28,
+      "line_end": 38
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_payload_base.py",
+      "type": "function",
+      "name": "test_validate_record",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 40,
+      "line_end": 54
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_payload_base.py",
+      "type": "function",
+      "name": "test_validate_record_missing_category",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 56,
+      "line_end": 65
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "class",
+      "name": "TestIntervalParsing",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test that HH:MM strings are parsed correctly.",
+      "line_start": 20,
+      "line_end": 40
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestIntervalParsing.test_basic_parsing",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 23,
+      "line_end": 27
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestIntervalParsing.test_sorts_ascending",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 29,
+      "line_end": 32
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestIntervalParsing.test_empty_raises",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 34,
+      "line_end": 36
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestIntervalParsing.test_invalid_format",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 38,
+      "line_end": 40
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "class",
+      "name": "TestDeltaCalculation",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test the core UTC delta calculator.",
+      "line_start": 43,
+      "line_end": 96
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestDeltaCalculation.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 46,
+      "line_end": 47
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestDeltaCalculation.test_before_first_interval",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "At 06:00 UTC, next target should be 12:00 UTC today.",
+      "line_start": 49,
+      "line_end": 54
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestDeltaCalculation.test_between_intervals",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "At 14:00 UTC, next target should be 00:00 UTC tomorrow.",
+      "line_start": 56,
+      "line_end": 61
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestDeltaCalculation.test_exactly_on_interval",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "At exactly 12:00:00 UTC, next should be 00:00 tomorrow.",
+      "line_start": 63,
+      "line_end": 68
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestDeltaCalculation.test_just_before_interval",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "At 11:59:59 UTC, next target should be 12:00 UTC today.",
+      "line_start": 70,
+      "line_end": 75
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestDeltaCalculation.test_just_after_midnight",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "At 00:00:01 UTC, next target should be 12:00 UTC today.",
+      "line_start": 77,
+      "line_end": 82
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestDeltaCalculation.test_delta_seconds_positive",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Delta should always be positive.",
+      "line_start": 84,
+      "line_end": 90
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestDeltaCalculation.test_23h59m_before_midnight",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "At 23:59 UTC, next should be 00:00 tomorrow (1 minute away).",
+      "line_start": 92,
+      "line_end": 96
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "class",
+      "name": "TestCatchUpDetection",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test the catch-up logic for missed intervals.",
+      "line_start": 99,
+      "line_end": 162
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestCatchUpDetection.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 102,
+      "line_end": 103
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestCatchUpDetection.test_first_launch_triggers_catchup",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "First launch (no previous execution) should trigger catch-up.",
+      "line_start": 105,
+      "line_end": 114
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestCatchUpDetection.test_no_catchup_when_recently_served",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "No catch-up needed if last execution was after the recent interval.",
+      "line_start": 116,
+      "line_end": 121
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestCatchUpDetection.test_catchup_when_interval_missed",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Catch-up needed: last ran at 00:05, now it's 14:00 (missed 12:00).",
+      "line_start": 123,
+      "line_end": 132
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestCatchUpDetection.test_catchup_after_overnight_sleep",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Laptop was off overnight. Last ran at 12:02 yesterday, now 08:00 today.",
+      "line_start": 134,
+      "line_end": 144
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestCatchUpDetection.test_most_recent_past_interval",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Verify we find the correct most recent past interval.",
+      "line_start": 146,
+      "line_end": 162
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "class",
+      "name": "TestMultipleIntervals",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test with more than 2 intervals (e.g., 6-hour).",
+      "line_start": 165,
+      "line_end": 187
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestMultipleIntervals.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 168,
+      "line_end": 169
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestMultipleIntervals.test_four_intervals",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "At 03:30 UTC, next should be 06:00.",
+      "line_start": 171,
+      "line_end": 178
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scheduler.py",
+      "type": "method",
+      "name": "TestMultipleIntervals.test_after_last_interval",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "At 20:00 UTC, next should be 00:00 tomorrow.",
+      "line_start": 180,
+      "line_end": 187
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scraper.py",
+      "type": "function",
+      "name": "test_load_config_exits",
+      "args": [
+        {
+          "name": "mock_config_path",
+          "type": null
+        },
+        {
+          "name": "mock_exit",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 9,
+      "line_end": 13
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scraper.py",
+      "type": "function",
+      "name": "test_scraper_main_loop",
+      "args": [
+        {
+          "name": "mock_load_config",
+          "type": null
+        },
+        {
+          "name": "mock_scheduler_cls",
+          "type": null
+        },
+        {
+          "name": "mock_notifier_cls",
+          "type": null
+        },
+        {
+          "name": "mock_transport_cls",
+          "type": null
+        },
+        {
+          "name": "mock_cycledb_cls",
+          "type": null
+        },
+        {
+          "name": "mock_sleep",
+          "type": null
+        },
+        {
+          "name": "mock_import",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 22,
+      "line_end": 88
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scraper.py",
+      "type": "function",
+      "name": "side_effect_run",
+      "args": [
+        {
+          "name": "on_cycle",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 47,
+      "line_end": 48
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_scraper.py",
+      "type": "function",
+      "name": "import_side_effect",
+      "args": [
+        {
+          "name": "name",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 66,
+      "line_end": 70
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "class",
+      "name": "TestRetryLogic",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test the mandatory 3x retry at 1-minute interval logic.",
+      "line_start": 41,
+      "line_end": 103
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestRetryLogic.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 44,
+      "line_end": 46
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestRetryLogic.tearDown",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 48,
+      "line_end": 49
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestRetryLogic.test_success_on_first_attempt",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "If upload succeeds immediately, no retries needed.",
+      "line_start": 51,
+      "line_end": 60
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestRetryLogic.test_success_on_second_retry",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Upload fails once, succeeds on first retry.",
+      "line_start": 62,
+      "line_end": 71
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestRetryLogic.test_all_retries_exhausted",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "After initial + 3 retries (4 total), data should be buffered.",
+      "line_start": 73,
+      "line_end": 83
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestRetryLogic.test_buffer_file_created_on_exhaustion",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "When retries exhaust, a buffer file should be written.",
+      "line_start": 85,
+      "line_end": 103
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "class",
+      "name": "TestNotifierIntegration",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test that webhook alerts fire on upload failures.",
+      "line_start": 106,
+      "line_end": 141
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestNotifierIntegration.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 109,
+      "line_end": 111
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestNotifierIntegration.tearDown",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 113,
+      "line_end": 114
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestNotifierIntegration.test_webhook_fired_on_first_failure",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Webhook should fire on the very first upload failure.",
+      "line_start": 116,
+      "line_end": 129
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestNotifierIntegration.test_no_webhook_on_success",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "No webhook alerts if upload succeeds.",
+      "line_start": 131,
+      "line_end": 141
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "class",
+      "name": "TestBufferFlush",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test the store-and-forward buffer flushing.",
+      "line_start": 144,
+      "line_end": 207
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestBufferFlush.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 147,
+      "line_end": 149
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestBufferFlush.tearDown",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 151,
+      "line_end": 152
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestBufferFlush.test_flush_empty_buffer",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Flushing an empty buffer should return (0, 0).",
+      "line_start": 154,
+      "line_end": 159
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestBufferFlush.test_flush_successful",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Buffered files should be deleted on successful upload.",
+      "line_start": 161,
+      "line_end": 179
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestBufferFlush.test_flush_failed_keeps_file",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Buffer files should persist if flush upload fails.",
+      "line_start": 181,
+      "line_end": 198
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestBufferFlush.test_buffer_count",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "get_buffer_count should return correct number.",
+      "line_start": 200,
+      "line_end": 207
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "class",
+      "name": "TestUploadCycleData",
+      "args": [
+        "unittest.TestCase"
+      ],
+      "returns": null,
+      "docstring": "Test the high-level upload_cycle_data method.",
+      "line_start": 210,
+      "line_end": 239
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestUploadCycleData.setUp",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 213,
+      "line_end": 215
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestUploadCycleData.tearDown",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 217,
+      "line_end": 218
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestUploadCycleData.test_groups_by_retailer",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Records should be grouped by retailer_id for upload.",
+      "line_start": 220,
+      "line_end": 233
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Web Scrapper\\tests\\test_transport.py",
+      "type": "method",
+      "name": "TestUploadCycleData.test_empty_records",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Empty record list should return True (nothing to upload).",
+      "line_start": 235,
+      "line_end": 239
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\cleaner.py",
+      "type": "function",
+      "name": "parse_price",
+      "args": [
+        {
+          "name": "price",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 4,
+      "line_end": 15
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\cleaner.py",
+      "type": "function",
+      "name": "clean_prices",
+      "args": [
+        {
+          "name": "df",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 18,
+      "line_end": 22
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "class",
+      "name": "FeatureExtractor",
+      "args": [],
+      "returns": null,
+      "docstring": "Production-grade feature extraction module\nfor laptop/product titles.",
+      "line_start": 5,
+      "line_end": 158
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 11,
+      "line_end": 41
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.normalize",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "text",
+          "type": "str"
+        }
+      ],
+      "returns": "str",
+      "docstring": null,
+      "line_start": 46,
+      "line_end": 54
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.extract_cpu",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "text",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 59,
+      "line_end": 70
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.extract_ram",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "text",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 75,
+      "line_end": 79
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.extract_storage",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "text",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 84,
+      "line_end": 94
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.extract_gpu",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "text",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 99,
+      "line_end": 103
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.extract_brand",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "text",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 108,
+      "line_end": 112
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.is_gaming",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "text",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 117,
+      "line_end": 122
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.transform_row",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "row",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 127,
+      "line_end": 147
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\features.py",
+      "type": "method",
+      "name": "FeatureExtractor.transform",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": null,
+      "line_start": 152,
+      "line_end": 158
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\ranking_engine.py",
+      "type": "function",
+      "name": "load_data",
+      "args": [
+        {
+          "name": "processed_csv",
+          "type": "str"
+        },
+        {
+          "name": "xai_csv",
+          "type": "str"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Loads, merges, and pre-processes both source CSVs.\n\nReturns a DataFrame with unified column names ready for scoring.",
+      "line_start": 94,
+      "line_end": 119
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\train.py",
+      "type": "function",
+      "name": "run_pipeline",
+      "args": [
+        {
+          "name": "data_path",
+          "type": "BinOp"
+        },
+        {
+          "name": "model_save_path",
+          "type": "BinOp"
+        },
+        {
+          "name": "val_fraction",
+          "type": "float"
+        }
+      ],
+      "returns": "dict",
+      "docstring": "Execute the complete ML pipeline end-to-end.\n\nArgs:\n    data_path: Path to prices.csv\n    model_save_path: Where to persist the trained model\n    val_fraction: Fraction of unique dates to use as validation\n\nReturns:\n    Dictionary with trained model and metric reports.",
+      "line_start": 62,
+      "line_end": 193
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\main.py",
+      "type": "function",
+      "name": "clean_output",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": null,
+      "line_start": 52,
+      "line_end": 59
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\Data Pipiline\\main.py",
+      "type": "function",
+      "name": "save_output",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "output_path",
+          "type": "str"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 65,
+      "line_end": 68
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\main.py",
+      "type": "function",
+      "name": "_parse_args",
+      "args": [],
+      "returns": "argparse.Namespace",
+      "docstring": null,
+      "line_start": 55,
+      "line_end": 85
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "build_features",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Main entry point.  Returns a DataFrame ready for train/test split.\n\nColumns added:\n  - all lag / rolling features\n  - calendar features\n  - lifecycle feature\n  - log_return  (the TARGET)\nRows with NaN in any feature column are dropped (necessary after lagging).",
+      "line_start": 79,
+      "line_end": 113
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "get_feature_columns",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "list[str]",
+      "docstring": "Return ordered list of feature column names (excludes IDs and target).",
+      "line_start": 116,
+      "line_end": 119
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "get_categorical_feature_names",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "list[str]",
+      "docstring": "Return feature columns that are categorical type (for LightGBM).",
+      "line_start": 122,
+      "line_end": 125
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "_compute_log_return",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Compute log return: log(P_t) - log(P_{t-1}) grouped by product_id.\n\nUsing log returns instead of raw prices makes the target stationary and\nscale-invariant across price tiers.",
+      "line_start": 132,
+      "line_end": 141
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "_add_lag_features",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Add lagged price_egp features, grouped per product_id.",
+      "line_start": 144,
+      "line_end": 153
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "_add_rolling_features",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Add rolling statistics computed on the shifted price series.\n\nshift(1) before rolling ensures we never include the current price:\n  rolling_mean_7[t] = mean(price[t-7 .. t-1])",
+      "line_start": 156,
+      "line_end": 171
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "_add_calendar_features",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Encode calendar-based features from the timestamp.",
+      "line_start": 174,
+      "line_end": 179
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "_add_lifecycle_features",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Compute how many days since the product was first seen in the dataset.",
+      "line_start": 182,
+      "line_end": 186
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "_drop_warmup_rows",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Drop rows where core lag/rolling features are NaN (warm-up period).\n\nOnly a subset of columns require non-null values.  Specifically:\n  - price_lag_N    : must be non-null (need prior prices for prediction)\n  - rolling_*      : must be non-null (requires price history window)\n  - log_return     : must be non-null (the target; first row of each product is NaN)\n\nColumns that are allowed to be NaN (and are filled downstream):\n  - retailer_price_std / _range / _spread_pct / n_retailers\n    Single-retailer products have NaN spread by definition; this is\n    valid information (spread=0 = monopoly).  Already filled in\n    _add_cross_retailer_spread().\n  - price_vol_30d  : NaN during the first 5 rows (min_periods=5)\n    These remain but do not cause the row to be dropped.",
+      "line_start": 189,
+      "line_end": 221
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "_add_volatility_features",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Add price volatility regime features per product_id.\n\nBoth features are computed on the SHIFTED log-return series so that\nat time t, only information from t-1 and earlier is used (no leakage).\n\nprice_vol_30d:\n    Rolling standard deviation of log-returns over 30 days.\n\nreprice_count_30d:\n    Number of days in the last 30 where |price_change| > 2%.",
+      "line_start": 222,
+      "line_end": 257
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "_add_days_since_last_jump",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Compute days elapsed since the last significant price change per product.\n\nLeakage safety:\n    pct_change is shifted by 1 before the jump flag is set, so at time t\n    the feature reflects the last jump that occurred on or before t-1.\n\nAlgorithm:\n    1. Compute |pct_change| shifted by 1 (past data only).\n    2. Mark rows where |pct_change| > JUMP_THRESHOLD as jump events.\n    3. Assign each row a running counter of consecutive non-jump days\n       since the most recent jump.  Counter resets to 0 on jump days.\n\nInterpretation:\n    - days_since_last_jump = 0  \u2192 price moved significantly yesterday\n    - days_since_last_jump = 30 \u2192 price has been stable for 30 days\n    (\"coiled spring\" effect: long stability increases repricing probability)",
+      "line_start": 260,
+      "line_end": 302
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\features\\engineer.py",
+      "type": "function",
+      "name": "_add_cross_retailer_spread",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Compute price dispersion across retailers for the same product on the same day.\n\nLeakage safety:\n    Spread metrics are computed for day t-1 (SPREAD_LAG_DAYS=1) and then\n    merged into day t.  This guarantees that at training time, the model\n    only sees competitive pricing information that was available the day\n    before the target price is observed.\n\nFeatures produced:\n    retailer_price_std   : std of prices across retailers (EGP)\n    retailer_price_range : max - min price across retailers (EGP)\n    retailer_price_spread_pct : std / mean price (normalised, scale-free)\n    n_retailers          : number of retailers carrying this product\n\nThese features encode competitive market pressure:\n    - Low std  \u2192 retailers are price-aligned; one cut can cascade\n    - High std \u2192 idiosyncratic pricing; independent repricing\n    - High n_retailers \u2192 more competitive product\n\nNote: products sold by only one retailer get spread=0 and range=0,\nwhich is informative (monopoly pricing behaviour).",
+      "line_start": 305,
+      "line_end": 378
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\model\\lgbm_model.py",
+      "type": "class",
+      "name": "ModelConfig",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 55,
+      "line_end": 59
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\model\\lgbm_model.py",
+      "type": "class",
+      "name": "PriceForecastModel",
+      "args": [],
+      "returns": null,
+      "docstring": "Global LightGBM model for electronics price forecasting.\n\nThe model predicts `log_return` (log(P_t) - log(P_{t-1})).\nTo recover the EGP price, it needs the previous price as an anchor.",
+      "line_start": 66,
+      "line_end": 213
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\model\\lgbm_model.py",
+      "type": "method",
+      "name": "PriceForecastModel.__init__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "config",
+          "type": "Optional[ModelConfig]"
+        }
+      ],
+      "returns": null,
+      "docstring": null,
+      "line_start": 73,
+      "line_end": 77
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\model\\lgbm_model.py",
+      "type": "method",
+      "name": "PriceForecastModel.fit",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "X_train",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "y_train",
+          "type": "pd.Series"
+        },
+        {
+          "name": "X_val",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "y_val",
+          "type": "pd.Series"
+        },
+        {
+          "name": "sample_weights",
+          "type": "Optional[np.ndarray]"
+        }
+      ],
+      "returns": "PriceForecastModel",
+      "docstring": "Train the LightGBM booster with early stopping.\n\nArgs:\n    X_train / y_train:  Training features and log-return targets.\n    X_val   / y_val  :  Validation features and log-return targets.\n    sample_weights    :  Optional per-row training weights (numpy array).\n                         Pass inverse-frequency weights to rebalance\n                         price tiers.  Val set is never weighted.\n\nReturns:\n    self (for chaining)",
+      "line_start": 83,
+      "line_end": 151
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\model\\lgbm_model.py",
+      "type": "method",
+      "name": "PriceForecastModel.predict_log_return",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "X",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "np.ndarray",
+      "docstring": "Return predicted log returns.",
+      "line_start": 157,
+      "line_end": 161
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\model\\lgbm_model.py",
+      "type": "method",
+      "name": "PriceForecastModel.predict_price",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "X",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "prev_prices",
+          "type": "pd.Series"
+        }
+      ],
+      "returns": "np.ndarray",
+      "docstring": "Invert log return prediction to obtain EGP price.\n\nP_hat_t = P_{t-1} * exp(log_return_hat_t)\n\nArgs:\n    X: Feature matrix for the prediction step.\n    prev_prices: Series of actual prices at t-1 (same index as X).\n\nReturns:\n    Numpy array of predicted EGP prices.",
+      "line_start": 163,
+      "line_end": 181
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\model\\lgbm_model.py",
+      "type": "method",
+      "name": "PriceForecastModel.feature_importance",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "importance_type",
+          "type": "str"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Return a sorted DataFrame of feature importances.",
+      "line_start": 187,
+      "line_end": 196
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\model\\lgbm_model.py",
+      "type": "method",
+      "name": "PriceForecastModel.save",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        },
+        {
+          "name": "path",
+          "type": "str"
+        }
+      ],
+      "returns": "None",
+      "docstring": "Persist the trained booster to disk.",
+      "line_start": 198,
+      "line_end": 203
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\model\\lgbm_model.py",
+      "type": "method",
+      "name": "PriceForecastModel.load",
+      "args": [
+        {
+          "name": "cls",
+          "type": null
+        },
+        {
+          "name": "path",
+          "type": "str"
+        },
+        {
+          "name": "config",
+          "type": "Optional[ModelConfig]"
+        }
+      ],
+      "returns": "PriceForecastModel",
+      "docstring": "Load a persisted LightGBM booster from disk.",
+      "line_start": 206,
+      "line_end": 213
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\backtester.py",
+      "type": "class",
+      "name": "FoldResult",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 52,
+      "line_end": 61
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\backtester.py",
+      "type": "class",
+      "name": "BacktestResult",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 65,
+      "line_end": 90
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\backtester.py",
+      "type": "method",
+      "name": "BacktestResult.print_summary",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "None",
+      "docstring": null,
+      "line_start": 69,
+      "line_end": 90
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\backtester.py",
+      "type": "function",
+      "name": "rolling_backtest",
+      "args": [
+        {
+          "name": "feat_df",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "min_train_days",
+          "type": "int"
+        },
+        {
+          "name": "horizon_days",
+          "type": "int"
+        },
+        {
+          "name": "step_days",
+          "type": "int"
+        },
+        {
+          "name": "max_folds",
+          "type": "BinOp"
+        }
+      ],
+      "returns": "BacktestResult",
+      "docstring": "Execute rolling-origin backtesting on a feature-engineered DataFrame.\n\nArgs:\n    feat_df:        Feature-engineered DataFrame (output of build_features).\n    min_train_days: Minimum number of days required in the training set\n                    before we start the first fold.\n    horizon_days:   How many days ahead each fold evaluates on.\n    step_days:      How many days to roll the origin forward per fold.\n    max_folds:      If set, stop after this many folds (useful for quick runs).\n\nReturns:\n    BacktestResult containing per-fold FoldResult objects and a summary DataFrame.",
+      "line_start": 97,
+      "line_end": 187
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\backtester.py",
+      "type": "function",
+      "name": "_generate_fold_windows",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "min_train_days",
+          "type": "int"
+        },
+        {
+          "name": "horizon_days",
+          "type": "int"
+        },
+        {
+          "name": "step_days",
+          "type": "int"
+        }
+      ],
+      "returns": "Iterator[tuple[Tuple]]",
+      "docstring": "Yield (train_end, val_start, val_end) tuples for each fold.",
+      "line_start": 194,
+      "line_end": 225
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\backtester.py",
+      "type": "function",
+      "name": "_build_summary_df",
+      "args": [
+        {
+          "name": "fold_results",
+          "type": "list[FoldResult]"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": null,
+      "line_start": 228,
+      "line_end": 248
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "class",
+      "name": "MetricsReport",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 52,
+      "line_end": 126
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "method",
+      "name": "MetricsReport.__str__",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "str",
+      "docstring": null,
+      "line_start": 77,
+      "line_end": 111
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "method",
+      "name": "MetricsReport.to_dict",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "dict",
+      "docstring": null,
+      "line_start": 113,
+      "line_end": 126
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "function",
+      "name": "evaluate_model",
+      "args": [
+        {
+          "name": "y_true_price",
+          "type": "BinOp"
+        },
+        {
+          "name": "y_pred_price",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "y_true_prev",
+          "type": "Optional[BinOp]"
+        },
+        {
+          "name": "model_name",
+          "type": "str"
+        }
+      ],
+      "returns": "MetricsReport",
+      "docstring": "Compute all metrics against actual EGP prices.\n\nArgs:\n    y_true_price:  Actual prices at time t (EGP).\n    y_pred_price:  Model-predicted prices at time t (EGP).\n    y_true_prev:   Actual prices at time t-1 (EGP).  Required for\n                   MASE and Directional Accuracy.  Corresponds to\n                   `price_lag_1` in the feature matrix.\n    model_name:    Label for the report.\n\nReturns:\n    MetricsReport with all computed metrics.",
+      "line_start": 133,
+      "line_end": 173
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "function",
+      "name": "evaluate_naive_baseline",
+      "args": [
+        {
+          "name": "val_df",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "price_col",
+          "type": "str"
+        },
+        {
+          "name": "lag1_col",
+          "type": "str"
+        },
+        {
+          "name": "model_name",
+          "type": "str"
+        }
+      ],
+      "returns": "MetricsReport",
+      "docstring": "Evaluate the naive baseline: predict price_t = price_{t-1}.",
+      "line_start": 176,
+      "line_end": 190
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "function",
+      "name": "compare_reports",
+      "args": [
+        {
+          "name": "lgbm_report",
+          "type": "MetricsReport"
+        },
+        {
+          "name": "baseline_report",
+          "type": "MetricsReport"
+        }
+      ],
+      "returns": "str",
+      "docstring": "Format a side-by-side improvement table covering all metrics.",
+      "line_start": 193,
+      "line_end": 242
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "function",
+      "name": "_lift",
+      "args": [
+        {
+          "name": "model_val",
+          "type": null
+        },
+        {
+          "name": "base_val",
+          "type": null
+        },
+        {
+          "name": "higher_is_better",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Compute % improvement of model over baseline.",
+      "line_start": 196,
+      "line_end": 204
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "function",
+      "name": "_smape",
+      "args": [
+        {
+          "name": "y_true",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "y_pred",
+          "type": "np.ndarray"
+        }
+      ],
+      "returns": "float",
+      "docstring": "Symmetric Mean Absolute Percentage Error.\n\nSMAPE = mean(2 * |y_t - y_hat_t| / (|y_t| + |y_hat_t|)) * 100\n\nUnlike MAPE, SMAPE is symmetric \u2014 it penalises under- and over-prediction\nequally.  Safe when actuals approach zero (denominator uses sum of both).",
+      "line_start": 249,
+      "line_end": 261
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "function",
+      "name": "_mase",
+      "args": [
+        {
+          "name": "y_true",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "y_pred",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "y_prev",
+          "type": "np.ndarray"
+        }
+      ],
+      "returns": "Optional[float]",
+      "docstring": "Mean Absolute Scaled Error.\n\nMASE = MAE(model) / MAE(naive)\n\nWhere naive MAE = mean(|y_t - y_{t-1}|) computed on the validation set.\nMASE < 1 \u2192 model beats naive.  MASE > 1 \u2192 naive is better.\n\nThis is the gold-standard metric for time series benchmarking because it:\n- Is scale-independent (safe to average across products with different price levels)\n- Has a meaningful absolute reference (1.0 = na\u00efve performance)",
+      "line_start": 264,
+      "line_end": 285
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "function",
+      "name": "_directional_accuracy",
+      "args": [
+        {
+          "name": "y_true",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "y_pred",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "y_prev",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "min_move_pct",
+          "type": "float"
+        }
+      ],
+      "returns": "float",
+      "docstring": "Directional Accuracy (DA).\n\nDA = % of timesteps where model correctly predicts direction of price change.\n\nOnly evaluated on rows where the actual price MOVED by at least `min_move_pct`\n(0.5% by default).  This filters out flat-price rows where directional\nprediction is trivially correct (predict no change) and thus inflated.\n\nFor buy/sell/hold decision systems, this is often more business-relevant\nthan MAE.",
+      "line_start": 288,
+      "line_end": 314
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "function",
+      "name": "_hit_rate",
+      "args": [
+        {
+          "name": "y_true",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "y_pred",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "tolerance",
+          "type": "float"
+        }
+      ],
+      "returns": "float",
+      "docstring": "Hit Rate at tolerance: fraction of predictions within \u00b1tolerance of actual.\n\nExample: tolerance=0.05 \u2192 what % of predictions are within \u00b15% of actual price?\n\nThis is a critical business metric: a retailer only cares whether the\npredicted price is \"close enough\" to make a correct competitive decision,\nnot the exact EGP error.",
+      "line_start": 317,
+      "line_end": 327
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\evaluator.py",
+      "type": "function",
+      "name": "evaluate_segments",
+      "args": [
+        {
+          "name": "val_df",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "y_pred_price",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "price_col",
+          "type": "str"
+        },
+        {
+          "name": "lag1_col",
+          "type": "str"
+        }
+      ],
+      "returns": "str",
+      "docstring": "Compute MAE, RMSE, MASE, Hit@5% broken down by price tier and price regime.\n\nArgs:\n    val_df:        Validation DataFrame (must contain price_col and lag1_col).\n    y_pred_price:  Predicted EGP prices (same row order as val_df).\n    price_col:     Column name for actual prices.\n    lag1_col:      Column name for lagged prices (t-1).\n\nReturns:\n    A formatted multi-line string table suitable for logging.",
+      "line_start": 342,
+      "line_end": 433
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\splitter.py",
+      "type": "class",
+      "name": "SplitResult",
+      "args": [],
+      "returns": null,
+      "docstring": null,
+      "line_start": 31,
+      "line_end": 45
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\splitter.py",
+      "type": "method",
+      "name": "SplitResult.summary",
+      "args": [
+        {
+          "name": "self",
+          "type": null
+        }
+      ],
+      "returns": "str",
+      "docstring": null,
+      "line_start": 38,
+      "line_end": 45
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\splitter.py",
+      "type": "function",
+      "name": "time_based_split",
+      "args": [
+        {
+          "name": "df",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "val_fraction",
+          "type": "float"
+        }
+      ],
+      "returns": "SplitResult",
+      "docstring": "Split the dataset chronologically using a global cutoff date.\n\nThe cutoff is chosen so that the LAST `val_fraction` of unique dates\nform the validation set, and all earlier dates form the training set.\n\nArgs:\n    df: Feature-engineered DataFrame (must contain TIME_COL).\n    val_fraction: Proportion of unique dates to reserve for validation.\n\nReturns:\n    SplitResult with train/val DataFrames and metadata.",
+      "line_start": 52,
+      "line_end": 94
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\train.py",
+      "type": "function",
+      "name": "_compute_sample_weights",
+      "args": [
+        {
+          "name": "train_df",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "np.ndarray",
+      "docstring": "Compute per-row sample weights for training.\n\nTwo components are multiplied together:\n  1. Inverse price-tier frequency \u2014 Ultra products are 2.5x rarer than\n     Budget products, so they get 2.5x higher weight.  This prevents\n     LightGBM from over-fitting cheap products.\n  2. Volatility boost \u2014 rows where price_vol_30d is high (top quartile)\n     get an additional 1.5x multiplier.  This forces the model to pay\n     more attention to repricing events.\n\nWeights are L1-normalised to sum to len(train_df) so the effective\nlearning rate is unchanged.",
+      "line_start": 200,
+      "line_end": 251
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\ETl\\model\\src\\training\\train.py",
+      "type": "function",
+      "name": "_assign_tier",
+      "args": [
+        {
+          "name": "price",
+          "type": "float"
+        }
+      ],
+      "returns": "str",
+      "docstring": null,
+      "line_start": 221,
+      "line_end": 225
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\forecast+shap\\xai_pipeline.py",
+      "type": "function",
+      "name": "assign_k",
+      "args": [
+        {
+          "name": "import_lambda",
+          "type": "pd.Series"
+        }
+      ],
+      "returns": "pd.Series",
+      "docstring": null,
+      "line_start": 88,
+      "line_end": 93
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\forecast+shap\\xai_pipeline.py",
+      "type": "function",
+      "name": "scale_shap_to_consumer",
+      "args": [
+        {
+          "name": "shap_values",
+          "type": "np.ndarray"
+        },
+        {
+          "name": "multiplier_array",
+          "type": "np.ndarray"
+        }
+      ],
+      "returns": "np.ndarray",
+      "docstring": "Per-row SHAP scaling: phi_scaled[i,j] = phi[i,j] * multiplier[i]",
+      "line_start": 112,
+      "line_end": 114
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\forecast+shap\\xai_pipeline.py",
+      "type": "function",
+      "name": "get_feature_names",
+      "args": [
+        {
+          "name": "column_transformer",
+          "type": null
+        }
+      ],
+      "returns": "list",
+      "docstring": "Rebuild original feature names from ColumnTransformer output columns.",
+      "line_start": 131,
+      "line_end": 153
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\database.py",
+      "type": "function",
+      "name": "_get_conn",
+      "args": [],
+      "returns": "sqlite3.Connection",
+      "docstring": null,
+      "line_start": 26,
+      "line_end": 29
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\database.py",
+      "type": "function",
+      "name": "init_db",
+      "args": [],
+      "returns": "None",
+      "docstring": "Create tables if they do not already exist.",
+      "line_start": 36,
+      "line_end": 89
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\database.py",
+      "type": "function",
+      "name": "insert_laptop",
+      "args": [
+        {
+          "name": "candidate",
+          "type": "Dict[Tuple]"
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Insert one candidate dict into electronics_history.\nSilently skips fields not present in the candidate.",
+      "line_start": 96,
+      "line_end": 132
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\database.py",
+      "type": "function",
+      "name": "save_recommendation",
+      "args": [
+        {
+          "name": "candidate",
+          "type": "Dict[Tuple]"
+        },
+        {
+          "name": "llm_explanation",
+          "type": "str"
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Persist a final recommendation + its LLM explanation into daily_recommendations.",
+      "line_start": 139,
+      "line_end": 169
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\database.py",
+      "type": "function",
+      "name": "get_history",
+      "args": [
+        {
+          "name": "limit",
+          "type": "int"
+        }
+      ],
+      "returns": "List[Dict[Tuple]]",
+      "docstring": null,
+      "line_start": 176,
+      "line_end": 189
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\database.py",
+      "type": "function",
+      "name": "get_recommendations",
+      "args": [
+        {
+          "name": "limit",
+          "type": "int"
+        }
+      ],
+      "returns": "List[Dict[Tuple]]",
+      "docstring": null,
+      "line_start": 192,
+      "line_end": 205
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\database.py",
+      "type": "function",
+      "name": "add_subscriber",
+      "args": [
+        {
+          "name": "email",
+          "type": "str"
+        },
+        {
+          "name": "name",
+          "type": "str"
+        },
+        {
+          "name": "category",
+          "type": "str"
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Register a new email subscriber for a given product category alert.",
+      "line_start": 212,
+      "line_end": 228
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\database.py",
+      "type": "function",
+      "name": "get_laptop_subscribers",
+      "args": [],
+      "returns": "List[Dict[Tuple]]",
+      "docstring": "Return all active subscribers opted in for laptop alerts.",
+      "line_start": 231,
+      "line_end": 245
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\email_service.py",
+      "type": "function",
+      "name": "_build_html",
+      "args": [
+        {
+          "name": "recommendations",
+          "type": "List[Dict[Tuple]]"
+        },
+        {
+          "name": "recipient_name",
+          "type": "str"
+        }
+      ],
+      "returns": "str",
+      "docstring": "Render a clean HTML email body from the daily recommendation records.",
+      "line_start": 37,
+      "line_end": 104
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\email_service.py",
+      "type": "function",
+      "name": "_send_via_sendgrid",
+      "args": [
+        {
+          "name": "to_email",
+          "type": "str"
+        },
+        {
+          "name": "to_name",
+          "type": "str"
+        },
+        {
+          "name": "subject",
+          "type": "str"
+        },
+        {
+          "name": "html_body",
+          "type": "str"
+        }
+      ],
+      "returns": "bool",
+      "docstring": "POST one email to the SendGrid v3 /mail/send endpoint.\nReturns True on HTTP 202 (Accepted), False otherwise.",
+      "line_start": 111,
+      "line_end": 136
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\email_service.py",
+      "type": "function",
+      "name": "dispatch_laptop_alerts",
+      "args": [
+        {
+          "name": "subscribers",
+          "type": "List[Dict[Tuple]]"
+        },
+        {
+          "name": "recommendations",
+          "type": "List[Dict[Tuple]]"
+        }
+      ],
+      "returns": "Dict[Tuple]",
+      "docstring": "Send today's recommendation digest to all laptop-alert subscribers.\n\nParameters\n----------\nsubscribers     : list of {email, name} dicts from get_laptop_subscribers()\nrecommendations : list of recommendation records from get_recommendations()\n\nReturns\n-------\ndict with keys 'sent' and 'failed'",
+      "line_start": 143,
+      "line_end": 187
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\llm_service.py",
+      "type": "function",
+      "name": "build_prompt",
+      "args": [
+        {
+          "name": "candidate",
+          "type": "Dict[Tuple]"
+        }
+      ],
+      "returns": "str",
+      "docstring": "Build the user message from a candidate dict.",
+      "line_start": 46,
+      "line_end": 62
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\llm_service.py",
+      "type": "function",
+      "name": "generate_explanation",
+      "args": [
+        {
+          "name": "candidate",
+          "type": "Dict[Tuple]"
+        }
+      ],
+      "returns": "str",
+      "docstring": "Generate a human-readable explanation for one candidate.\n\nParameters\n----------\ncandidate : dict  \u2013  one item from recommendations.json\n\nReturns\n-------\nstr  \u2013  plain-English explanation, or FALLBACK if the API fails.",
+      "line_start": 69,
+      "line_end": 117
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\main_pipeline.py",
+      "type": "function",
+      "name": "load_candidates",
+      "args": [
+        {
+          "name": "path",
+          "type": "str"
+        }
+      ],
+      "returns": "List[Dict[Tuple]]",
+      "docstring": "Load candidates from recommendations.json.\nReturns an empty list if the file is missing or malformed.",
+      "line_start": 57,
+      "line_end": 79
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\main_pipeline.py",
+      "type": "function",
+      "name": "validate_candidate",
+      "args": [
+        {
+          "name": "c",
+          "type": "Any"
+        }
+      ],
+      "returns": "bool",
+      "docstring": "Return True only if the candidate has the bare minimum required fields.",
+      "line_start": 82,
+      "line_end": 86
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\main_pipeline.py",
+      "type": "function",
+      "name": "run_daily_pipeline",
+      "args": [
+        {
+          "name": "json_path",
+          "type": "str"
+        }
+      ],
+      "returns": "None",
+      "docstring": "Full pipeline:  load \u2192 persist history \u2192 LLM \u2192 persist recommendation.\nSafe to call manually or from the scheduler.",
+      "line_start": 93,
+      "line_end": 166
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\main_pipeline.py",
+      "type": "function",
+      "name": "_seconds_until_midnight_utc",
+      "args": [],
+      "returns": "float",
+      "docstring": "Returns seconds remaining until next 00:00:00 UTC.",
+      "line_start": 173,
+      "line_end": 180
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\main_pipeline.py",
+      "type": "function",
+      "name": "run_scheduler",
+      "args": [],
+      "returns": "None",
+      "docstring": "Runs run_daily_pipeline() once immediately, then every day at 00:00 UTC.\nStop with Ctrl-C.",
+      "line_start": 183,
+      "line_end": 194
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\recommendation_SYS.ipynb",
+      "type": "function",
+      "name": "calculate_r_score",
+      "args": [
+        {
+          "name": "df",
+          "type": null
+        },
+        {
+          "name": "alpha_L",
+          "type": null
+        },
+        {
+          "name": "beta_L",
+          "type": null
+        },
+        {
+          "name": "gamma_L",
+          "type": null
+        },
+        {
+          "name": "delta_L",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Calculates the R_score using weighted economic factors.",
+      "line_start": 17,
+      "line_end": 39
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\ranking_engine.py",
+      "type": "function",
+      "name": "get_ranked_laptops",
+      "args": [
+        {
+          "name": "processed_csv",
+          "type": "str"
+        },
+        {
+          "name": "xai_csv",
+          "type": "str"
+        },
+        {
+          "name": "alpha_L",
+          "type": "float"
+        },
+        {
+          "name": "beta_L",
+          "type": "float"
+        },
+        {
+          "name": "gamma_L",
+          "type": "float"
+        },
+        {
+          "name": "delta_L",
+          "type": "float"
+        }
+      ],
+      "returns": "Tuple[Tuple]",
+      "docstring": "Full ranking flow:\n  1. Load & merge data.\n  2. Keep only the latest snapshot per product.\n  3. Compute R_score.\n  4. Return (latest_data_all, ranked_top_candidates).\n\nReturns\n-------\nfull_latest : pd.DataFrame\n    Latest snapshot for every product (used as background for SHAP).\nranked : pd.DataFrame\n    `full_latest` sorted descending by r_score.",
+      "line_start": 126,
+      "line_end": 159
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\recommendation_pipeline.py",
+      "type": "function",
+      "name": "_build_candidate_record",
+      "args": [
+        {
+          "name": "row",
+          "type": "pd.Series"
+        },
+        {
+          "name": "shap_drivers",
+          "type": "Dict[Tuple]"
+        }
+      ],
+      "returns": "dict",
+      "docstring": "Converts a DataFrame row + SHAP dict into the strict output record.",
+      "line_start": 63,
+      "line_end": 78
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\recommendation_pipeline.py",
+      "type": "function",
+      "name": "run_recommendation_pipeline",
+      "args": [
+        {
+          "name": "output_path",
+          "type": "str"
+        },
+        {
+          "name": "top_n",
+          "type": "int"
+        },
+        {
+          "name": "preferred_class",
+          "type": "str"
+        }
+      ],
+      "returns": "Dict",
+      "docstring": "Runs the full pipeline end-to-end and returns a clean Python dict that\nalso gets persisted to *output_path* as formatted JSON.\n\nParameters\n----------\noutput_path : str\n    Where to save ``recommendations.json``.\ntop_n : int\n    How many top-ranked candidates to classify and explain.\npreferred_class : str\n    If any candidate belongs to this class, only those are included in\n    the final output; otherwise all *top_n* candidates are included.\n\nReturns\n-------\ndict \u2013 the full recommendation payload (no pandas objects).",
+      "line_start": 85,
+      "line_end": 150
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\state_detector.py",
+      "type": "function",
+      "name": "label_logic",
+      "args": [
+        {
+          "name": "row",
+          "type": "pd.Series"
+        }
+      ],
+      "returns": "str",
+      "docstring": "Rule-based label generator used to create synthetic training targets.",
+      "line_start": 48,
+      "line_end": 54
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\recommendation_SYS.ipynb",
+      "type": "function",
+      "name": "generate_recommendation_payload",
+      "args": [
+        {
+          "name": "candidates_df",
+          "type": null
+        },
+        {
+          "name": "model",
+          "type": null
+        },
+        {
+          "name": "feature_names",
+          "type": null
+        },
+        {
+          "name": "background_data",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Outputs a JSON payload for the top candidates, including their SHAP values.",
+      "line_start": 158,
+      "line_end": 218
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\shap_engine.py",
+      "type": "function",
+      "name": "compute_shap_drivers",
+      "args": [
+        {
+          "name": "model",
+          "type": "Pipeline"
+        },
+        {
+          "name": "candidates",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "background_data",
+          "type": "pd.DataFrame"
+        },
+        {
+          "name": "feature_names",
+          "type": "List[str]"
+        },
+        {
+          "name": "target_class",
+          "type": "str"
+        },
+        {
+          "name": "background_n",
+          "type": "int"
+        }
+      ],
+      "returns": "List[Dict[Tuple]]",
+      "docstring": "Runs SHAP KernelExplainer on *candidates* and returns a list of\n``shap_drivers`` dictionaries \u2013 one dict per candidate row.\n\nEach dict maps feature_name \u2192 SHAP value (float, rounded to 4 dp),\nsorted by absolute contribution descending.\n\nParameters\n----------\nmodel : fitted sklearn Pipeline (StandardScaler + SVC)\ncandidates : pd.DataFrame\n    Rows to explain; must contain ``feature_names`` columns.\nbackground_data : pd.DataFrame\n    Pool used to build the SHAP background distribution.\nfeature_names : list[str]\n    Feature column names (must match training order).\ntarget_class : str\n    The class whose SHAP values are extracted.\nbackground_n : int\n    Number of background rows to sample.\n\nReturns\n-------\nlist[dict]  \u2013  one dict per row in *candidates*.",
+      "line_start": 34,
+      "line_end": 113
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\state_detector.py",
+      "type": "function",
+      "name": "train_state_detector",
+      "args": [
+        {
+          "name": "latest_data",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "Pipeline",
+      "docstring": "Builds and fits a StandardScaler + SVC pipeline on the provided DataFrame.\n\nParameters\n----------\nlatest_data : pd.DataFrame\n    Must contain FEATURE_COLS plus 'r_score'.\n\nReturns\n-------\nsklearn.pipeline.Pipeline  \u2013  fitted pipeline.",
+      "line_start": 61,
+      "line_end": 82
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Recommendation system\\state_detector.py",
+      "type": "function",
+      "name": "predict_states",
+      "args": [
+        {
+          "name": "model",
+          "type": "Pipeline"
+        },
+        {
+          "name": "candidates",
+          "type": "pd.DataFrame"
+        }
+      ],
+      "returns": "pd.DataFrame",
+      "docstring": "Appends ``state_classification`` and ``confidence`` columns to *candidates*.\n\nParameters\n----------\nmodel : fitted sklearn Pipeline\ncandidates : pd.DataFrame\n    Rows to classify; must contain FEATURE_COLS.\n\nReturns\n-------\npd.DataFrame  \u2013  *candidates* with two new columns added.",
+      "line_start": 89,
+      "line_end": 114
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Vola Score\\phase1_2_features.py",
+      "type": "function",
+      "name": "extract_chipset_score",
+      "args": [
+        {
+          "name": "title",
+          "type": "str"
+        }
+      ],
+      "returns": "BinOp",
+      "docstring": "Return a normalised [0, 1] chipset compute score from raw_title, or None.",
+      "line_start": 88,
+      "line_end": 107
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Vola Score\\phase1_2_features.py",
+      "type": "function",
+      "name": "compute_phone_proxy",
+      "args": [
+        {
+          "name": "ram_norm",
+          "type": "float"
+        },
+        {
+          "name": "sto_norm",
+          "type": "float"
+        }
+      ],
+      "returns": "float",
+      "docstring": "\u03b1=0.6, \u03b2=0.4 proxy for phones without chipset data.",
+      "line_start": 110,
+      "line_end": 112
+    },
+    {
+      "file_path": "c:\\Users\\mohan\\OneDrive\\Desktop\\Wise Purchaser\\Volatility score ML pipeline\\volat_score.ipynb",
+      "type": "function",
+      "name": "evaluate_model_cv",
+      "args": [
+        {
+          "name": "df",
+          "type": null
+        },
+        {
+          "name": "model_class",
+          "type": null
+        },
+        {
+          "name": "params",
+          "type": null
+        },
+        {
+          "name": "fit_kwargs",
+          "type": null
+        }
+      ],
+      "returns": null,
+      "docstring": "Evaluates a model using rolling time-series validation.\nTrains on months < T, validates on month T.",
+      "line_start": 84,
+      "line_end": 142
+    }
+  ]
+}

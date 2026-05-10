@@ -1,0 +1,118 @@
+{
+  "project_state": {
+    "title": "E-Commerce Market Dynamics & XAI Forecasting Engine",
+    "target_market": "Egyptian Retail Electronics Sector",
+    "timeline": "10 Weeks",
+    "current_phase": "Phase 1: Data Ingestion & ETL Architecture",
+    "status": "Distributed Scraping Infrastructure COMPLETE. Standalone .exe deployment folder created with native SMTP alerting. 100% Production Ready."
+  },
+  "objectives": {
+    "academic": "Validate multivariate forecasting (SARIMAX + LightGBM) and SHAP explainability on volatile economic data.",
+    "engineering": "Build an asynchronous, 12-to-24-hour batch ETL pipeline using a Medallion architecture (Bronze/Silver/Gold).",
+    "business": "B2C Cost-Per-Click (CPC) model via an Idealo-style comparison platform, avoiding ToS violations with enterprise retailers."
+  },
+  "architecture_stack": {
+    "frontend": "React.js",
+    "backend": "Python / FastAPI",
+    "machine_learning": "SARIMAX + LightGBM",
+    "explainable_ai": "SHAP",
+    "scraper_architecture": "Watchdog Pattern: watchdog.exe monitors/restarts scraper.exe. UTC-synchronized batch execution at 00:00 and 12:00 UTC.",
+    "future_scope": "LLM-driven 'Smart Procurement' Agent (Task Decomposition & Optimization) moved to Phase 3 backlog to prevent scope creep."
+  },
+  "phase_1_etl_blueprint": {
+    "target_categories": [
+      "Mobile Phones",
+      "Earbuds",
+      "PC Components (Motherboards, CPUs, GPUs, Power Supplies)",
+      "Laptops",
+      "TVs",
+      "Audio Accessories",
+      "PlayStation Consoles/Games"
+    ],
+    "target_retailers": {
+      "enterprise_proxies": ["Amazon Egypt", "Noon"],
+      "local_custom_scrapers": ["B.TECH", "2B", "Dream2000", "Sigma Computer", "Maximum Hardware", "More Shopping"]
+    },
+    "medallion_schema": {
+      "bronze_layer_raw_extraction": [
+        "scrape_timestamp (ISO 8601 UTC)",
+        "retailer_id",
+        "raw_title",
+        "raw_current_price",
+        "raw_original_price (nullable)",
+        "availability_text (nullable)",
+        "product_url",
+        "extra_data (JSON blob for additional retailer-specific fields)"
+      ],
+      "silver_layer_cleaned": [
+        "normalized_text",
+        "parsed_price_floats",
+        "boolean_stock_status"
+      ],
+      "gold_layer_harmonized_features": [
+        "Master_SKU_ID (via FuzzyWuzzy matching)",
+        "Official_EGP_Rate",
+        "Parallel_EGP_Rate",
+        "US_Baseline_Price",
+        "Days_Until_Major_Sale (e.g., White Friday)",
+        "Is_Fake_Discount (Boolean)"
+      ]
+    },
+    "extraction_rules": {
+      "rate_limiting": "HARDCODED randomized delay of 5.0-7.0 seconds between all web requests. Egyptian Anti-Cybercrime Law 175/2018.",
+      "decoupling": "Extraction engine is strictly separated from transformation logic to protect ML pipeline from UI changes."
+    }
+  },
+  "scraper_infrastructure": {
+    "execution_model": {
+      "pattern": "Watchdog + Scraper (two-process)",
+      "watchdog_exe": "Lightweight process supervisor. Launches, monitors, and restarts scraper.exe on crash (OOM, unhandled exception). Fires webhook alert on failure. Max 5 restart attempts.",
+      "scraper_exe": "Batch executor. Runs all assigned retailers in one cycle. UTC-synchronized via delta calculation to fixed intervals.",
+      "sleep_prevention": "Windows kernel32 SetThreadExecutionState prevents OS sleep/hibernate while exe is running."
+    },
+    "scheduling": {
+      "intervals_utc": ["00:00", "12:00"],
+      "method": "UTC delta calculation — never naive sleep(43200). Recalculates from scratch after every cycle.",
+      "catchup": "If laptop was asleep and missed an interval, executes immediately on wake."
+    },
+    "data_persistence": {
+      "local_backup": "Each cycle creates a new SQLite .db file. Never deleted. Permanent local backup.",
+      "cloud_upload": "After cycle, appends data to GCP Cloud Storage (Bronze bucket). JSON Lines format, partitioned by retailer.",
+      "retry_logic": "3 retries at 1-minute intervals on cloud upload failure.",
+      "store_and_forward": "Failed uploads buffered locally as .json files. Re-attempted on next cycle."
+    },
+    "notifications": {
+      "method": "Native SMTP via smtplib (Gmail App Passwords). No GCP dependencies.",
+      "triggers": ["First upload failure", "Upload retries exhausted", "Scraper crash", "Watchdog restart budget exhausted", "Missed interval (catch-up)", "Cycle complete"]
+    }
+  },
+  "implementation_progress": {
+    "completed": [
+      "config/config.json — Full configuration schema",
+      "watchdog.py — Process supervisor (330 lines)",
+      "engine/sleep_prevention.py — Windows kernel32 API context manager",
+      "engine/notifier.py — SMTP email client (8 tests passing)",
+      "engine/scheduler.py — UTC delta calculator + catch-up (18 tests passing)",
+      "database/local_db.py — SQLite per-cycle database (11 tests passing)",
+      "engine/transport.py — Cloud upload + 3x retry + buffer (15 tests passing)",
+      "scraper.py — Full implementation (main loop: schedule → batch scrape → SQLite → GCP)",
+      "payload/base.py — Abstract base class for retailer scrapers",
+      "payload/dummy_retailer.py — Team boilerplate template",
+      "build_watchdog.bat / build_scraper.bat — PyInstaller build scripts",
+      "tests/ — 58 unit tests, all passing",
+      "scraper_deployment/ — Standalone portable execution package"
+    ],
+    "pending": [
+      "Retailer-specific payload implementations (Sigma, 2B Egypt: ✅ Complete | Dream2000, B.TECH: Pending)"
+    ]
+  },
+  "academic_validation_strategy": {
+    "track_a": "Initial model training on an open-source, macroeconomically volatile proxy dataset (e.g., Turkey/Argentina) to prove mathematical soundness.",
+    "track_b": "Live MVP inference on the scraped Egyptian dataset once volume allows."
+  },
+  "last_session": {
+    "date": "2026-04-07",
+    "summary": "Resolved Playwright browser path issues in frozen environments by implementing absolute path resolution to %LOCALAPPDATA%. Implemented secure GitHub push protocols with credential sanitization and a comprehensive .gitignore. Verified full vertical integration (Watchdog -> Scraper -> 2B Egypt -> Google Drive).",
+    "next_steps": "Begin implementation of Dream2000 and B.TECH payloads using the refined AI Developer Prompt and absolute browser path standards."
+  }
+}

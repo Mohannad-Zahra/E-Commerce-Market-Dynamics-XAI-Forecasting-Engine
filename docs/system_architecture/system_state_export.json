@@ -1,0 +1,72 @@
+{
+  "system_name": "Wise Purchaser",
+  "audit_timestamp": "2026-05-10T14:14:00+03:00",
+  "active_components": [
+    {
+      "name": "Web_Scrapper",
+      "path": "Web Scrapper/",
+      "status": "Active",
+      "type": "Data Ingestion"
+    },
+    {
+      "name": "ETL",
+      "path": "ETl/",
+      "status": "Active",
+      "type": "Data Processing"
+    },
+    {
+      "name": "Vola_Score",
+      "path": "Vola Score/",
+      "status": "Active",
+      "type": "Feature Engineering & Volatility"
+    },
+    {
+      "name": "XAI_Forecasting",
+      "path": "forecast+shap/",
+      "status": "Active",
+      "type": "Machine Learning & Explainability"
+    },
+    {
+      "name": "Recommendation_System",
+      "path": "Recommendation system/",
+      "status": "Active",
+      "type": "Decision Engine"
+    },
+    {
+      "name": "Backend",
+      "path": "backend/",
+      "status": "Active",
+      "type": "API Service"
+    },
+    {
+      "name": "FrontEnd",
+      "path": "FrontEnd/",
+      "status": "Active",
+      "type": "User Interface"
+    }
+  ],
+  "deprecated_components": [
+    {
+      "name": "Volatility_score_ML_pipeline",
+      "path": "Volatility score ML pipeline/",
+      "status": "Deprecated",
+      "recommendation": "Archive or Delete"
+    },
+    {
+      "name": "Redundant_Web_Scrapper",
+      "path": "E-Commerce Market Dynamics & XAI Forecasting Engine/",
+      "status": "Deprecated",
+      "recommendation": "Migrate unique docs to root and Archive folder"
+    }
+  ],
+  "data_management": [
+    {
+      "name": "Legacy_JSON_Dumps",
+      "path": "oldData_need the scrape_time to update for it to work/",
+      "status": "To be consolidated",
+      "recommendation": "Merge into a single dataset and pass to ETL component for validation"
+    }
+  ],
+  "architecture_pattern": "Decoupled Batch Pipeline (CSV/Parquet)",
+  "proposed_db": "PostgreSQL"
+}
