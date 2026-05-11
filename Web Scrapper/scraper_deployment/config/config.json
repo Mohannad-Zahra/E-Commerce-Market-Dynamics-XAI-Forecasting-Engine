@@ -1,0 +1,117 @@
+{
+    "version": "1.0.0",
+    "developer_id": "mohannad_zahra",
+    "developer_name": "Mohannad Zahra",
+    "developer_email": "mohannadezzzahra@example.com",
+    "scrape_intervals_utc": [
+        "00:00",
+        "12:00"
+    ],
+    "retailers": [
+        {
+            "retailer_id": "2b_egypt",
+            "retailer_name": "2B Egypt",
+            "enabled": true,
+            "base_url": "https://2b.com.eg",
+            "payload_module": "payload.twob",
+            "target_urls": [
+                "https://2b.com.eg/en/computers/laptops.html"
+            ]
+        },
+        {
+            "retailer_id": "dream2000",
+            "retailer_name": "Dream2000",
+            "enabled": false,
+            "base_url": "https://dream2000.com.eg",
+            "payload_module": "payload.dream2000",
+            "categories": [
+                "laptops",
+                "mobiles",
+                "audio",
+                "tvs",
+                "playstation"
+            ]
+        },
+        {
+            "retailer_id": "sigma-computer",
+            "retailer_name": "Sigma Computer",
+            "enabled": true,
+            "base_url": "https://www.sigma-computer.com",
+            "payload_module": "payload.sigma",
+            "target_urls": [
+                "https://www.sigma-computer.com/en/category/9f5039de-5c80-46f3-9fe4-6e8f94189b8c",
+                "https://www.sigma-computer.com/en/category/9f5039af-f5d2-4396-9ba2-8ac40277c373",
+                "https://www.sigma-computer.com/en/category/9f5039ed-8dd4-4a9b-a8ce-caf20ed29436",
+                "https://www.sigma-computer.com/en/category/9f503a01-79d7-4a25-b3f3-63b0fd5b3094?page=1&filters=%7B%22is_stock%22%3A1%7D"
+            ]
+        },
+        {
+            "retailer_id": "btech",
+            "retailer_name": "B.TECH",
+            "enabled": false,
+            "base_url": "https://btech.com",
+            "payload_module": "payload.btech",
+            "categories": [
+                "mobiles",
+                "laptops"
+            ]
+        },
+        {
+            "retailer_id": "dummy_retailer",
+            "retailer_name": "Dummy Retailer",
+            "enabled": false,
+            "base_url": "https://dummy.com",
+            "payload_module": "payload.dummy_retailer",
+            "categories": [
+                "test"
+            ]
+        }
+    ],
+    "rate_limit": {
+        "min_seconds": 5.0,
+        "max_seconds": 7.0,
+        "_comment": "HARDCODED FLOOR. Code enforces 5.0-7.0s regardless of this config. Egyptian Anti-Cybercrime Law 175/2018."
+    },
+    "google_drive": {
+        "folder_id": "1WAAr2lEQyCVW_p7iLK2IojxtGUblwWho",
+        "credentials_path": "./config/oauth_credentials.json"
+    },
+    "smtp": {
+        "host": "smtp.gmail.com",
+        "port": 587,
+        "sender_email": "ecmdxaife@gmail.com",
+        "sender_app_password": "askliikrlggtilqt",
+        "team_emails": [
+            "mohannadezzzahra@gmail.com",
+            "abdelrhamanwael8@gmail.com",
+            "Moroazer15@gmail.com",
+            "mohamed101hussien@gmail.com",
+            "m.rashik2005@gmail.com"
+        ],
+        "_comment": "Direct Gmail sender setup. Requires an App Password."
+    },
+    "cloud_retry": {
+        "max_retries": 3,
+        "retry_interval_seconds": 60,
+        "_comment": "On cloud upload failure: retry exactly 3 times at 1-minute intervals."
+    },
+    "watchdog": {
+        "health_check_interval_seconds": 30,
+        "max_restart_attempts": 5,
+        "restart_cooldown_seconds": 10,
+        "scraper_executable": "scraper.exe",
+        "_comment": "Watchdog monitors scraper process. Restarts on crash. Alerts webhook after max_restart_attempts."
+    },
+    "logging": {
+        "level": "INFO",
+        "local_log_dir": "./logs",
+        "log_format": "%(asctime)s | %(name)-20s | %(levelname)-8s | %(message)s",
+        "max_log_size_mb": 50,
+        "backup_count": 5
+    },
+    "database": {
+        "cycle_db_dir": "./data/cycles",
+        "buffer_dir": "./data/buffer",
+        "_comment": "Each scrape cycle creates a new SQLite file: {cycle_db_dir}/{timestamp}_{cycle_id}.db"
+    }
+}
