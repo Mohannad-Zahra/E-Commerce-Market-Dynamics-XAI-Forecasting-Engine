@@ -592,19 +592,47 @@ class PipelineOrchestrator:
             if "Hard Reject" in c.get("routing_path", ""):
                 status = "Rejected"
                 
+            # Priority 3 Fix — Agentic Property 3 (Acts with Explanation):
+            # Build a signal-derived, human-readable justification from the 5 computed signals
+            sig = c.get("signals", {})
+            s_val       = sig.get("S", 0.0)
+            gap_val     = sig.get("Gap_SVM", 0.0)
+            mu_val      = sig.get("mu_predicted", 0.0)
+            arima_val   = sig.get("ARIMA_mult", 0.0)
+            shap_val    = sig.get("SHAP_cos", 0.0)
+            int_score   = c.get("intelligent_score", 0.0)
+
+            justification = (
+                f"Routing decision: {c.get('routing_path')}. "
+                f"Composite Intelligent Score: {int_score:.3f}. "
+                f"Signal breakdown — Severity (S): {s_val:.2f}, "
+                f"SVM Confidence Gap: {gap_val:.2f}, "
+                f"FCM Membership (mu): {mu_val:.2f}, "
+                f"ARIMA Trend Multiplier: {arima_val:.2f}, "
+                f"SHAP Cosine Reliability: {shap_val:.2f}."
+            )
+
             rec = DailyRecommendation(
                 price_history_id=c["db_price_history_id"],
                 intelligent_score=c.get("intelligent_score", 0.0),
                 routing_path=c.get("routing_path", "Unknown"),
                 status=status,
-                justification=f"Automated {status} via {c.get('routing_path')}"
+                justification=justification
             )
             self.db.add(rec)
             
         self.db.commit()
         log.info(f"ReAct Loop Complete. {len(approved)} approved, {len(dlq)} sent to DLQ.")
+        
+        # Trigger event-driven B2C Action Layer
+        try:
+            from src_integrated.utils.email_service import dispatch_b2c_emails
+            email_stats = dispatch_b2c_emails(self.db)
+            log.info(f"Email Dispatch Complete. Sent: {email_stats['sent']}, Failed: {email_stats['failed']}")
+        except Exception as e:
+            log.error(f"Email Dispatch Failed: {e}")
+            
         return True
-
     def run_pipeline(self, target_date):
         print(f"--- Starting Pipeline for {target_date} ---")
         raw_data = self.fetch_raw_scrape_data(target_date)

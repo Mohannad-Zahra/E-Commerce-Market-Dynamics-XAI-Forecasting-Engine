@@ -11,11 +11,23 @@ from src_integrated.orchestrator import PipelineOrchestrator
 from src_integrated.schemas.pydantic_models import IngestionRequest, ETLRequest, RawProduct
 from pydantic import BaseModel
 
+from fastapi.responses import HTMLResponse
+from pathlib import Path
+
 class IngestQueueRequest(BaseModel):
     batch_id: str
     limit: int = 100
 
 app = FastAPI(title="Wise Purchaser Unified Backend")
+
+@app.get("/", response_class=HTMLResponse)
+@app.get("/dashboard", response_class=HTMLResponse)
+def serve_dashboard():
+    dashboard_path = Path(__file__).parent / "templates" / "dashboard.html"
+    if dashboard_path.exists():
+        with open(dashboard_path, "r", encoding="utf-8") as f:
+            return f.read()
+    return "Dashboard HTML not found."
 
 # ── Model Discovery & Loading (Requirement 2.1) ───────────────────────────────
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -211,21 +223,59 @@ class DLQActionRequest(BaseModel):
     action: str
 
 @app.post("/dlq/action")
-def take_dlq_action(request: DLQActionRequest, db: Session = Depends(get_db)):
-    from src_integrated.database.models import DailyRecommendation
+def take_dlq_action(request: DLQActionRequest, req: Request, db: Session = Depends(get_db)):
+    """
+    Audit Fix #3 — Agentic Property 4 (Adapts to Outcomes):
+    When a human approves a DLQ item, we inject its SHAP vector into the live
+    FAISS index so the agent immediately uses it as a valid 'buy' neighbor
+    for future RAG majority-vote queries.
+    """
+    from src_integrated.database.models import DailyRecommendation, PriceHistory, MLForecastShap
+    import numpy as np
+
     rec = db.query(DailyRecommendation).filter_by(id=request.recommendation_id).first()
     if not rec:
         raise HTTPException(status_code=404, detail="Recommendation not found")
-    
+
     if request.action == "approve":
         rec.status = "Approved"
+        db.commit()
+
+        # --- FAISS Memory Injection ---
+        react_state = getattr(req.app.state, "react_state", None)
+        if react_state:
+            try:
+                # Retrieve the SHAP row linked to this recommendation's price_history
+                shap_row = db.query(MLForecastShap).filter_by(
+                    price_history_id=rec.price_history_id
+                ).first()
+
+                if shap_row:
+                    from react_router import SHAP_COLS
+                    shap_vec = np.array([
+                        getattr(shap_row, col.replace("shap_", "shap_"), 0.0) or 0.0
+                        for col in SHAP_COLS
+                    ], dtype=np.float32).reshape(1, -1)
+
+                    # Add to live FAISS index so future RAG queries include this approved item
+                    react_state["faiss_index"].add(np.ascontiguousarray(shap_vec))
+
+                    # Append the ground-truth label so majority vote is updated
+                    react_state["historical_labels"] = np.append(
+                        react_state["historical_labels"], "Deflating Arbitrage"
+                    )
+                    print(f"  [DLQ] ✓ SHAP vector injected into FAISS index for rec {request.recommendation_id}")
+            except Exception as e:
+                # Non-fatal — approval is persisted even if FAISS injection fails
+                print(f"  [DLQ] WARN: FAISS injection failed: {e}")
+
     elif request.action == "reject":
         rec.status = "Rejected"
+        db.commit()
     else:
-        raise HTTPException(status_code=400, detail="Invalid action")
-    
-    db.commit()
-    return {"status": "success", "message": f"Recommendation {request.recommendation_id} {rec.status}"}
+        raise HTTPException(status_code=400, detail="Invalid action. Use 'approve' or 'reject'.")
+
+    return {"status": "success", "message": f"Recommendation {request.recommendation_id} → {rec.status}"}
 
 @app.get("/stats/react")
 def get_react_stats(db: Session = Depends(get_db)):
@@ -276,13 +326,24 @@ def get_price_distribution(db: Session = Depends(get_db)):
     return [{"current": r[0], "forecast": r[1]} for r in results]
 
 @app.get("/stats/drift-history")
-def get_drift_history_stats(req: Request):
+def get_drift_history_stats(db: Session = Depends(get_db)):
     """
-    Dashboard: Get drift history from AgenticDB for Zone 4.
+    Priority 1 Fix: Removed broken agentic_db import.
+    Returns a rolling 7-day history of approval/rejection counts from the SQLite DB.
     """
-    from agentic_db import get_drift_history
-    history = get_drift_history(limit=50)
-    return history
+    from src_integrated.database.models import DailyRecommendation
+    from sqlalchemy import cast, Date as SADate
+    import datetime
+
+    cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=7)
+    rows = db.query(
+        DailyRecommendation.status,
+        func.count(DailyRecommendation.id)
+    ).filter(
+        DailyRecommendation.created_at >= cutoff
+    ).group_by(DailyRecommendation.status).all()
+
+    return {status: count for status, count in rows}
 
 @app.get("/stats/ingestion")
 def get_ingestion_stats(db: Session = Depends(get_db)):
@@ -302,27 +363,47 @@ def get_ingestion_stats(db: Session = Depends(get_db)):
         except:
             pass
             
+    # Priority 4 Fix: Compute real ETL success rate from IngestionBatch.status
+    total_batches = db.query(IngestionBatch).count()
+    completed_batches = db.query(IngestionBatch).filter(IngestionBatch.status == "completed").count()
+    etl_success_rate = f"{(completed_batches / total_batches * 100):.1f}%" if total_batches > 0 else "N/A"
+
     return {
         "batch_count": batch_count,
         "queue_depth": queue_depth,
-        "etl_success_rate": "99.9%" # Static or calculate if status tracking allows
+        "etl_success_rate": etl_success_rate,
+        "completed_batches": completed_batches,
+        "total_batches": total_batches
     }
 
 @app.post("/system/retrain")
 def trigger_retrain(req: Request, db: Session = Depends(get_db)):
-    orchestrator = PipelineOrchestrator(db)
-    from src_integrated.database.models import IngestionBatch
-    latest_batch = db.query(IngestionBatch).order_by(IngestionBatch.created_at.desc()).first()
-    if not latest_batch:
-        raise HTTPException(status_code=404, detail="No batches found to retrain.")
-    
-    react_state = req.app.state.react_state
-    success = orchestrator.run_verification_react(latest_batch.batch_id, react_state)
-    
-    if not success:
-        raise HTTPException(status_code=500, detail="Retrain loop failed.")
-        
-    return {"status": "success", "message": f"Retrained on batch {latest_batch.batch_id}"}
+    """
+    Audit Fix #2 — Autonomous Retraining (Agentic Property 6):
+    Rebuilds the entire offline state (FCM, SVM, FAISS, SHAP means) from the
+    background dataset and hot-swaps it into app.state.react_state, so all
+    subsequent live inference calls immediately use the new models.
+    """
+    try:
+        from offline_state_builder import load_offline_state
+        print("  [RETRAIN] Rebuilding offline ReAct state (SVM, FCM, FAISS, SHAP)...")
+        new_state = load_offline_state()
+
+        # Hot-swap the live app state so all subsequent requests use new models
+        req.app.state.react_state = new_state
+
+        # Also reset the drift monitor with the freshly trained baseline
+        from drift_monitor import DriftMonitor
+        req.app.state.drift_monitor = DriftMonitor(new_state)
+
+        print("  [RETRAIN] ✓ Offline state rebuilt and hot-swapped.")
+        return {
+            "status": "success",
+            "message": "Offline state fully rebuilt: SVM, FCM, FAISS, and SHAP mean vectors updated.",
+            "fpc": float(new_state.get("fpc", 0.0))
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Retrain failed: {str(e)}")
 
 @app.get("/status/{batch_id}")
 def get_batch_status(batch_id: str, db: Session = Depends(get_db)):
@@ -339,13 +420,183 @@ def get_batch_status(batch_id: str, db: Session = Depends(get_db)):
     }
 
 @app.get("/health")
-def health_check():
+def health_check(req: Request, db: Session = Depends(get_db)):
+    """
+    Audit Fix #1 — Live Drift Health Check (Zone 4 Dashboard):
+    Returns 'degraded' status when the real DriftMonitor fires on the latest
+    batch. The dashboard Zone 4 panel will turn red automatically.
+    """
+    drift_status = {"overall_drift": False, "signal_1": {}, "signal_2": {}}
+
+    try:
+        react_state = getattr(req.app.state, "react_state", None)
+        if react_state:
+            # Lazily initialize the drift monitor if not already running
+            if not hasattr(req.app.state, "drift_monitor") or req.app.state.drift_monitor is None:
+                from drift_monitor import DriftMonitor
+                req.app.state.drift_monitor = DriftMonitor(react_state)
+
+            # Run drift check against the most recent batch in the DB
+            from src_integrated.database.models import IngestionBatch, PriceHistory, MLForecastShap, RawScrapedData
+            latest_batch = db.query(IngestionBatch).order_by(IngestionBatch.created_at.desc()).first()
+            if latest_batch:
+                results = db.query(PriceHistory, MLForecastShap).join(
+                    MLForecastShap, PriceHistory.id == MLForecastShap.price_history_id
+                ).filter(
+                    PriceHistory.product_id.in_(
+                        db.query(RawScrapedData.product_url).filter_by(batch_id=latest_batch.batch_id)
+                    )
+                ).limit(200).all()
+
+                if results:
+                    data = [{
+                        "current_price": ph.raw_current_price,
+                        "forecasted_price": shap.price_t_plus_14,
+                        "volatility_score": 100 - (shap.predicted_stability_score or 50),
+                        "price_14d_avg": ph.raw_current_price * 0.98,
+                        "months_since_release": ph.D_months or 12.0
+                    } for ph, shap in results]
+                    df_live = pd.DataFrame(data)
+                    drift_status = req.app.state.drift_monitor.check_drift(df_live)
+    except Exception as e:
+        print(f"  [HEALTH] Drift check error (non-fatal): {e}")
+
+    overall_drift = drift_status.get("overall_drift", False)
     return {
-        "status": "healthy", 
+        "status": "degraded" if overall_drift else "healthy",
         "service": "Wise Purchaser API",
         "db": "wise_purchaser.sqlite",
-        "models": 2
+        "drift_detected": overall_drift,
+        "signal_1": drift_status.get("signal_1", {}),
+        "signal_2": drift_status.get("signal_2", {})
     }
+
+# ── New Dashboard-Required Endpoints ─────────────────────────────────────────
+
+@app.get("/stats/cluster")
+def get_cluster_stats(req: Request):
+    """
+    Zone 1 — Cluster Health: Returns FPC (Fuzzy Partition Coefficient) and
+    centroid count from the live offline ReAct state.
+    """
+    react_state = getattr(req.app.state, "react_state", None)
+    if not react_state:
+        return {"fpc": None, "n_centroids": None, "status": "ReAct state not initialized"}
+
+    fpc = react_state.get("fpc", 0.0)
+    centroids = react_state.get("fcm_centroids", [])
+    n_centroids = len(centroids) if centroids is not None else 0
+
+    health = "Good" if fpc > 0.7 else "Degraded" if fpc > 0.5 else "Poor"
+    return {
+        "fpc": round(float(fpc), 4),
+        "n_centroids": n_centroids,
+        "health_label": health,
+        "interpretation": "FPC measures cluster separation. >0.7 = well-separated, <0.5 = overlapping clusters."
+    }
+
+
+@app.get("/stats/shap-reliability")
+def get_shap_reliability(req: Request, db: Session = Depends(get_db)):
+    """
+    Zone 4 — SHAP Reliability: Computes cosine similarity between each recent
+    product's SHAP vector and the offline mean SHAP vector.
+    Returns a distribution (min, mean, max, histogram buckets).
+    """
+    import numpy as np
+    from src_integrated.database.models import MLForecastShap
+
+    react_state = getattr(req.app.state, "react_state", None)
+    if not react_state:
+        return {"error": "ReAct state not initialized"}
+
+    mean_vec = react_state.get("mean_shap_vector")
+    if mean_vec is None:
+        return {"error": "mean_shap_vector not found in react_state"}
+
+    SHAP_DB_COLS = [
+        "shap_compute_potential", "shap_delta_p_7d", "shap_delta_p_14d",
+        "shap_delta_p_1d", "shap_vol_30d", "shap_official_egp_usd",
+        "shap_cpi_inflation", "shap_is_major_sale_period",
+        "shap_competitor_scarcity_count", "shap_volume_weight",
+        "shap_D_months", "shap_k", "shap_import_lambda",
+        "shap_missing_release_date", "shap_base_expected_price"
+    ]
+
+    rows = db.query(MLForecastShap).order_by(MLForecastShap.id.desc()).limit(200).all()
+    if not rows:
+        return {"cosine_values": [], "mean": 0, "min": 0, "max": 0}
+
+    def cosine(v1, v2):
+        n1, n2 = np.linalg.norm(v1), np.linalg.norm(v2)
+        return float(np.dot(v1, v2) / (n1 * n2)) if n1 > 0 and n2 > 0 else 0.0
+
+    cosine_scores = []
+    for row in rows:
+        vec = np.array([getattr(row, c, 0.0) or 0.0 for c in SHAP_DB_COLS], dtype=np.float32)
+        cosine_scores.append(cosine(vec, mean_vec))
+
+    cosine_arr = np.array(cosine_scores)
+    hist, edges = np.histogram(cosine_arr, bins=10, range=(0, 1))
+    return {
+        "mean": round(float(np.mean(cosine_arr)), 4),
+        "min": round(float(np.min(cosine_arr)), 4),
+        "max": round(float(np.max(cosine_arr)), 4),
+        "histogram": [
+            {"range": f"{edges[i]:.1f}-{edges[i+1]:.1f}", "count": int(hist[i])}
+            for i in range(len(hist))
+        ],
+        "reliability_threshold": 0.6,
+        "samples": len(cosine_scores)
+    }
+
+
+@app.get("/stats/outcomes")
+def get_outcome_stats(db: Session = Depends(get_db)):
+    """
+    Zone 5 — Outcome Tracking: Returns approved, rejected, pending, and emailed
+    counts from daily_recommendations for overview display.
+    """
+    from src_integrated.database.models import DailyRecommendation
+
+    total = db.query(DailyRecommendation).count()
+    approved = db.query(DailyRecommendation).filter(DailyRecommendation.status == "Approved").count()
+    rejected = db.query(DailyRecommendation).filter(DailyRecommendation.status == "Rejected").count()
+    human_review = db.query(DailyRecommendation).filter(DailyRecommendation.status == "Human Review").count()
+    emailed = db.query(DailyRecommendation).filter(DailyRecommendation.emailed == True).count()
+
+    return {
+        "total": total,
+        "approved": approved,
+        "rejected": rejected,
+        "human_review": human_review,
+        "emailed": emailed,
+        "approval_rate": f"{(approved / total * 100):.1f}%" if total > 0 else "N/A"
+    }
+
+
+_PIPELINE_HALTED = False
+
+@app.post("/system/halt")
+def halt_pipeline(req: Request):
+    """
+    Priority 5 Fix — Kill Switch: Sets a global halt flag on app.state.
+    The orchestrator checks this flag before accepting new batch jobs.
+    """
+    global _PIPELINE_HALTED
+    _PIPELINE_HALTED = True
+    req.app.state.halted = True
+    return {"status": "halted", "message": "Pipeline emergency stop activated. No new batches will be processed."}
+
+
+@app.post("/system/resume")
+def resume_pipeline(req: Request):
+    """Lifts the kill switch halt."""
+    global _PIPELINE_HALTED
+    _PIPELINE_HALTED = False
+    req.app.state.halted = False
+    return {"status": "active", "message": "Pipeline resumed."}
+
 
 # ── Cache Logic (from original backend) ───────────────────────────────────────
 _CACHED_PRODUCTS = None

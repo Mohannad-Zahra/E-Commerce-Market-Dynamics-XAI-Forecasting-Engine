@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wise Purchaser | Agentic Control Plane</title>
+    <style>
+        :root {
+            --bg: #0d1117; --card: #161b22; --border: #30363d;
+            --text: #c9d1d9; --muted: #8b949e;
+            --blue: #58a6ff; --green: #3fb950; --red: #f85149;
+            --yellow: #d29922; --purple: #bc8cff;
+            --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        * { box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: var(--font); margin: 0; }
+        header {
+            padding: 16px 32px; background: var(--card);
+            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        header h1 { margin: 0; font-size: 20px; color: #fff; }
+        .status-bar { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--muted); }
+        #halt-status { padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 12px;
+            background: rgba(63,185,80,.15); color: var(--green); }
+        #halt-status.halted { background: rgba(248,81,73,.15); color: var(--red); }
+        .spinner { width: 16px; height: 16px; border: 2px solid var(--border);
+            border-top-color: var(--blue); border-radius: 50%; animation: spin 1s linear infinite; display: none; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 24px 32px; max-width: 1600px; margin: 0 auto; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+        .card.wide { grid-column: 1 / -1; }
+        .card.half { grid-column: span 2; }
+        .card h2 { margin: 0 0 16px 0; font-size: 14px; color: var(--blue); text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .card h2 span { margin-right: 6px; }
+
+        /* Metrics */
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }
+        .metric { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px; text-align: center; }
+        .metric .val { font-size: 26px; font-weight: 700; color: var(--green); }
+        .metric .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; margin-top: 4px; }
+        .metric .val.red { color: var(--red); }
+        .metric .val.yellow { color: var(--yellow); }
+        .metric .val.purple { color: var(--purple); }
+        .metric .val.blue { color: var(--blue); }
+
+        /* Buttons */
+        .btn-group { display: flex; flex-direction: column; gap: 8px; }
+        btn, button.act { all: unset; display: block; width: 100%; padding: 10px 16px;
+            border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer;
+            text-align: center; transition: opacity .15s; border: 1px solid rgba(255,255,255,.1); }
+        button.act:hover { opacity: .85; }
+        button.act.green { background: #238636; color: #fff; }
+        button.act.blue { background: #1f6feb; color: #fff; }
+        button.act.red { background: #b91c1c; color: #fff; }
+        button.act.orange { background: #9a3412; color: #fff; }
+
+        /* Path list */
+        .path-row { display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 10px; border-radius: 5px; margin-bottom: 6px; background: var(--bg); border: 1px solid var(--border); font-size: 13px; }
+        .badge { padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600;
+            background: rgba(88,166,255,.12); color: var(--blue); }
+
+        /* SHAP bar chart */
+        .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 12px; }
+        .bar-track { flex: 1; background: var(--bg); border-radius: 3px; height: 12px; overflow: hidden; }
+        .bar-fill { height: 100%; background: var(--purple); border-radius: 3px; transition: width .4s; }
+        .bar-label { width: 70px; color: var(--muted); text-align: right; }
+        .bar-count { width: 30px; color: var(--text); }
+
+        /* DLQ cards */
+        .dlq-card { border: 1px solid var(--border); border-radius: 6px; padding: 14px; margin-bottom: 10px; background: var(--bg); }
+        .dlq-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .dlq-title { font-weight: 600; font-size: 14px; }
+        .dlq-meta { font-size: 12px; color: var(--muted); margin-bottom: 10px; line-height: 1.6; }
+        .dlq-actions { display: flex; gap: 8px; }
+        .dlq-actions button { flex: 1; padding: 6px; border-radius: 5px; border: 1px solid var(--border); cursor: pointer; font-size: 12px; font-weight: 600; }
+        .dlq-actions .approve { background: rgba(63,185,80,.1); color: var(--green); }
+        .dlq-actions .reject { background: rgba(248,81,73,.1); color: var(--red); }
+
+        /* Alert banners */
+        .alert { padding: 10px 14px; border-radius: 6px; font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .alert.warn { background: rgba(210,153,34,.1); border: 1px solid rgba(210,153,34,.3); color: var(--yellow); }
+        .alert.danger { background: rgba(248,81,73,.1); border: 1px solid rgba(248,81,73,.3); color: var(--red); }
+        .alert.ok { background: rgba(63,185,80,.1); border: 1px solid rgba(63,185,80,.3); color: var(--green); }
+
+        /* FPC gauge */
+        .fpc-bar { height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; margin: 6px 0 3px; }
+        .fpc-fill { height: 100%; border-radius: 4px; transition: width .5s; }
+
+        #last-refresh { font-size: 11px; color: var(--muted); }
+    </style>
+</head>
+<body>
+<header>
+    <h1>⚡ Wise Purchaser — Agentic Control Plane</h1>
+    <div class="status-bar">
+        <div id="spinner" class="spinner"></div>
+        <span id="last-refresh">Initialising…</span>
+        <span id="halt-status">● ACTIVE</span>
+    </div>
+</header>
+
+<div class="grid">
+
+    <!-- ── Zone 1: Cluster Health ── -->
+    <div class="card">
+        <h2><span>🧬</span>Zone 1 · Cluster Health</h2>
+        <div class="metrics">
+            <div class="metric"><div class="val purple" id="z1-fpc">--</div><div class="lbl">FPC Score</div></div>
+            <div class="metric"><div class="val blue" id="z1-n">--</div><div class="lbl">Centroids</div></div>
+            <div class="metric"><div class="val" id="z1-health" style="font-size:14px">--</div><div class="lbl">Cluster State</div></div>
+        </div>
+        <div class="fpc-bar" style="margin-top:14px"><div class="fpc-fill" id="z1-fpc-bar" style="width:0%;background:var(--purple)"></div></div>
+        <p style="font-size:11px;color:var(--muted);margin:4px 0 0">&gt;0.7 well-separated · 0.5–0.7 degraded · &lt;0.5 poor</p>
+    </div>
+
+    <!-- ── Zone 2: Live Scoring Feed ── -->
+    <div class="card">
+        <h2><span>🧠</span>Zone 2 · Live Scoring Feed</h2>
+        <div id="z2-paths">Loading…</div>
+    </div>
+
+    <!-- ── Zone 3: Action Dispatch ── -->
+    <div class="card">
+        <h2><span>🚀</span>Zone 3 · Action Dispatch</h2>
+        <div class="btn-group">
+            <button class="act green" onclick="triggerRetrain()">Force Full Retrain</button>
+            <button class="act blue" onclick="triggerBatch()">Trigger New Batch</button>
+            <button class="act orange" id="halt-btn" onclick="toggleHalt()">🛑 Kill Switch (Emergency Stop)</button>
+            <button class="act blue" id="resume-btn" onclick="resumePipeline()" style="display:none">▶ Resume Pipeline</button>
+        </div>
+        <div class="metrics" style="margin-top:14px">
+            <div class="metric"><div class="val" id="z3-total">--</div><div class="lbl">Total Recs</div></div>
+            <div class="metric"><div class="val" id="z3-emailed">--</div><div class="lbl">Emailed</div></div>
+        </div>
+    </div>
+
+    <!-- ── Zone 4: SHAP Reliability ── -->
+    <div class="card half">
+        <h2><span>📐</span>Zone 4 · SHAP Reliability</h2>
+        <div class="metrics" style="margin-bottom:14px">
+            <div class="metric"><div class="val purple" id="z4-mean">--</div><div class="lbl">Mean Cosine</div></div>
+            <div class="metric"><div class="val" id="z4-min">--</div><div class="lbl">Min</div></div>
+            <div class="metric"><div class="val" id="z4-max">--</div><div class="lbl">Max</div></div>
+            <div class="metric"><div class="val blue" id="z4-samples">--</div><div class="lbl">Samples</div></div>
+        </div>
+        <div id="z4-histogram"></div>
+        <p style="font-size:11px;color:var(--muted);margin:6px 0 0">Reliability threshold: 0.60 · Cosine similarity to mean SHAP vector</p>
+    </div>
+
+    <!-- ── Zone 5: Outcome Tracking ── -->
+    <div class="card">
+        <h2><span>📊</span>Zone 5 · Outcome Tracking</h2>
+        <div class="metrics">
+            <div class="metric"><div class="val green" id="z5-approved">--</div><div class="lbl">Approved</div></div>
+            <div class="metric"><div class="val red" id="z5-rejected">--</div><div class="lbl">Rejected</div></div>
+            <div class="metric"><div class="val yellow" id="z5-review">--</div><div class="lbl">Human Review</div></div>
+            <div class="metric"><div class="val blue" id="z5-rate">--</div><div class="lbl">Approval Rate</div></div>
+        </div>
+    </div>
+
+    <!-- ── Zone 6: System Alerts ── -->
+    <div class="card wide">
+        <h2><span>🚨</span>Zone 6 · System Alerts</h2>
+        <div id="z6-alerts">Checking system status…</div>
+    </div>
+
+    <!-- ── Zone 5b: Human Review (DLQ) ── -->
+    <div class="card wide">
+        <h2><span>🕵️</span>Dead Letter Queue · Human Review Items</h2>
+        <div id="dlq-items">Loading…</div>
+    </div>
+
+</div>
+
+<script>
+const API = window.location.origin;
+let pipelineHalted = false;
+
+const $ = id => document.getElementById(id);
+const show = () => { $('spinner').style.display = 'block'; };
+const hide = () => {
+    $('spinner').style.display = 'none';
+    $('last-refresh').textContent = 'Last refresh: ' + new Date().toLocaleTimeString();
+};
+
+async function get(ep) {
+    try {
+        const r = await fetch(API + ep);
+        if (!r.ok) return null;
+        return await r.json();
+    } catch { return null; }
+}
+
+async function post(ep) {
+    try { const r = await fetch(API + ep, { method: 'POST' }); return await r.json(); }
+    catch { return null; }
+}
+
+// ── Zone 1: Cluster Health ─────────────────────────────────────
+async function loadZ1() {
+    const d = await get('/stats/cluster');
+    if (!d) return;
+    $('z1-fpc').textContent = d.fpc !== null ? d.fpc.toFixed(3) : 'N/A';
+    $('z1-n').textContent = d.n_centroids ?? '--';
+    const lbl = $('z1-health');
+    lbl.textContent = d.health_label ?? '--';
+    lbl.style.color = d.health_label === 'Good' ? 'var(--green)' : d.health_label === 'Degraded' ? 'var(--yellow)' : 'var(--red)';
+    const pct = d.fpc ? Math.min(d.fpc * 100, 100) : 0;
+    $('z1-fpc-bar').style.width = pct + '%';
+    const col = pct > 70 ? 'var(--green)' : pct > 50 ? 'var(--yellow)' : 'var(--red)';
+    $('z1-fpc-bar').style.background = col;
+}
+
+// ── Zone 2: Live Scoring Feed ──────────────────────────────────
+async function loadZ2() {
+    const d = await get('/stats/react');
+    if (!d) return;
+    const total = Object.values(d).reduce((a, b) => a + b, 0);
+    const pathColors = {
+        'Path 1': 'var(--green)', 'Path 2': 'var(--blue)',
+        'Path 3': 'var(--blue)', 'Path 4': 'var(--yellow)',
+        'Path 5': 'var(--purple)', 'Path 6': 'var(--purple)', 'Path 7': 'var(--red)'
+    };
+    let html = '';
+    for (const [path, count] of Object.entries(d)) {
+        if (!count && count !== 0) continue;
+        const key = path.split(' ')[0] + ' ' + path.split(' ')[1];
+        const color = pathColors[key] || 'var(--text)';
+        html += `<div class="path-row">
+            <span style="color:${color}">${path}</span>
+            <span class="badge" style="background:rgba(255,255,255,.05);color:${color}">${count}</span>
+        </div>`;
+    }
+    $('z2-paths').innerHTML = html || '<span style="color:var(--muted);font-size:13px">No routing data yet. Run a batch first.</span>';
+}
+
+// ── Zone 3: Action Dispatch ────────────────────────────────────
+async function loadZ3() {
+    const d = await get('/stats/outcomes');
+    if (!d) return;
+    $('z3-total').textContent = d.total;
+    $('z3-emailed').textContent = d.emailed;
+}
+
+// ── Zone 4: SHAP Reliability ───────────────────────────────────
+async function loadZ4() {
+    const d = await get('/stats/shap-reliability');
+    if (!d || d.error) { $('z4-histogram').innerHTML = `<span style="color:var(--muted);font-size:13px">${d?.error || 'No data'}</span>`; return; }
+    $('z4-mean').textContent = d.mean.toFixed(3);
+    $('z4-min').textContent = d.min.toFixed(3);
+    $('z4-max').textContent = d.max.toFixed(3);
+    $('z4-samples').textContent = d.samples;
+    const maxCount = Math.max(...d.histogram.map(b => b.count), 1);
+    let html = '';
+    for (const b of d.histogram) {
+        const pct = (b.count / maxCount * 100).toFixed(1);
+        const isAbove = parseFloat(b.range) >= 0.6;
+        html += `<div class="bar-row">
+            <div class="bar-label">${b.range}</div>
+            <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${isAbove ? 'var(--green)' : 'var(--muted)'}"></div></div>
+            <div class="bar-count">${b.count}</div>
+        </div>`;
+    }
+    $('z4-histogram').innerHTML = html;
+}
+
+// ── Zone 5: Outcome Tracking ───────────────────────────────────
+async function loadZ5() {
+    const d = await get('/stats/outcomes');
+    if (!d) return;
+    $('z5-approved').textContent = d.approved;
+    $('z5-rejected').textContent = d.rejected;
+    $('z5-review').textContent = d.human_review;
+    $('z5-rate').textContent = d.approval_rate;
+}
+
+// ── Zone 6: System Alerts ──────────────────────────────────────
+async function loadZ6() {
+    const [health, ingestion] = await Promise.all([get('/health'), get('/stats/ingestion')]);
+    let alerts = [];
+
+    if (pipelineHalted) {
+        alerts.push({ cls: 'danger', icon: '🛑', msg: 'PIPELINE HALTED — Kill switch is active. No new batches will be processed.' });
+    }
+
+    if (health) {
+        if (health.drift_detected) {
+            const s1 = health.signal_1 || {};
+            const s2 = health.signal_2 || {};
+            alerts.push({ cls: 'danger', icon: '⚠️',
+                msg: `DRIFT DETECTED — Signal 1: SVM gap degradation ${((s1.degradation||0)*100).toFixed(1)}% · Signal 2: Centroid distance ${(s2.centroid_distance||0).toFixed(3)}. Retrain recommended.`
+            });
+        } else if (health.signal_1?.degradation > 0.2) {
+            alerts.push({ cls: 'warn', icon: '📉', msg: `SVM gap declining (${((health.signal_1.degradation||0)*100).toFixed(1)}% degradation) — monitoring for dual-signal drift trigger.` });
+        } else {
+            alerts.push({ cls: 'ok', icon: '✅', msg: `System stable — no drift detected. SVM gap healthy, centroids within bounds.` });
+        }
+    }
+
+    if (ingestion) {
+        alerts.push({ cls: 'ok', icon: '📦',
+            msg: `Ingestion: ${ingestion.completed_batches}/${ingestion.total_batches} batches completed · ETL success rate: ${ingestion.etl_success_rate} · Queue depth: ${ingestion.queue_depth}`
+        });
+    }
+
+    $('z6-alerts').innerHTML = alerts.map(a =>
+        `<div class="alert ${a.cls}"><span>${a.icon}</span>${a.msg}</div>`
+    ).join('') || '<span style="color:var(--muted)">No alerts.</span>';
+}
+
+// ── DLQ ───────────────────────────────────────────────────────
+async function loadDLQ() {
+    const d = await get('/dlq/items');
+    if (!d) return;
+    if (!d.length) { $('dlq-items').innerHTML = '<span style="color:var(--muted);font-size:13px">Queue is empty. All clear ✓</span>'; return; }
+    $('dlq-items').innerHTML = d.map(item => `
+        <div class="dlq-card">
+            <div class="dlq-header">
+                <div class="dlq-title">${item.product_title}</div>
+                <span class="badge">${item.routing_path}</span>
+            </div>
+            <div class="dlq-meta">
+                Score: <strong>${item.intelligent_score?.toFixed(3) ?? '--'}</strong> &nbsp;·&nbsp;
+                Price: <strong>${item.current_price?.toLocaleString() ?? '--'} EGP</strong><br>
+                <em style="color:var(--text)">${item.justification}</em>
+            </div>
+            <div class="dlq-actions">
+                <button class="approve" onclick="handleDLQ(${item.id},'approve')">✔ Approve + Inject to FAISS</button>
+                <button class="reject" onclick="handleDLQ(${item.id},'reject')">✖ Reject</button>
+            </div>
+        </div>`).join('');
+}
+
+// ── Actions ───────────────────────────────────────────────────
+async function handleDLQ(id, action) {
+    show();
+    try {
+        await fetch(`${API}/dlq/action`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ recommendation_id: id, action })
+        });
+        await refresh();
+    } catch { hide(); }
+}
+
+async function triggerRetrain() {
+    if (!confirm('Force full offline retrain? This rebuilds SVM, FCM, FAISS, and SHAP means (~30s).')) return;
+    show();
+    const d = await post('/system/retrain');
+    alert(d ? `Retrain complete. New FPC: ${d.fpc?.toFixed(3) ?? 'N/A'}` : 'Retrain failed — check logs.');
+    await refresh();
+}
+
+async function triggerBatch() {
+    if (pipelineHalted) { alert('Pipeline is halted. Resume it first.'); return; }
+    alert('Batch trigger: POST /etl with your batch_id from the ingestion layer.');
+}
+
+async function toggleHalt() {
+    show();
+    const d = await post('/system/halt');
+    if (d) {
+        pipelineHalted = true;
+        $('halt-status').textContent = '● HALTED'; $('halt-status').className = 'halted';
+        $('halt-btn').style.display = 'none'; $('resume-btn').style.display = 'block';
+    }
+    await loadZ6(); hide();
+}
+
+async function resumePipeline() {
+    show();
+    const d = await post('/system/resume');
+    if (d) {
+        pipelineHalted = false;
+        $('halt-status').textContent = '● ACTIVE'; $('halt-status').className = '';
+        $('halt-btn').style.display = 'block'; $('resume-btn').style.display = 'none';
+    }
+    await loadZ6(); hide();
+}
+
+// ── Main refresh ──────────────────────────────────────────────
+async function refresh() {
+    show();
+    await Promise.all([loadZ1(), loadZ2(), loadZ3(), loadZ4(), loadZ5(), loadZ6(), loadDLQ()]);
+    hide();
+}
+
+refresh();
+setInterval(refresh, 30000);
+</script>
+</body>
+</html>

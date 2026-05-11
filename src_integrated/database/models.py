@@ -149,3 +149,13 @@ class DailyRecommendation(Base):
     created_at = Column(DateTime, default=datetime.now)
 
     price_history = relationship("PriceHistory")
+
+class Subscriber(Base):
+    __tablename__ = 'subscribers'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    email = Column(String, unique=True, nullable=False)
+    name = Column(String, nullable=True)
+    category = Column(String, default='laptop')
+    active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.now)
