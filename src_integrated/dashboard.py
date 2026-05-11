@@ -83,7 +83,9 @@ if st.sidebar.button("🔄 Force ReAct Retrain", use_container_width=True):
             st.rerun()
 
 if st.sidebar.button("🧹 Clear Ingestion Queue", use_container_width=True):
-    st.toast("Queue Cleared (Simulation)")
+    res = api_request("POST", "/queue/clear")
+    if res:
+        st.toast("Testing Queue Cleared!")
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("🚀 Batch Orchestration")
@@ -208,9 +210,14 @@ with tab3:
 
     with d_col2:
         st.subheader("Zone 4: SHAP Reliability")
-        cos_data = np.random.normal(0.85, 0.05, 100)
-        fig_c = px.histogram(cos_data, nbins=20, title="SHAP Cosine Distribution")
-        st.plotly_chart(fig_c, use_container_width=True)
+        cos_data = api_request("GET", "/stats/shap-reliability")
+        if cos_data and len(cos_data) > 0:
+            fig_c = px.histogram(cos_data, nbins=20, title="SHAP Cosine Distribution (Live Data)",
+                                 labels={'value': 'Cosine Similarity'},
+                                 color_discrete_sequence=['#00b4ff'])
+            st.plotly_chart(fig_c, use_container_width=True)
+        else:
+            st.info("No SHAP reliability data found. Run verification batches to populate.")
 
 # ZONE 4: Intelligence Layer
 with tab4:

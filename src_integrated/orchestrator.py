@@ -240,21 +240,55 @@ class PipelineOrchestrator:
 
     def run_volatility(self, etl_data: List[ETLOutput]) -> List[VolatilityOutput]:
         """
-        Calculates price momentum and volatility features.
+        Calculates real price momentum and volatility features from database history.
         """
-        print("Executing Volatility Modeling in-memory...")
+        print("Executing Volatility Modeling with database lookup...")
         vol_data = []
         for etl in etl_data:
-            # In a real scenario, we would fetch historical prices for this product
-            # For now, we simulate or use what's in the DB if available.
-            # Let's use some dummy values that look realistic.
+            p_id = str(etl.product_url)
+            # Fetch last 30 days of price history for this specific product
+            history = self.db.query(PriceHistory).filter(
+                PriceHistory.product_id == p_id
+            ).order_by(PriceHistory.scrape_timestamp.desc()).limit(30).all()
+            
+            p_current = etl.raw_current_price
+            
+            if history:
+                # delta_p_1d
+                p_1d = history[0].raw_current_price
+                delta_p_1d = (p_current - p_1d) / p_1d if p_1d > 0 else 0.0
+                
+                # delta_p_7d
+                p_idx_7 = min(6, len(history)-1)
+                p_7d = history[p_idx_7].raw_current_price
+                delta_p_7d = (p_current - p_7d) / p_7d if p_7d > 0 else 0.0
+                
+                # delta_p_14d
+                p_idx_14 = min(13, len(history)-1)
+                p_14d = history[p_idx_14].raw_current_price
+                delta_p_14d = (p_current - p_14d) / p_14d if p_14d > 0 else 0.0
+                
+                # vol_30d (Standard deviation of daily returns)
+                prices = [h.raw_current_price for h in history]
+                if len(prices) > 1:
+                    returns = [(prices[i] - prices[i+1])/prices[i+1] for i in range(len(prices)-1) if prices[i+1] > 0]
+                    vol_30d = float(np.std(returns)) if returns else 0.05
+                else:
+                    vol_30d = 0.05
+            else:
+                # No history found, use defaults
+                delta_p_1d = 0.0
+                delta_p_7d = 0.0
+                delta_p_14d = 0.0
+                vol_30d = 0.05
+            
             vol_item = VolatilityOutput(
                 **etl.model_dump(),
-                delta_p_1d=0.01,
-                delta_p_7d=0.05,
-                delta_p_14d=0.08,
-                vol_30d=0.15,
-                stability_score=85.0
+                delta_p_1d=delta_p_1d,
+                delta_p_7d=delta_p_7d,
+                delta_p_14d=delta_p_14d,
+                vol_30d=vol_30d,
+                stability_score=max(0, 100 - (vol_30d * 200)) # Heuristic stability
             )
             vol_data.append(vol_item)
         return vol_data
@@ -565,7 +599,14 @@ class PipelineOrchestrator:
             return False
             
         candidates = []
+        from datetime import timedelta
         for ph, p, shap in results:
+            # Fetch real 14-day average from database
+            avg_14d = self.db.query(func.avg(PriceHistory.raw_current_price)).filter(
+                PriceHistory.product_id == p.id,
+                PriceHistory.scrape_timestamp >= datetime.now() - timedelta(days=14)
+            ).scalar() or ph.raw_current_price
+
             # Map DB fields to ReAct candidate format
             cand = {
                 "model_id": p.id,
@@ -575,9 +616,9 @@ class PipelineOrchestrator:
                 "forecasted_price": shap.price_t_plus_14,
                 "volatility_score": 100 - (shap.predicted_stability_score or 50),
                 "predicted_stability_score": shap.predicted_stability_score,
-                "price_14d_avg": ph.raw_current_price * 0.98, # Heuristic fallback
+                "price_14d_avg": float(avg_14d),
                 "months_since_release": ph.D_months or 12.0,
-                "r_score": ph.raw_current_price / (shap.price_t_plus_14 + 1e-6) * 100, # Heuristic r_score proxy
+                "r_score": ph.raw_current_price / (shap.price_t_plus_14 + 1e-6) * 100, 
                 "db_price_history_id": ph.id
             }
             candidates.append(cand)
@@ -595,6 +636,7 @@ class PipelineOrchestrator:
             rec = DailyRecommendation(
                 price_history_id=c["db_price_history_id"],
                 intelligent_score=c.get("intelligent_score", 0.0),
+                shap_reliability=c.get("signals", {}).get("SHAP_cos", 0.0),
                 routing_path=c.get("routing_path", "Unknown"),
                 status=status,
                 justification=f"Automated {status} via {c.get('routing_path')}"

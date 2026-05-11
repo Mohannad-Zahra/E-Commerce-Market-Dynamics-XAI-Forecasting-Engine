@@ -275,6 +275,18 @@ def get_price_distribution(db: Session = Depends(get_db)):
     
     return [{"current": r[0], "forecast": r[1]} for r in results]
 
+@app.get("/stats/shap-reliability")
+def get_shap_reliability(db: Session = Depends(get_db)):
+    """
+    Dashboard: Get real SHAP cosine similarity distribution for Zone 4.
+    """
+    from src_integrated.database.models import DailyRecommendation
+    results = db.query(DailyRecommendation.shap_reliability).filter(
+        DailyRecommendation.shap_reliability.isnot(None)
+    ).order_by(DailyRecommendation.created_at.desc()).limit(200).all()
+    
+    return [r[0] for r in results]
+
 @app.get("/stats/drift-history")
 def get_drift_history_stats(req: Request):
     """
@@ -305,8 +317,23 @@ def get_ingestion_stats(db: Session = Depends(get_db)):
     return {
         "batch_count": batch_count,
         "queue_depth": queue_depth,
-        "etl_success_rate": "99.9%" # Static or calculate if status tracking allows
+        "etl_success_rate": "99.9%" 
     }
+
+@app.post("/queue/clear")
+def clear_testing_queue():
+    import sqlite3
+    queue_db_path = os.path.join(os.path.dirname(__file__), "database", "testing_queue.db")
+    if os.path.exists(queue_db_path):
+        try:
+            conn = sqlite3.connect(queue_db_path)
+            conn.execute("DELETE FROM raw_queue")
+            conn.commit()
+            conn.close()
+            return {"status": "success", "message": "Queue cleared"}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+    return {"status": "error", "message": "Queue DB not found"}
 
 @app.post("/system/retrain")
 def trigger_retrain(req: Request, db: Session = Depends(get_db)):

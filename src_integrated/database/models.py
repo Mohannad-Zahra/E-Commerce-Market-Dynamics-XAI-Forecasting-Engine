@@ -142,6 +142,7 @@ class DailyRecommendation(Base):
     price_history_id = Column(Integer, ForeignKey('price_history.id'))
     
     intelligent_score = Column(Float)
+    shap_reliability = Column(Float, nullable=True)
     routing_path = Column(String) # Path 1 to Path 7
     status = Column(String) # 'Approved', 'Rejected', 'Human Review'
     justification = Column(String, nullable=True)
