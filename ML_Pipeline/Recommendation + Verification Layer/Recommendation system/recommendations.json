@@ -1,0 +1,38 @@
+{
+    "candidates": [
+        {
+            "model_id": "https://dream2000.com/en/honor-600-lite-8gb-ram-256gb-sprout-green-free-earbuds-x7e-active-cover-metal.html",
+            "model": "https://dream2000.com/en/honor-600-lite-8gb-ram-256gb-sprout-green-free-earbuds-x7e-active-cover-metal.html",
+            "current_price": 22082.150390625,
+            "price_14d_avg": 24537.27089954871,
+            "forecasted_price": 22082.150390625,
+            "r_score": 96.2519,
+            "classification": "Deflating Arbitrage",
+            "confidence": "49.86%",
+            "shap_drivers": {
+                "months_since_release": -0.3205,
+                "volatility_score": -0.0353,
+                "price_14d_avg": 0.0109,
+                "current_price": -0.0032,
+                "forecasted_price": -0.0032
+            }
+        },
+        {
+            "model_id": "https://2b.com.eg/en/vivo-v70-12gb-ram-256gb-grey.html",
+            "model": "https://2b.com.eg/en/vivo-v70-12gb-ram-256gb-grey.html",
+            "current_price": 32237.0390625,
+            "price_14d_avg": 35157.65158239382,
+            "forecasted_price": 32237.0390625,
+            "r_score": 96.0388,
+            "classification": "Deflating Arbitrage",
+            "confidence": "80.45%",
+            "shap_drivers": {
+                "months_since_release": -0.0902,
+                "price_14d_avg": 0.0429,
+                "volatility_score": -0.0281,
+                "current_price": 0.0192,
+                "forecasted_price": 0.0192
+            }
+        }
+    ]
+}

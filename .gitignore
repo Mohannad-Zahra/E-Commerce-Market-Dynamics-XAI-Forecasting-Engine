@@ -1,18 +1,10 @@
-# System / IDE
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
-
-# Python cache
-__pycache__/
-*.py[cod]
-*$py.class
-
-# GitHub Large File Rejections (Exceeds 100MB)
-*.csv
-*.sqlite
-*.exe
 *.db
-*.onnx
+*.sqlite
+*.csv
 *.joblib
+*.onnx
+__pycache__/
+.ipynb_checkpoints/
+.vscode/
+.idea/
+*.log

@@ -1,17 +1,189 @@
+import os
+import numpy as np
 import pandas as pd
 from typing import List
 from sqlalchemy.orm import Session
 from src_integrated.database.db import SessionLocal, engine
-from src_integrated.database.models import Product, MacroEconomic, PriceHistory, MLForecastShap
-from src_integrated.schemas.pydantic_models import WebScrapperOutput, ETLOutput, VolatilityOutput, XAIForecastOutput
+from src_integrated.database.models import Product, MacroEconomic, PriceHistory, MLForecastShap, IngestionBatch, RawScrapedData, DailyRecommendation
+from src_integrated.schemas.pydantic_models import WebScrapperOutput, ETLOutput, VolatilityOutput, XAIForecastOutput, RawProduct
+from src_integrated.utils.shap_engine import JoblibExplainer
+from src_integrated.database.db import SessionLocal
 from sqlalchemy import func
 import logging
+import sqlite3
+import json
+import re
+from datetime import datetime
 
 log = logging.getLogger(__name__)
 
 class PipelineOrchestrator:
     def __init__(self, db_session: Session):
         self.db = db_session
+
+    def ingest_raw_data(self, batch_id: str, category: str, target_count: int, data: List[RawProduct]):
+        """Requirement 1.1: Bulk insertion of raw scraped data into the database."""
+        # Check if batch exists
+        batch = self.db.query(IngestionBatch).filter_by(batch_id=batch_id).first()
+        if not batch:
+            batch = IngestionBatch(batch_id=batch_id, category=category, target_count=target_count, status='raw')
+            self.db.add(batch)
+            self.db.flush()
+        
+        raw_rows = []
+        for r in data:
+            raw_rows.append(RawScrapedData(
+                batch_id=batch_id,
+                scrape_timestamp=r.scrape_timestamp,
+                retailer_id=r.retailer_id,
+                raw_title=r.raw_title,
+                raw_current_price=r.raw_current_price,
+                raw_original_price=r.raw_original_price,
+                product_url=r.product_url
+            ))
+        self.db.bulk_save_objects(raw_rows)
+        self.db.commit()
+        return len(raw_rows)
+        
+    def _clean_price(self, price_str):
+        """Helper to convert 'EGP 3,999' or 'EGP\u00a03,999' to float 3999.0"""
+        if price_str is None: return None
+        if isinstance(price_str, (int, float)): return float(price_str)
+        # Remove currency symbols, commas, and non-breaking spaces
+        cleaned = re.sub(r'[^\d.]', '', price_str.replace(',', ''))
+        try:
+            return float(cleaned)
+        except:
+            return 0.0
+
+    def ingest_from_testing_queue(self, batch_id: str, limit: int = 100):
+        """Requirement: User-controlled ingestion from testing_queue.db."""
+        queue_db_path = os.path.join(os.path.dirname(__file__), "database", "testing_queue.db")
+        if not os.path.exists(queue_db_path):
+            log.error(f"Testing queue DB not found at {queue_db_path}")
+            return 0
+            
+        conn = sqlite3.connect(queue_db_path)
+        cursor = conn.cursor()
+        
+        # Fetch rows from raw_queue
+        cursor.execute("SELECT id, payload FROM raw_queue LIMIT ?", (limit,))
+        rows = cursor.fetchall()
+        
+        if not rows:
+            conn.close()
+            return 0
+            
+        raw_products = []
+        row_ids_to_delete = []
+        
+        for row_id, payload_str in rows:
+            payload = json.loads(payload_str)
+            try:
+                # Map to RawProduct schema
+                # Some fields might be missing or in different format
+                # e.g. raw_current_price needs cleaning
+                p = RawProduct(
+                    scrape_timestamp=datetime.fromisoformat(payload["scrape_timestamp"]),
+                    retailer_id=payload["retailer_id"],
+                    raw_title=payload["raw_title"],
+                    raw_current_price=self._clean_price(payload.get("raw_current_price")),
+                    raw_original_price=self._clean_price(payload.get("raw_original_price")),
+                    product_url=payload["product_url"]
+                )
+                raw_products.append(p)
+                row_ids_to_delete.append(row_id)
+            except Exception as e:
+                log.warning(f"Failed to parse payload for row {row_id}: {e}")
+                
+        # Bulk ingest into main DB
+        count = self.ingest_raw_data(
+            batch_id=batch_id,
+            category="mixed_test", # Or extract from payload if available
+            target_count=len(raw_products),
+            data=raw_products
+        )
+        
+        # Delete from queue if successful
+        if count > 0:
+            cursor.executemany("DELETE FROM raw_queue WHERE id = ?", [(rid,) for rid in row_ids_to_delete])
+            conn.commit()
+            
+        conn.close()
+        return count
+
+    def process_batch_etl(self, batch_id: str):
+        """Requirement 1.2: Database-resident ETL transformation."""
+        batch = self.db.query(IngestionBatch).filter_by(batch_id=batch_id).first()
+        if not batch:
+            log.error(f"Batch {batch_id} not found.")
+            return False
+            
+        batch.status = 'processing'
+        self.db.commit()
+        
+        try:
+            raw_data = self.db.query(RawScrapedData).filter_by(batch_id=batch_id).all()
+            if not raw_data:
+                batch.status = 'failed'
+                self.db.commit()
+                return False
+                
+            # Convert to WebScrapperOutput for run_etl
+            web_scrapper_inputs = [
+                WebScrapperOutput(
+                    scrape_timestamp=r.scrape_timestamp,
+                    retailer_id=r.retailer_id,
+                    raw_title=r.raw_title,
+                    raw_current_price=r.raw_current_price,
+                    raw_original_price=r.raw_original_price,
+                    product_url=r.product_url
+                ) for r in raw_data
+            ]
+            
+            etl_results = self.run_etl(web_scrapper_inputs)
+            
+            # Persist processed products (UPSERT)
+            for etl in etl_results:
+                # Use product_url as ID
+                p_id = str(etl.product_url)
+                product = self.db.query(Product).filter_by(id=p_id).first()
+                if not product:
+                    product = Product(id=p_id)
+                    self.db.add(product)
+                
+                # Map ETL fields to Product
+                product.retailer_id = etl.retailer_id
+                product.raw_title = etl.raw_title
+                product.product_url = p_id
+                product.category = etl.category
+                product.sub_category = etl.sub_category
+                product.brand = etl.brand
+                product.cpu = etl.cpu
+                product.ram_gb = etl.ram_gb
+                product.storage_gb = etl.storage_gb
+                product.gpu = etl.gpu
+                product.is_gaming = etl.is_gaming
+                product.global_release_date_str = etl.global_release_date_str
+                
+                # Also create PriceHistory record
+                ph = PriceHistory(
+                    product_id=p_id,
+                    scrape_timestamp=etl.scrape_timestamp,
+                    date_id=etl.scrape_timestamp.date(),
+                    raw_current_price=etl.raw_current_price,
+                    raw_original_price=etl.raw_original_price
+                )
+                self.db.add(ph)
+
+            batch.status = 'completed'
+            self.db.commit()
+            return True
+        except Exception as e:
+            log.error(f"ETL failed for batch {batch_id}: {e}")
+            batch.status = 'failed'
+            self.db.commit()
+            return False
 
     def fetch_raw_scrape_data(self, target_date) -> List[WebScrapperOutput]:
         """Fetch raw data for a specific date from PriceHistory and Product tables."""
@@ -220,7 +392,7 @@ class PipelineOrchestrator:
                 
         self.db.commit()
 
-    def process_external_batch(self, raw_dicts: List[dict]) -> dict:
+    def process_external_batch(self, raw_dicts: List[dict], models: dict = None) -> dict:
         """
         Process a batch of raw dicts (e.g. from testing queue) and return all intermediate results.
         Useful for the dashboard/monitor to inspect the I/O of each layer.
@@ -228,6 +400,9 @@ class PipelineOrchestrator:
         raw_data = []
         for d in raw_dicts:
             try:
+                # Clean price strings before Pydantic validation
+                d["raw_current_price"] = self._clean_price(d.get("raw_current_price"))
+                d["raw_original_price"] = self._clean_price(d.get("raw_original_price"))
                 raw_data.append(WebScrapperOutput(**d))
             except Exception as e:
                 log.warning(f"Skipping malformed row: {e}")
@@ -237,7 +412,7 @@ class PipelineOrchestrator:
 
         etl_data = self.run_etl(raw_data)
         vol_data = self.run_volatility(etl_data)
-        forecast_data = self.run_forecasting(vol_data)
+        forecast_data = self.run_forecasting(vol_data, models=models)
         
         return {
             "raw": [r.model_dump() for r in raw_data],
@@ -245,6 +420,190 @@ class PipelineOrchestrator:
             "vol": [v.model_dump() for v in vol_data],
             "ml": [f.model_dump() for f in forecast_data]
         }
+
+    def run_forecasting_unified(self, batch_id: str, models: dict):
+        """Requirement 2.1 & 2.2: Integrated Forecasting & SHAP."""
+        log.info(f"Running Forecasting & SHAP for batch {batch_id}...")
+        
+        # 1. Fetch relevant PriceHistory records
+        # Since we just ran ETL, we need to find records created/updated for this batch.
+        # We can join RawScrapedData with PriceHistory via product_id and timestamp
+        results = self.db.query(PriceHistory, Product).join(Product).filter(
+            PriceHistory.product_id.in_(
+                self.db.query(RawScrapedData.product_url).filter_by(batch_id=batch_id)
+            )
+        ).all()
+        
+        if not results:
+            log.warning("No records found for forecasting.")
+            return
+            
+        # 2. Prepare Feature Vectors (14 features from NEW_FEATURES)
+        from ml_models import NEW_FEATURES
+        
+        # Use recent macro data (Requirement 5.3: Temporal Continuity)
+        macro = self.db.query(MacroEconomic).order_by(MacroEconomic.date_id.desc()).first()
+        macro_dict = {
+            "official_egp_usd": macro.official_egp_usd if macro else 48.0,
+            "cpi_inflation": macro.cpi_inflation if macro else 35.0,
+            "is_major_sale_period": 1 if macro and macro.is_major_sale_period else 0,
+            "import_lambda": macro.import_lambda if macro else 1.0,
+        }
+        
+        features_list = []
+        target_records = []
+        for ph, p in results:
+            feat_dict = {
+                "compute_potential": p.compute_potential or 0.5,
+                "delta_p_7d": ph.delta_p_7d or 0.0,
+                "delta_p_14d": ph.delta_p_14d or 0.0,
+                "delta_p_1d": ph.delta_p_1d or 0.0,
+                "vol_30d": ph.vol_30d or 0.0,
+                "official_egp_usd": macro_dict["official_egp_usd"],
+                "cpi_inflation": macro_dict["cpi_inflation"],
+                "is_major_sale_period": macro_dict["is_major_sale_period"],
+                "competitor_scarcity_count": ph.competitor_scarcity_count or 0,
+                "volume_weight": ph.volume_weight or 0.5,
+                "D_months": ph.D_months or 12.0,
+                "k": ph.k or 0.001,
+                "import_lambda": macro_dict["import_lambda"],
+                "missing_release_date": 1 if p.missing_release_date else 0
+            }
+            # Maintain strict order from NEW_FEATURES
+            vector = [feat_dict[f] for f in NEW_FEATURES]
+            features_list.append(vector)
+            target_records.append((ph, feat_dict))
+
+        # 3. Inference
+        df_features = pd.DataFrame(features_list, columns=NEW_FEATURES)
+        
+        price_results = []
+        stability_results = []
+        
+        price_model = models.get("price")
+        stability_model = models.get("stability")
+        
+        if price_model and stability_model:
+            # Batch Inference (or loop if session requires)
+            for vec in features_list:
+                # Price Forecast
+                inp_price = {price_model.get_inputs()[0].name: np.array([vec], dtype=np.float32)}
+                raw_p = price_model.run(None, inp_price)
+                price_results.append(raw_p[0].flat[0])
+                
+                # Stability Forecast
+                inp_stab = {name: np.array([[vec[i]]], dtype=np.float32) for i, name in enumerate([inp.name for inp in stability_model.get_inputs()])}
+                raw_s = stability_model.run(None, inp_stab)
+                stability_results.append(raw_s[0].flat[0])
+        
+        # 4. SHAP Explanations (Using Joblib as requested)
+        shap_values_stability = []
+        shap_values_price = []
+        
+        # Paths to Joblib artifacts for SHAP
+        STABILITY_JOBLIB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ML_Pipeline", "Forecasting", "stability_model_v2_final.joblib")
+        PRICE_JOBLIB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ML_Pipeline", "Forecasting", "model_14d.joblib")
+        
+        if os.path.exists(STABILITY_JOBLIB_PATH):
+            explainer_s = JoblibExplainer(STABILITY_JOBLIB_PATH, NEW_FEATURES)
+            shap_values_stability = explainer_s.compute_shap(df_features)
+            
+        if os.path.exists(PRICE_JOBLIB_PATH):
+            explainer_p = JoblibExplainer(PRICE_JOBLIB_PATH, NEW_FEATURES)
+            shap_values_price = explainer_p.compute_shap(df_features)
+        else:
+            log.warning(f"Price Joblib not found at {PRICE_JOBLIB_PATH}. Price SHAP skipped.")
+
+        # 5. Persist Results
+        for i, (ph, feats) in enumerate(target_records):
+            shap_record = self.db.query(MLForecastShap).filter_by(price_history_id=ph.id).first()
+            if not shap_record:
+                shap_record = MLForecastShap(price_history_id=ph.id)
+                self.db.add(shap_record)
+            
+            shap_record.price_t_plus_14 = price_results[i] if i < len(price_results) else 0.0
+            shap_record.stability_score = stability_results[i] if i < len(stability_results) else 0.0
+            shap_record.predicted_stability_score = shap_record.stability_score
+            
+            # Map SHAP values (Stability)
+            if i < len(shap_values_stability):
+                row_shap = shap_values_stability[i]
+                for j, feat_name in enumerate(NEW_FEATURES):
+                    setattr(shap_record, f"shap_{feat_name}", float(row_shap[j]))
+            
+            # Map SHAP values (Price - stored as delta_shap columns in schema)
+            if i < len(shap_values_price):
+                row_shap_p = shap_values_price[i]
+                for j, feat_name in enumerate(NEW_FEATURES):
+                    setattr(shap_record, f"delta_shap_{feat_name}", float(row_shap_p[j]))
+
+        self.db.commit()
+        log.info(f"Successfully processed {len(target_records)} forecasts and SHAP explanations.")
+        return True
+
+    def run_verification_react(self, batch_id: str, react_state: dict):
+        """Requirement 3.1: Fully Dynamic ReAct Decision Router."""
+        log.info(f"Executing ReAct Verification for batch {batch_id}...")
+        
+        if not react_state:
+            log.error("ReAct State not initialized.")
+            return False
+            
+        # 1. Fetch relevant records (joined data for signals)
+        from ml_models import NEW_FEATURES
+        
+        # Need: current_price, forecasted_price, volatility_score, price_14d_avg, months_since_release
+        # Plus metadata for SARIMAX: category, title
+        results = self.db.query(PriceHistory, Product, MLForecastShap).join(Product).join(MLForecastShap).filter(
+            PriceHistory.product_id.in_(
+                self.db.query(RawScrapedData.product_url).filter_by(batch_id=batch_id)
+            )
+        ).all()
+        
+        if not results:
+            log.warning("No records found for verification.")
+            return False
+            
+        candidates = []
+        for ph, p, shap in results:
+            # Map DB fields to ReAct candidate format
+            cand = {
+                "model_id": p.id,
+                "product_title": p.raw_title,
+                "category": p.category,
+                "current_price": ph.raw_current_price,
+                "forecasted_price": shap.price_t_plus_14,
+                "volatility_score": 100 - (shap.predicted_stability_score or 50),
+                "predicted_stability_score": shap.predicted_stability_score,
+                "price_14d_avg": ph.raw_current_price * 0.98, # Heuristic fallback
+                "months_since_release": ph.D_months or 12.0,
+                "r_score": ph.raw_current_price / (shap.price_t_plus_14 + 1e-6) * 100, # Heuristic r_score proxy
+                "db_price_history_id": ph.id
+            }
+            candidates.append(cand)
+
+        # 2. Execute ReAct Loop
+        from react_router import run_react_loop
+        approved, dlq = run_react_loop(candidates, react_state)
+        
+        # 3. Persist Recommendations
+        for c in approved + dlq:
+            status = "Approved" if c in approved else "Human Review"
+            if "Hard Reject" in c.get("routing_path", ""):
+                status = "Rejected"
+                
+            rec = DailyRecommendation(
+                price_history_id=c["db_price_history_id"],
+                intelligent_score=c.get("intelligent_score", 0.0),
+                routing_path=c.get("routing_path", "Unknown"),
+                status=status,
+                justification=f"Automated {status} via {c.get('routing_path')}"
+            )
+            self.db.add(rec)
+            
+        self.db.commit()
+        log.info(f"ReAct Loop Complete. {len(approved)} approved, {len(dlq)} sent to DLQ.")
+        return True
 
     def run_pipeline(self, target_date):
         print(f"--- Starting Pipeline for {target_date} ---")

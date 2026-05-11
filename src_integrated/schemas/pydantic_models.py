@@ -10,6 +10,23 @@ class WebScrapperOutput(BaseModel):
     raw_original_price: Optional[float] = None
     product_url: HttpUrl
 
+class RawProduct(BaseModel):
+    scrape_timestamp: datetime
+    retailer_id: str
+    raw_title: str
+    raw_current_price: float
+    raw_original_price: Optional[float] = None
+    product_url: str
+
+class IngestionRequest(BaseModel):
+    batch_id: str
+    category: str
+    target_count: int
+    data: list[RawProduct]
+
+class ETLRequest(BaseModel):
+    batch_id: str
+
 class ETLOutput(WebScrapperOutput):
     category: Optional[str] = None
     sub_category: Optional[str] = None
